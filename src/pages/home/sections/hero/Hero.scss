@@ -1,0 +1,14 @@
+@use '../../../../base';
+
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+
+    .time {
+        font-family: base.$lekton;
+        letter-spacing: -0.04em;
+    }
+}
+

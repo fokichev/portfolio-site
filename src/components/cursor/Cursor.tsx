@@ -1,5 +1,6 @@
+// TODO try out changing rotation based on screen width/height, so mouse moves right = rotate x degress right, etc. OR do speed/velocity
 import './Cursor.scss';
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const Cursor = () => {
     // check if it is a touch device
