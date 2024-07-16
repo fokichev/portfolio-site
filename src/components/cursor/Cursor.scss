@@ -1,0 +1,47 @@
+html {
+    cursor: none;
+}
+
+.custom-cursor {
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    .cursor-center {
+        position: absolute;
+        background: conic-gradient(
+            #C82121 0deg,
+            #E892CE 72deg,
+            #3581AF 144deg,
+            #D9B570 216deg,
+            #E4572A 288deg,
+            #C82121 359deg
+        );
+        top: 0px;
+        left: 0px;
+        border-radius: 50%;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .cursor-border {
+        position: absolute;
+        background-color: transparent;
+        border: 2px solid rgba(256, 256, 256, 0.8);
+        // mix-blend-mode: exclusion;
+        border-radius: 50%;
+        top: 0px;
+        left: 0px;
+        pointer-events: none;
+        overflow: hidden;
+
+    }
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
