@@ -3,9 +3,13 @@ html {
 }
 
 .custom-cursor {
-    animation: fadeInAnimation ease 3s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    // animation: fadeInAnimation ease 3s;
+    // animation-iteration-count: 1;
+    // animation-fill-mode: forwards;
+    // z-index: ;   
+    position: absolute;
+    top: 0;
+    left: 0;
     .cursor-center {
         position: absolute;
         background: conic-gradient(
@@ -16,6 +20,7 @@ html {
             #E4572A 288deg,
             #C82121 359deg
         );
+        // border: 1px solid rgba(256, 256, 256, 1);
         top: 0px;
         left: 0px;
         border-radius: 50%;
@@ -27,8 +32,8 @@ html {
         position: absolute;
         background-color: transparent;
         border: 2px solid rgba(256, 256, 256, 0.8);
-        // mix-blend-mode: exclusion;
         border-radius: 50%;
+        mix-blend-mode: exclusion;
         top: 0px;
         left: 0px;
         pointer-events: none;
@@ -37,11 +42,11 @@ html {
     }
 }
 
-@keyframes fadeInAnimation {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
+// @keyframes fadeInAnimation {
+//     0% {
+//         opacity: 0.01;
+//     }
+//     100% {
+//         opacity: 1;
+//     }
+// }

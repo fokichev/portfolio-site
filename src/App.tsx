@@ -6,8 +6,8 @@ function App() {
 
 	return (
 		<div>
-			<Cursor />
 			<HomePage />
+			<Cursor />
 		</div>
 	)
 }

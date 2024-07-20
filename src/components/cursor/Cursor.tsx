@@ -1,4 +1,5 @@
 // TODO try out changing rotation based on screen width/height, so mouse moves right = rotate x degress right, etc. OR do speed/velocity
+// TODO fix scroll bars appearing when cursor hits bottom or right edges 
 import './Cursor.scss';
 import { useEffect, useRef } from "react";
 
