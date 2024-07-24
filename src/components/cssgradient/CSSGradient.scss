@@ -4,9 +4,9 @@
     width: 60%;
     max-width: 1200px;
     height: 28rem;
-    margin: 100px 0;
+    margin: 100px 0 50px 0;
     border-radius: 100px;
-    
+
     position: relative;
     overflow: hidden;
 
@@ -88,7 +88,7 @@
     100% {
         transform: rotate(360deg);
     }
-    }
+}
 
 @keyframes moveVertical {
     0% {
@@ -100,7 +100,7 @@
     100% {
         transform: translateY(0%);
     }
-    }
+}
 
 @keyframes moveHorizontal {
     0% {

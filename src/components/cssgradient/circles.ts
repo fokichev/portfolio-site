@@ -54,7 +54,6 @@ const CIRCLES = [
     // red
     {
         color: COLORS.red,
-        center: COLORS.white,
         x: 70,
         y: 20,
         movement: ANIM.c,
