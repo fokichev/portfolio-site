@@ -5,9 +5,9 @@ import {
 } from '../../../../components';
 import SmileyIcon from '../../../../assets/smiley.svg?react';
 
-const Hero = () => {
+const Hero = ({ id }: { id: string }) => {
     return (
-        <div className='hero-container'>
+        <div className='hero-container' id={id}>
             <Timer />
             <CSSGradient/>
             <div className='smiley'>

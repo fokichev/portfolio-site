@@ -3,7 +3,7 @@
 .gradient {
     width: 60%;
     max-width: 1200px;
-    height: 28rem;
+    height: 24rem;
     margin: 100px 0 50px 0;
     border-radius: 100px;
 
@@ -27,12 +27,10 @@
         position: absolute;
         mix-blend-mode: hard-light;
         opacity: 1;
-        z-index: 1;
 
         &.--interactive {
             opacity: 0.7;
             pointer-events: none;
-            z-index: 2;
         }
     }
 
@@ -53,14 +51,15 @@
         
         .name {
             font-family: base.$titillium;
-            font-size: 100px;
+            font-size: 85px;
             font-weight: 300;
         }
 
         .job {
             font-family: base.$italiana;
-            font-size: 95px;
+            font-size: 80px;
             margin-bottom: 20px;
+            text-align: cventer;
         }
     }
 

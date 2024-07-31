@@ -6,10 +6,11 @@ html {
     // animation: fadeInAnimation ease 3s;
     // animation-iteration-count: 1;
     // animation-fill-mode: forwards;
-    // z-index: ;   
-    position: absolute;
+    z-index: 9999;
+    position: fixed;
     top: 0;
     left: 0;
+    pointer-events: none;
     .cursor-center {
         position: absolute;
         background: conic-gradient(
@@ -33,7 +34,7 @@ html {
         background-color: transparent;
         border: 2px solid rgba(256, 256, 256, 0.8);
         border-radius: 50%;
-        mix-blend-mode: exclusion;
+        // mix-blend-mode: exclusion;
         top: 0px;
         left: 0px;
         pointer-events: none;

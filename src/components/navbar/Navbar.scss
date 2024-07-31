@@ -1,0 +1,68 @@
+@use '../../base';
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
+    
+    // TODO sticky to top
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    $paddingX: 30px;
+    padding: 15px $paddingX;
+    width: calc(100% - $paddingX*2);
+
+    font-family: base.$lekton;
+    font-size: 18px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    padding-left: 24px;
+
+    &-chosen {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    &-items {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+
+    &-item {
+        text-align: end;
+        width: 70px;
+        -webkit-transition: all .5s;
+        -moz-transition: all .5s;
+        -o-transition: all .5s;
+        transition: all .5s;
+
+        &.--active {
+            $color: white;
+            $shadow: 0.2px;
+
+            text-shadow: 0 0 10px white;
+            // text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+            // text-shadow:
+            //     $shadow*-1 $shadow*-1 0 $color,
+            //     $shadow $shadow*-1 0 $color,
+            //     $shadow*-1 $shadow 0 $color,
+            //     $shadow $shadow 0 $color;
+        }
+
+        &:hover {
+            color: base.$accent1;
+            text-shadow: 0 0 10px base.$accent1;
+        }
+    }
+}

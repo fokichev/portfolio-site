@@ -1,0 +1,15 @@
+@use '../../base';
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.sections-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
