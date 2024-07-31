@@ -1,0 +1,8 @@
+.carrot-model {
+    // TODO make reactive to screen size (JS?)
+    padding-left: 100px;
+    $size: 600px;
+    min-width: $size;
+    height: $size;
+    overflow: visible;
+}

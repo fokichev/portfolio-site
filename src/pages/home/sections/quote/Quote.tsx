@@ -1,9 +1,16 @@
+import { useGSAP } from '@gsap/react';
+import { CarrotModel } from '../../../../components';
 import './Quote.scss';
+import gsap from 'gsap';
+import { useRef } from 'react';
 
 const TEXT = [
     'I lose myself in time',
     'when coding something',
     'beautiful.'
+    // 'Lorem ipsum dolor sit,',
+    // 'consectetur adipis',
+    // 'elit, sed.',
 ]
 
 const Quote = ({ id }: { id: string }) => {
@@ -11,26 +18,41 @@ const Quote = ({ id }: { id: string }) => {
         <div className='quote-container' id={id}>
             <div className='quote-content'>
                 <div className='subtext'>
-                    A realisation:
+                    {/* A realisation: */}
+                    Incididunt ut:
                 </div>
-                { TEXT.map(text => <QuoteLine text={text} />) }
+                { TEXT.map((text, index) => <QuoteLine text={text} index={index}/>) }
             </div>
             <div className='quote-model'>
-                MODEL GOES HERE
+                <CarrotModel />
             </div>
         </div>
     )
 }
 
-const QuoteLine = ({ text }: { text: string }) => {
+const QuoteLine = ({ text, index }: { text: string, index: number }) => {
+    const ref = useRef(null);
+    const offset = 100;
+    const start = -100 + index * offset;
+    const end = 400 + index * offset;
+    useGSAP(() => {
+        gsap.to(ref.current, {
+            scrollTrigger: {
+                start: `${start}% center`,
+                end: `${end}% center`,
+                trigger: ref.current,
+                scrub: 1,
+                markers: true
+            },
+            x: '100%'
+        })
+    });
     return (
         <span className='quote-line'>
             <span className='text'>{text}</span>
-            <span className='mask'></span>
+            <span className='mask' ref={ref}></span>
         </span>
     )
 }
-
-
 
 export { Quote };
