@@ -16,7 +16,7 @@ gsap.registerPlugin(
 function App() {
 
 	return (
-		<div className='app-container'>
+		<div className='app-container' id='app-container'>
 			<Cursor />
 			<HomePage />
 		</div>

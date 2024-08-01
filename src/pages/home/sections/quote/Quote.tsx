@@ -15,7 +15,7 @@ const TEXT = [
 
 const Quote = ({ id }: { id: string }) => {
     return (
-        <div className='quote-container' id={id}>
+        <div className='quote-container margin-content' id={id}>
             <div className='quote-content'>
                 <div className='subtext'>
                     {/* A realisation: */}
@@ -42,9 +42,9 @@ const QuoteLine = ({ text, index }: { text: string, index: number }) => {
                 end: `${end}% center`,
                 trigger: ref.current,
                 scrub: 1,
-                markers: true
+                // markers: true
             },
-            x: '100%'
+            x: '90%'
         })
     });
     return (

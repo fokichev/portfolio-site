@@ -8,8 +8,10 @@ import SmileyIcon from '../../../../assets/smiley.svg?react';
 const Hero = ({ id }: { id: string }) => {
     return (
         <div className='hero-container' id={id}>
-            <Timer />
-            <CSSGradient/>
+            <div className='hero-content margin-content'>
+                <Timer />
+                <CSSGradient/>
+            </div>
             <div className='smiley'>
                 <SmileyIcon className='smiley-icon'/>
             </div>

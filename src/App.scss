@@ -3,12 +3,20 @@
 #root {
     background-color: base.$bg1;
     width: 100%;
+    display: flex;
+    justify-content: center;
 
-    color: base.$text;
+    color: base.$white;
     font-family: base.$titillium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .app-container {
-    position: relative;
-    z-index: 1;
+    // position: relative;
+    // z-index: 1;
+    width: 100%;
+}
+
+.margin-content {
+    width: 1000px;
+    // TODO breakpoint widths, this is desktop
 }

@@ -9,6 +9,7 @@ import {
     Environment,
     Float,
     MeshTransmissionMaterial,
+    OrbitControls,
     PerspectiveCamera,
     useCubeTexture,
     useGLTF,
@@ -46,6 +47,7 @@ const CarrotModel = () => {
                 </EffectComposer>
                 <PerspectiveCamera makeDefault fov={40} position={[0,0,3]} />
                 {/* <CameraControls /> */}
+                {/* <OrbitControls /> */}
                 <Environment
                     map={envMap}
                     environmentIntensity={env.str}

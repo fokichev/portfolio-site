@@ -1,0 +1,43 @@
+@use '../../base';
+
+.progress-bar-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 5px;
+    padding-right: 30px;
+    padding-top: 5vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .progress-number {
+        font-family: base.$lekton;
+        font-size: 10px;
+        margin-bottom: 8px;
+
+        $degree: 90deg;
+        -webkit-transform: rotate($degree);
+        -moz-transform: rotate($degree);
+        -o-transform: rotate($degree);
+        -ms-transform: rotate($degree);
+        transform: rotate($degree);
+    }
+
+    .progress-line {
+        border-top: 1px solid #5D5D5D;
+        width: 80%;
+        height: 6px;
+
+        &.--even {
+            width: 100%;
+        }
+
+        &.--active {
+            border-top: 1px solid white;
+        }
+    }
+}

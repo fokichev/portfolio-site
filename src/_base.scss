@@ -73,5 +73,14 @@ $titillium: 'TitilliumWeb', Arial, Helvetica, sans-serif;
 
 // COLOURS
 $bg1: #060606;
-$text: white;
-$accent1: #F74CC7;
+$white: white;
+$blue: #0075BC;
+$orange: #F2620F;
+$pink: #F74CC7;
+$red: #D90404;
+
+.--white { color: $white; }
+.--blue { color: $blue; }
+.--orange { color: $orange; }
+.--pink { color: $pink; }
+.--red { color: $red; }

@@ -5,9 +5,10 @@
     flex-direction: row;
     align-items: start;
     justify-content: space-between;
+    z-index: 999;
     
     // TODO sticky to top
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
 
@@ -16,14 +17,14 @@
     width: calc(100% - $paddingX*2);
 
     font-family: base.$lekton;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .menu {
     display: flex;
     flex-direction: row;
     position: relative;
-    padding-left: 24px;
+    // padding-left: 0px;
 
     &-chosen {
         position: absolute;
@@ -61,8 +62,8 @@
         }
 
         &:hover {
-            color: base.$accent1;
-            text-shadow: 0 0 10px base.$accent1;
+            color: base.$pink;
+            text-shadow: 0 0 10px base.$pink;
         }
     }
 }

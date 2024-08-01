@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const LINE_HEIGHT = 24;
+const LINE_HEIGHT = 20;
 
 const Navbar = (props: NavbarProps) => {
     const { sections, scope } = props;
