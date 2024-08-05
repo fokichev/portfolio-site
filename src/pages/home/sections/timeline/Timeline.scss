@@ -1,7 +1,128 @@
 @use '../../../../base';
 
 .timeline-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding-top: 200px;
+}
+
+.pin-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.title {
+    font-family: base.$italiana;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.dash {
+    $stroke: 1px;
+
+    height: $stroke;
+    // margin-top: 3px;
+
+    background-position-y: bottom;
+    background-size: 10px $stroke;
+    background-repeat: repeat-x;
+}
+
+.timeline {
     width: 100%;
-    height: 100vh;
-    background-color: indigo;
+    margin: 50px 0;
+    font-family: base.$titillium;
+    font-size: 18px;
+    position: relative;
+
+    .timeline-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        .year {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .role {
+            font-weight: 300;
+            text-align: center;
+
+
+            &.--present {
+                padding: 6px 0;
+                background-image: linear-gradient(90deg, #9275A9, #004A77);
+                border-radius: 20px;
+            }
+        }
+
+        .line {
+            background-image: linear-gradient(to right, white 33%, rgba(255,255,255,0) 0%);
+        }
+    }
+
+    .line-mask {
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: calc(50% + 1px);
+
+        background-image: linear-gradient(to right, base.$purple 33%, rgba(255,255,255,0) 0%);
+    }
+
+    .mini-lev {
+        position: absolute;
+        top: -10px;
+        left: 0;
+        width: 0;
+    }
+
+    .present-marker {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        position: absolute;
+        top: 200%;
+        opacity: 0;
+
+        font-size: 16px;
+        font-family: base.$titillium;
+        font-weight: 300;
+
+        .arrow {
+            height: 30px;
+        }
+    }
+}
+
+.keep-scrolling {
+    margin-top: 60px;
+    width: 95px;
+    height: 95px;
+    animation: 25s linear 0s infinite normal none running moveInCircle;
+    opacity: 0;
+}
+
+
+@keyframes moveInCircle {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
