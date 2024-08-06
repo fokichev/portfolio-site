@@ -1,6 +1,7 @@
 import './App.scss'
 import { Cursor } from './components'
 import { HomePage } from './pages'
+import { MousePositionProvider } from './contexts';
 
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -14,12 +15,13 @@ gsap.registerPlugin(
 );
 
 function App() {
-
 	return (
-		<div className='app-container' id='app-container'>
-			<Cursor />
-			<HomePage />
-		</div>
+		<MousePositionProvider>
+			<div className='app-container' id='app-container'>
+				<Cursor />
+				<HomePage />
+			</div>
+		</MousePositionProvider>
 	)
 }
 
