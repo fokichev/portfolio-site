@@ -2,6 +2,11 @@
 // TODO fix scroll bars appearing when cursor hits bottom or right edges 
 import './Cursor.scss';
 import { useEffect, useRef } from "react";
+import { useMousePositionContext } from '../../contexts';
+
+
+import { useGSAP } from '@gsap/react';
+import { gsap } from 'gsap';
 
 const Cursor = () => {
     // check if it is a touch device
@@ -24,54 +29,55 @@ const TouchCursor = () => {
 }
 
 const MouseCursor = () => {
+    const cursorContainerRef = useRef<HTMLDivElement>(null);
     const cursorRef = useRef<HTMLDivElement>(null);
     const cursorBorderRef = useRef<HTMLDivElement>(null);
-    const mousePosition = useRef({ x: 0, y: 0 });
-    const borderPosition = useRef({ x: 0, y: 0 });
-    const rotationAngle = useRef(0);
 
-    const handleMouseMove = (event: MouseEvent) => {
-        mousePosition.current = {
-            x: event.clientX,
-            y: event.clientY
-        }
-    }
-    
+    const { x, y } = useMousePositionContext();
     const centerRadius = 14;
     const borderRadius = 40;
-    const cursorBorderSmoothing = 15;
-    const move = () => {
-        // cursor center
-        if (cursorRef.current) {
-            const x = mousePosition.current.x - centerRadius/2;
-            const y = mousePosition.current.y - centerRadius/2;
-            rotationAngle.current += 0.5;
-            const transformString = `translate(${x}px, ${y}px) rotate(${rotationAngle.current}deg)`;
-            cursorRef.current.style.transform = transformString;
-        }
-        // cursor border
-        borderPosition.current.x += (mousePosition.current.x - borderPosition.current.x) / cursorBorderSmoothing;
-        borderPosition.current.y += (mousePosition.current.y - borderPosition.current.y) / cursorBorderSmoothing;
-        if (cursorBorderRef.current) {
-            const borderWidth = parseFloat(getComputedStyle(cursorBorderRef.current).borderWidth);
-            const x = borderPosition.current.x - (borderRadius)/2 - borderWidth;
-            const y = borderPosition.current.y - (borderRadius)/2 - borderWidth;
-            const transformString = `translate(${x}px, ${y}px)`;
-            cursorBorderRef.current.style.transform = transformString;
-        }
-        requestAnimationFrame(move);
-    }
-    
+
+    // when x/y change, update cursor position with GSAP,
+    // and border position with GSAP with longer duration
+    const { contextSafe } = useGSAP(() => {
+        gsap.to(cursorRef.current, {
+            rotation: 360,
+            duration: 5,
+            repeat: -1,
+            ease: 'none'
+        })
+    }, { scope: cursorContainerRef });
+
+    const xCursor = gsap.quickSetter(cursorRef.current, 'x', 'px');
+    const yCursor = gsap.quickSetter(cursorRef.current, 'y', 'px');
+
+    const borderDur = 0.7;
+    const borderEase = 'power4.out';
+    const xBorder = gsap.quickTo(
+        cursorBorderRef.current,
+        'x',
+        { duration: borderDur, ease: borderEase }
+    );
+    const yBorder = gsap.quickTo(
+        cursorBorderRef.current,
+        'y',
+        { duration: borderDur, ease: borderEase }
+    );
+
+    const withContext = (val: number, fn: Function) => contextSafe(() => fn(val))();
+
     useEffect(() => {
-        document.addEventListener('mousemove', handleMouseMove);
-        move();
-        return () => {
-            document.removeEventListener('mousemove', handleMouseMove);
-        };
-    }, []);
+        withContext(x - centerRadius / 2, xCursor);
+        withContext(y - centerRadius / 2, yCursor);
+        
+        // if (cursorBorderRef.current) { console.log(parseFloat(getComputedStyle(cursorBorderRef.current).borderWidth)) }
+        const borderWidth = 1.6;
+        withContext(x - borderRadius/2 - borderWidth, xBorder);
+        withContext(y - borderRadius/2 - borderWidth, yBorder);
+    }, [x, y]);
 
     return (
-        <div className="custom-cursor">
+        <div className="custom-cursor" ref={cursorContainerRef}>
             <div
                 className="cursor-center"
                 ref={cursorRef}
