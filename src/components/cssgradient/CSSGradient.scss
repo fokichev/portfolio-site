@@ -28,8 +28,10 @@
         opacity: 1;
 
         &.--interactive {
+            position: fixed;
             opacity: 0.7;
             pointer-events: none;
+            // border: 1px solid white;
         }
     }
 

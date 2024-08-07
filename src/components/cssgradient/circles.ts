@@ -161,6 +161,7 @@ type CircleType = {
 }
 
 export {
+    COLORS,
     CIRCLES,
     type CircleType
 }

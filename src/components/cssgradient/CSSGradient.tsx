@@ -1,16 +1,22 @@
-import { useEffect, useRef, useState } from 'react';
 import './CSSGradient.scss';
-import { CircleType, CIRCLES } from './circles';
+import { useEffect, useRef } from 'react';
+import { useMousePositionContext } from '../../contexts';
+
+import { useGSAP } from '@gsap/react';
+import { gsap } from 'gsap';
+
+import { CircleType, CIRCLES, COLORS } from './circles';
 import { hexToRGB } from './utils';
 
 const SIZE = 700;
 
 const CSSGradient = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
     return (
         <div
             className='gradient'
         >
-            <div className='gradient-container' id='gradient-container'>
+            <div className='gradient-container' ref={containerRef}>
                 <svg xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <filter id="goo">
@@ -31,7 +37,7 @@ const CSSGradient = () => {
                     </defs>
                 </svg>
                 { CIRCLES.map((circle, i) => <Circle {...circle} key={`circle-${i}`} />) }
-                <InteractiveCircle color={"#D22525"} />
+                <InteractiveCircle container={containerRef}/>
             </div>
             <div className='gradient-text'>
                 <div className='name'>Lev Fokichev</div>
@@ -43,7 +49,6 @@ const CSSGradient = () => {
 }
 
 const Circle = (props: CircleType) => {
-    // params
     const {
         color: hexColor,
         center: hexCenter,
@@ -94,56 +99,28 @@ const Circle = (props: CircleType) => {
     )
 }
 
-const InteractiveCircle = ({ color }: { color: string }) => {
-    // color
-    const colorStr = hexToRGB(color).join(', ')
+const InteractiveCircle = ({ container }: { container: React.RefObject<HTMLDivElement> }) => {
+    const colorStr = hexToRGB(COLORS.red).join(', ')
     const background = `radial-gradient(circle at center, rgba(${colorStr}, 1) 0, rgba(${colorStr}, 0) 50%) no-repeat`;
 
-    // cursor tracking  
+    const { x, y } = useMousePositionContext();
+    const { contextSafe } = useGSAP({ scope: container });
     const cursorRef = useRef<HTMLDivElement>(null);
-    const currentPosition = useRef({ x: 0, y: 0 });
-    const targetPosition = useRef({ x: 0, y: 0 });
-    const [containerPosition, setContainerPosition] = useState<{ x: number, y: number }>();
-    const [animationStarted, setAnimationStarted] = useState(false);
 
-    const handleMouseMove = (event: MouseEvent) => {
-        targetPosition.current = {
-            x: event.clientX,
-            y: event.clientY
-        }
-    }
+    const duration = 1;
+    const ease = 'power4.out';
+    const xCursor = gsap.quickTo(cursorRef.current, 'x', { duration, ease });
+    const yCursor = gsap.quickTo(cursorRef.current, 'y', { duration, ease });
 
-    const cursorSmoothing = 10;
-    const animate = () => {
-        currentPosition.current.x += (targetPosition.current.x - currentPosition.current.x) / cursorSmoothing;
-        currentPosition.current.y += (targetPosition.current.y - currentPosition.current.y) / cursorSmoothing;
-        if (cursorRef.current && containerPosition) {
-            const x = Math.round(currentPosition.current.x - (SIZE/2) - containerPosition.x);
-            const y = Math.round(currentPosition.current.y - (SIZE/2) - containerPosition.y);
-            const transformString = `translate(${x}px, ${y}px)`;
-            cursorRef.current.style.transform = transformString;
-        }
-        requestAnimationFrame(animate);
-    }
+    const withContext = (val: number, fn: Function) => contextSafe(() => fn(val))();
 
     useEffect(() => {
-        const containerPoint = document.getElementById('gradient-container');
-        if (containerPoint) {
-            const rect = containerPoint.getBoundingClientRect();
-            setContainerPosition({ x: rect.left, y: rect.top });
+        if (container.current) {
+            const rect = container.current.getBoundingClientRect();
+            withContext(x - SIZE/2 - rect.left, xCursor);
+            withContext(y - SIZE/2 - rect.top, yCursor);
         }
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-        }
-    }, []);
-
-    useEffect(() => {
-        if(containerPosition && !animationStarted) {
-            setAnimationStarted(true);
-            animate();
-        }
-    }, [containerPosition, animationStarted])
+    }, [x, y]);
 
     return (
         <div
