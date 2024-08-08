@@ -1,7 +1,151 @@
 @use '../../../../base';
 
 .skills-container {
+    width: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-bottom: 400px;
+}
+
+.skills-heading {
+    font-family: base.$lekton;
+    font-size: 36px;
+    font-weight: normal;
+    line-height: 1.2;
+
+    text-align: center;
+}
+
+$gap: 100px;
+
+.skills-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px 0 40px 0;
+    gap: $gap;
+
+    a {
+        font-family: base.$lekton;
+        font-size: 24px;
+        font-weight: normal;
+        color: white;
+        text-decoration: none;
+        line-height: 1.2;
+        border-bottom: 2px solid white;
+    }
+}
+
+$border: 1px;
+
+.skills-cards {
     width: 100%;
-    height: 100vh;
-    background-color: green;
+    height: 600px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: $gap;
+
+    $width: calc(50% - $gap/2 - $border*2);
+
+    .card-wrapper {
+        display: flex;
+    }
+
+    .half-container {
+        display: flex;
+        flex-direction: column;
+        width: $width;
+        height: 100%;
+        gap: $gap*0.7;
+    }
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 15px;
+
+    transform: perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1);
+    // background: linear-gradient(161.212deg, rgba(151, 135, 135, 5%) 0%, rgba(142, 18, 55, 5%) 100%);
+    box-shadow: 0px 4px 25px 0px rgba(255, 255, 255, 8%);
+    border-radius: 18px;
+    border: white $border solid;
+    padding: 20px;
+
+
+    .section {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        font-size: 18px;
+    }
+
+    .card-heading {
+        display: flex;
+        gap: 10px;
+        font-size: 20px;
+        .carrot {
+            font-family: base.$titillium;
+            font-weight: normal;
+        }
+
+        .label {
+            font-family: base.$lekton;
+            font-weight: bold;
+
+            &.--backend {
+                font-weight: normal;
+            }
+        }
+    }
+
+    .company {
+        font-family: base.$titillium;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    .timeframe {
+        font-family: base.$titillium;
+        font-weight: 300;
+        font-style: italic;
+    }
+
+    .description {
+        font-family: base.$lekton;
+
+        ul {
+            margin-top: 10px;
+            padding-left: 20px;
+            li {
+                line-height: 1.2;
+
+                &::marker {
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+
+    .skills-array {
+        font-family: base.$titillium;
+        font-weight: normal;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        span {
+            margin-right: 20px;
+            margin-bottom: 8px;
+        }
+    }
+}
+
+.skills {
+    gap: 4px;
 }
