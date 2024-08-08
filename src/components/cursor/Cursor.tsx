@@ -8,7 +8,7 @@ import { useMousePositionContext } from '../../contexts';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 
-const Cursor = () => {
+const Cursor = (props: CursorProps) => {
     // check if it is a touch device
     const isTouchDevice = () => {
         try {
@@ -19,7 +19,7 @@ const Cursor = () => {
         }
     };
 
-    return isTouchDevice() ? <TouchCursor /> : <MouseCursor />;
+    return isTouchDevice() ? <TouchCursor /> : <MouseCursor props={props}/>;
 }
 
 const TouchCursor = () => {
@@ -28,17 +28,17 @@ const TouchCursor = () => {
     )
 }
 
-const MouseCursor = () => {
+const MouseCursor = ({ props }: { props: CursorProps }) => {
+    const { image } = props;
     const cursorContainerRef = useRef<HTMLDivElement>(null);
     const cursorRef = useRef<HTMLDivElement>(null);
     const cursorBorderRef = useRef<HTMLDivElement>(null);
+    const imageRef = useRef<HTMLImageElement>(null);
 
     const { x, y } = useMousePositionContext();
     const centerRadius = 14;
     const borderRadius = 40;
 
-    // when x/y change, update cursor position with GSAP,
-    // and border position with GSAP with longer duration
     const { contextSafe } = useGSAP(() => {
         gsap.to(cursorRef.current, {
             rotation: 360,
@@ -64,9 +64,16 @@ const MouseCursor = () => {
         { duration: borderDur, ease: borderEase }
     );
 
+    const xImage = gsap.quickSetter(imageRef.current, 'x', 'px');
+    const yImage = gsap.quickSetter(imageRef.current, 'y', 'px');
+
     const withContext = (val: number, fn: Function) => contextSafe(() => fn(val))();
 
     useEffect(() => {
+        if (image) {
+            withContext(x, xImage);
+            withContext(y, yImage);
+        }
         withContext(x - centerRadius / 2, xCursor);
         withContext(y - centerRadius / 2, yCursor);
         
@@ -74,7 +81,22 @@ const MouseCursor = () => {
         const borderWidth = 1.6;
         withContext(x - borderRadius/2 - borderWidth, xBorder);
         withContext(y - borderRadius/2 - borderWidth, yBorder);
-    }, [x, y]);
+    }, [x, y, image]);
+
+    useEffect(() => {
+        contextSafe(() => {
+            const duration = 0.5;
+            if (image) {
+                gsap.to(cursorRef.current, { duration, opacity: 0 });
+                gsap.to(cursorBorderRef.current, { duration, opacity: 0 });
+                gsap.to(imageRef.current, { duration, opacity: 1 });
+            } else {
+                gsap.to(cursorRef.current, { duration, opacity: 1 });
+                gsap.to(cursorBorderRef.current, { duration, opacity: 1 });
+                gsap.to(imageRef.current, { duration, opacity: 0 });
+            }
+        })();
+    }, [image])
 
     return (
         <div className="custom-cursor" ref={cursorContainerRef}>
@@ -91,8 +113,23 @@ const MouseCursor = () => {
                     height: `${borderRadius}px`,
                 }}
             ></div>
+            { image && (
+                <img
+                    src={image}
+                    ref={imageRef}
+                    style={{
+                        opacity: 0,
+                        transform: `translate(${-1000}px, ${0}px)`
+                    }}
+                />
+            )}
         </div>
     )
+}
+
+interface CursorProps {
+    clickable: boolean,
+    image: string | null
 }
 
 export { Cursor };

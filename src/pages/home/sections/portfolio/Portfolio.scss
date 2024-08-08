@@ -21,23 +21,22 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 
     margin-top: 60px;
 }
 
 .portfolio-card {
-    $paddingX: 40px;
-    $border: 1px;
-    border: $border solid #3C3C3C;
-    width: calc(50% - $border*2 - $paddingX*2);
-    padding: 30px $paddingX;
+    border: 1px solid #3C3C3C;
+    width: 50%;
+    padding: 30px 40px;
 
     background-color: base.$bg1;
 
     color: white;
     text-decoration: none;
     
-    overflow-x: hidden;
+    overflow: hidden;
     transition: all 0.3s ease-in-out;
 
     &:hover {

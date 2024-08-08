@@ -18,8 +18,8 @@ const Quote = ({ id }: { id: string }) => {
         <div className='quote-container margin-content' id={id}>
             <div className='quote-content'>
                 <div className='subtext'>
-                    {/* A realisation: */}
-                    Incididunt ut:
+                    A realisation:
+                    {/* Incididunt ut: */}
                 </div>
                 { TEXT.map((text, index) => <QuoteLine text={text} index={index}/>) }
             </div>

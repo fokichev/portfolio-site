@@ -7,6 +7,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { CursorProvider } from './contexts/CursorContext/CursorContext';
 
 gsap.registerPlugin(
 	useGSAP,
@@ -17,10 +18,11 @@ gsap.registerPlugin(
 function App() {
 	return (
 		<MousePositionProvider>
-			<div className='app-container' id='app-container'>
-				<Cursor />
-				<HomePage />
-			</div>
+			<CursorProvider>
+				<div className='app-container' id='app-container'>
+					<HomePage />
+				</div>
+			</CursorProvider>
 		</MousePositionProvider>
 	)
 }
