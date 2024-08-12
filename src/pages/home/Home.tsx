@@ -1,11 +1,10 @@
 import './Home.scss';
 
-import { Navbar, ProgressBar, Section } from "../../components";
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 import { About, Footer, Hero, Portfolio, Quote, Skills, Timeline } from "./sections";
-import { useState } from 'react';
-import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Navbar, ProgressBar, Section } from "../../components";
 
 const HomePage = () => {
     const sections = [
@@ -18,31 +17,21 @@ const HomePage = () => {
         { key: "contact", Component: Footer, menu: true },
     ] satisfies Section[];
 
-    const [fixedStyle, setFixedStyle] = useState<FixedStyle>({ position: 'fixed', top: 0 });
-
-    const updateFixedStyle = (event: ScrollTrigger) => {
-        const { start, end, progress } = event;
-        if (progress === 0) {
-            setFixedStyle({ position: 'fixed', top: 0 });
-        } else {
-            const top = start - ((end - start) * progress);
-            setFixedStyle({ position: 'absolute', top });
-        }
-    };
-
     useGSAP(() => {
-        ScrollTrigger.create({
-            trigger: '#contact',
-            start: 'top bottom',
-            end: 'bottom bottom',
-            onUpdate: updateFixedStyle,
-            // markers: true
+        gsap.to('.fixed-container', {
+            scrollTrigger: {
+                trigger: '#contact',
+                start: 'top bottom',
+                end: 'bottom bottom',
+                scrub: 1,
+            },
+            opacity: 0
         });
     }, { scope: '.home-page' });
 
     return (
         <div className='home-page'>
-            <div className='fixed-container' style={fixedStyle}>
+            <div className='fixed-container'>
                 <ProgressBar />
                 <Navbar
                     sections={sections}
@@ -55,10 +44,5 @@ const HomePage = () => {
         </div>
     )
 }
-
-type FixedStyle = {
-    position: 'fixed' | 'absolute',
-    top: number
-};
 
 export { HomePage }
