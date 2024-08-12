@@ -1,5 +1,4 @@
 import './App.scss'
-import { Cursor } from './components'
 import { HomePage } from './pages'
 import { MousePositionProvider } from './contexts';
 
