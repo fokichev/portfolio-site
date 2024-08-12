@@ -109,8 +109,8 @@ const InteractiveCircle = ({ container }: { container: React.RefObject<HTMLDivEl
 
     const duration = 1;
     const ease = 'power4.out';
-    const xCursor = gsap.quickTo(cursorRef.current, 'x', { duration, ease });
-    const yCursor = gsap.quickTo(cursorRef.current, 'y', { duration, ease });
+    const xCursor = cursorRef.current ? gsap.quickTo(cursorRef.current, 'x', { duration, ease }) : () => {};
+    const yCursor = cursorRef.current ? gsap.quickTo(cursorRef.current, 'y', { duration, ease }) : () => {};
 
     const withContext = (val: number, fn: Function) => contextSafe(() => fn(val))();
 

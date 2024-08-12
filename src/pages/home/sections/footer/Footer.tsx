@@ -1,13 +1,11 @@
 import './Footer.scss';
-import { useRef } from 'react';
 
 import { MatterCarrots } from '../../../../components';
 
 import LinkedInIcon from '../../../../assets/icons/linkedin.svg?react';
 import GithubIcon from '../../../../assets/icons/github.svg?react';
 
-const Footer = ({ id }: { id: string }) => {
-    const footerRef = useRef<HTMLDivElement>(null);
+const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     const containerHeight = 600;
     const bottomPadding = 25;
 
@@ -15,6 +13,7 @@ const Footer = ({ id }: { id: string }) => {
         <div
             className='footer-container'
             id={id}
+            ref={refProp}
             style={{ height: `${containerHeight + bottomPadding}px` }}
         >
             <div className='footer-content'>
@@ -35,7 +34,7 @@ const Footer = ({ id }: { id: string }) => {
                     <a href=''>website repo :)</a>
                 </div>
             </div>
-            <MatterCarrots scope={footerRef} height={containerHeight}/>
+            <MatterCarrots scope={refProp} height={containerHeight}/>
         </div>
     )
 }

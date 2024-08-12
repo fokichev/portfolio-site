@@ -3,10 +3,10 @@ import './Portfolio.scss';
 import { CARDS, CARD } from './cards';
 import { useCursorContext } from '../../../../contexts/CursorContext/CursorContext';
 
-const Portfolio = ({ id }: { id: string }) => {
+const Portfolio = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     const { onHoverImage } = useCursorContext();
     return (
-        <div className='portfolio-container' id={id}>
+        <div className='portfolio-container' id={id} ref={refProp}>
             <div className='header margin-content'>
                 <h3>Project Highlights</h3>
                 <div>(pretty version coming soon)</div>

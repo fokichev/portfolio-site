@@ -6,15 +6,17 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const BARS = 62;
 
-const ProgressBar = () => {
+const ProgressBar = ({ scope }: { scope: React.RefObject<HTMLDivElement> }) => {
     const [progress, setProgress] = useState(0);
 
     useGSAP(() => {
-        ScrollTrigger.create({
-            trigger: '#root',
-            onUpdate: (e) => setProgress(Math.round(e.progress * 100))
-        })
-    }, { scope: '#root'})
+        if (scope.current) {
+            ScrollTrigger.create({
+                trigger: scope.current,
+                onUpdate: (e) => setProgress(Math.round(e.progress * 100))
+            })
+        }
+    }, { scope })
 
     const arrTop = Array.from({ length: BARS/2 }, (_, i) => i*100/BARS);
     const arrBot = arrTop.map(el => el + 50);
@@ -24,6 +26,7 @@ const ProgressBar = () => {
                     progress={progress}
                     percent={percent}
                     index={i}
+                    key={`percent-bar-${i}`}
                 />
             )}
             <span className='progress-number'>{String(progress).padStart(2, '0')}%</span>
@@ -31,6 +34,7 @@ const ProgressBar = () => {
                     progress={progress}
                     percent={percent}
                     index={i}
+                    key={`percent-bar-${i}`}
                 />
             )}
         </div>

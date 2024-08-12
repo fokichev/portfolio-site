@@ -29,7 +29,7 @@ const TEXT = {
 }
 
 
-const About = ({ id }: { id: string }) => {
+const About = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     const [src, setSrc] = useState({ big: SparkleBig, small: SparkleSmallAlt });
     const [alt, setAlt] = useState(false);
 
@@ -46,7 +46,7 @@ const About = ({ id }: { id: string }) => {
     }, []);
     
     return (
-        <div className='about-container margin-content' id={id}>
+        <div className='about-container margin-content' id={id} ref={refProp}>
             <div className='sticky-container'>
                 <div className='photo-title'>
                     Hey, I'm <span className='--red'>Lev</span>! (he/him)

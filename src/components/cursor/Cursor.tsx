@@ -40,12 +40,14 @@ const MouseCursor = ({ props }: { props: CursorProps }) => {
     const borderRadius = 40;
 
     const { contextSafe } = useGSAP(() => {
-        gsap.to(cursorRef.current, {
-            rotation: 360,
-            duration: 5,
-            repeat: -1,
-            ease: 'none'
-        })
+        if (cursorRef.current) {
+            gsap.to(cursorRef.current, {
+                rotation: 360,
+                duration: 5,
+                repeat: -1,
+                ease: 'none'
+            });
+        }
     }, { scope: cursorContainerRef });
 
     const xCursor = gsap.quickSetter(cursorRef.current, 'x', 'px');
@@ -53,16 +55,16 @@ const MouseCursor = ({ props }: { props: CursorProps }) => {
 
     const borderDur = 0.7;
     const borderEase = 'power4.out';
-    const xBorder = gsap.quickTo(
+    const xBorder = cursorBorderRef.current ? gsap.quickTo(
         cursorBorderRef.current,
         'x',
         { duration: borderDur, ease: borderEase }
-    );
-    const yBorder = gsap.quickTo(
+    ) : () => {};
+    const yBorder = cursorBorderRef.current ? gsap.quickTo(
         cursorBorderRef.current,
         'y',
         { duration: borderDur, ease: borderEase }
-    );
+    ) : () => {};
 
     const xImage = gsap.quickSetter(imageRef.current, 'x', 'px');
     const yImage = gsap.quickSetter(imageRef.current, 'y', 'px');
@@ -93,7 +95,9 @@ const MouseCursor = ({ props }: { props: CursorProps }) => {
             } else {
                 gsap.to(cursorRef.current, { duration, opacity: 1 });
                 gsap.to(cursorBorderRef.current, { duration, opacity: 1 });
-                gsap.to(imageRef.current, { duration, opacity: 0 });
+                if (imageRef.current) {
+                    gsap.to(imageRef.current, { duration, opacity: 0 });
+                }
             }
         })();
     }, [image])

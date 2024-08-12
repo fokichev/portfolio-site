@@ -283,14 +283,16 @@ const MatterCarrots = (props: MatterCarrotsProps) => {
     }
 
     useGSAP(() => {
-        ScrollTrigger.create({
-            trigger: scene.current,
-            start: 'center bottom',
-            end: 'center bottom',
-            // markers: true,
-            once: true,
-            onEnter: () => runRender()
-        });
+        if (scene.current) {
+            ScrollTrigger.create({
+                trigger: scene.current,
+                start: 'center bottom',
+                end: 'center bottom',
+                // markers: true,
+                once: true,
+                onEnter: () => runRender()
+            });
+        }
     }, { scope });
 
     return (

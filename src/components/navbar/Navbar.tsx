@@ -1,5 +1,5 @@
 import './Navbar.scss'
-import { ReactElement, useRef, useState } from 'react';
+import React, { ReactElement, useRef, useState } from 'react';
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -24,13 +24,16 @@ const Navbar = (props: NavbarProps) => {
         sections
             .filter(section => section.menu)
             .forEach((section, index) => {
-                ScrollTrigger.create({
-                    trigger: `#${section.key}`,
-                    start: 'top center',
-                    end: 'bottom center',
-                    onEnter: () => setSection({ key: section.key, index }),
-                    onEnterBack: () => setSection({ key: section.key, index })
-                })
+                if (section.refProp.current) {
+                    ScrollTrigger.create({
+                        trigger: section.refProp.current,
+                        start: 'top center',
+                        end: 'bottom center',
+                        onEnter: () => setSection({ key: section.key, index }),
+                        onEnterBack: () => setSection({ key: section.key, index })
+                    })
+                };
+
             })
     }, { scope })
     return (
@@ -51,6 +54,7 @@ const Navbar = (props: NavbarProps) => {
                             <MenuItem
                                 section={section}
                                 active={active}
+                                key={section.key}
                             />
                         )
                     }
@@ -77,7 +81,12 @@ const MenuItem = (props: MenuProps) => {
     )
 }
 
-type Section = { key: string, Component: (props: any) => ReactElement, menu?: boolean }
+type Section = {
+    key: string,
+    Component: (props: any) => ReactElement,
+    menu?: boolean,
+    refProp: React.RefObject<HTMLDivElement>
+}
 
 interface MenuProps {
     active: string,
@@ -86,7 +95,7 @@ interface MenuProps {
 
 interface NavbarProps {
     sections: Section[],
-    scope: string
+    scope: React.RefObject<HTMLDivElement>
 }
 
 export {

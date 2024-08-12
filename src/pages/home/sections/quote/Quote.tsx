@@ -13,15 +13,17 @@ const TEXT = [
     // 'elit, sed.',
 ]
 
-const Quote = ({ id }: { id: string }) => {
+const Quote = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     return (
-        <div className='quote-container margin-content' id={id}>
+        <div className='quote-container margin-content' id={id} ref={refProp}>
             <div className='quote-content'>
                 <div className='subtext'>
                     A realisation:
                     {/* Incididunt ut: */}
                 </div>
-                { TEXT.map((text, index) => <QuoteLine text={text} index={index}/>) }
+                { TEXT.map((text, index) =>
+                    <QuoteLine text={text} index={index} key={index}/>
+                )}
             </div>
             <div className='quote-model'>
                 <CarrotModel />

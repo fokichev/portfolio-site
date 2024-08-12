@@ -2,7 +2,7 @@
 // Italiana
 @font-face {
     font-family: 'Italiana';
-    src: url('./assets/fonts/Italiana-Regular.ttf');
+    src: url('/src/assets/fonts/Italiana-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
@@ -11,13 +11,13 @@ $italiana: 'Italiana', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', san
 // Lekton
 @font-face {
     font-family: 'Lekton';
-    src: url('./assets/fonts/Lekton-Regular.ttf');
+    src: url('/src/assets/fonts/Lekton-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Lekton';
-    src: url('./assets/fonts/Lekton-Bold.ttf');
+    src: url('/src/assets/fonts/Lekton-Bold.ttf');
     font-weight: bold;
     font-style: normal;
 }
@@ -26,13 +26,13 @@ $lekton: 'Lekton', 'Courier New', Courier, monospace;
 // Roboto
 @font-face {
     font-family: 'Roboto';
-    src: url('./assets/fonts/Roboto-Regular.ttf');
+    src: url('/src/assets/fonts/Roboto-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Roboto';
-    src: url('./assets/fonts/Roboto-MediumItalic.ttf');
+    src: url('/src/assets/fonts/Roboto-MediumItalic.ttf');
     font-weight: 500;
     font-style: italic;
 }
@@ -41,31 +41,31 @@ $roboto: 'Roboto', Arial, Helvetica, sans-serif;
 // TitilliumWeb
 @font-face {
     font-family: 'TitilliumWeb';
-    src: url('./assets/fonts/TitilliumWeb-Regular.ttf');
+    src: url('/src/assets/fonts/TitilliumWeb-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'TitilliumWeb';
-    src: url('./assets/fonts/TitilliumWeb-Light.ttf');
+    src: url('/src/assets/fonts/TitilliumWeb-Light.ttf');
     font-weight: 300;
     font-style: normal;
 }
 @font-face {
     font-family: 'TitilliumWeb';
-    src: url('./assets/fonts/TitilliumWeb-LightItalic.ttf');
+    src: url('/src/assets/fonts/TitilliumWeb-LightItalic.ttf');
     font-weight: 300;
     font-style: italic;
 }
 @font-face {
     font-family: 'TitilliumWeb';
-    src: url('./assets/fonts/TitilliumWeb-Bold.ttf');
+    src: url('/src/assets/fonts/TitilliumWeb-Bold.ttf');
     font-weight: bold;
     font-style: normal;
 }
 @font-face {
     font-family: 'TitilliumWeb';
-    src: url('./assets/fonts/TitilliumWeb-BoldItalic.ttf');
+    src: url('/src/assets/fonts/TitilliumWeb-BoldItalic.ttf');
     font-weight: bold;
     font-style: italic;
 }

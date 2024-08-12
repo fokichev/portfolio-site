@@ -11,7 +11,7 @@ const COLORS = {
     orange: [255, 175, 129]
 }
 
-const Skills = ({ id }: { id: string }) => {
+const Skills = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     const { x, y } = useMousePositionContext();
     const maxDeg = { x: 10, y: 10 };
 
@@ -84,7 +84,7 @@ const Skills = ({ id }: { id: string }) => {
     }, [x, y, active]);
 
     return (
-        <div className='skills-container margin-content' id={id}>
+        <div className='skills-container margin-content' id={id} ref={refProp}>
             <h2 className='skills-heading'>
                 Are you a London/remote digital agency,  with a front end developer opening?
             </h2>
@@ -194,21 +194,21 @@ const SkillsCard = () => {
                 <span className='label'>skills</span>
             </div>
             <div className='section skills-array'>
-                { skills.current.map(skill => <span>{skill}</span>) }
+                { skills.current.map((skill, i) => <span key={i}>{skill}</span>) }
             </div>
             <div className='card-heading'>
                 <span className='carrot'>{'>'}</span>
                 <span className='label'>in progress...</span>
             </div>
             <div className='section skills-array'>
-                { skills.inProgress.map(skill => <span>{skill}</span>) }
+                { skills.inProgress.map((skill, i) => <span key={i}>{skill}</span>) }
             </div>
             <div className='card-heading --gray'>
                 <span className='carrot'>{'>'}</span>
                 <span className='label --backend'><i>backend</i></span>
             </div>
             <div className='section skills-array --gray'>
-                { skills.backend.map(skill => <span>{skill}</span>) }
+                { skills.backend.map((skill, i) => <span key={i}>{skill}</span>) }
             </div>
         </>
     )

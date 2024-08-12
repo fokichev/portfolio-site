@@ -10,7 +10,7 @@ import KeepScrolling from '../../../../assets/timeline/keep-scrolling.svg?react'
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
-const Timeline = ({ id }: { id: string }) => {
+const Timeline = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     const containerRef = useRef(null);
     const timelineRef = useRef(null);
     const levRef = useRef(null);
@@ -92,6 +92,7 @@ const Timeline = ({ id }: { id: string }) => {
         <div
             className='timeline-container margin-content'
             id={id}
+            ref={refProp}
             style={{ paddingBottom: `${animationLength + 500}px` }}
         >
             <div className='pin-wrapper' ref={containerRef}>
