@@ -1,8 +1,12 @@
 import './CarrotModel.scss';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from '@gsap/react';
 
 import { Mesh } from 'three';
+import { OrbitControls as OrbitControlsType } from 'three-stdlib';
 import { Canvas } from '@react-three/fiber';
 import {
     CameraControls,
@@ -21,6 +25,9 @@ import {
 } from '@react-three/postprocessing';
 
 const CarrotModel = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const orbitControlsRef = useRef<OrbitControlsType>(null);
+    
     const [env, setEnv] = useState({
         rot: { x: 4.39, y: 8.07, z: 10 },
         str: 35 // 50 for black sections TODO
@@ -33,12 +40,38 @@ const CarrotModel = () => {
         '5env.png',
         '6env.png'
     ], { path: '/model/envMap/' });
+
+    const convertToAzimuthalAngle = (val: number, rot: number): number  => {
+        // const progress = (val * rot) % 1;
+        const progress = val;
+        if (progress <= 0.5) {
+            return -Math.PI * (val * 2);
+        } else {
+            return Math.PI * ((1 - val) * 2);
+        }
+    }
+
+    useGSAP(() => {
+        if (containerRef.current) {
+            ScrollTrigger.create({
+                start: 'top center',
+                end: 'bottom center',
+                trigger: containerRef.current,
+                scrub: 1,
+                // markers: true,
+                onUpdate: (self) => {
+                    if (orbitControlsRef.current) {
+                        const angle = convertToAzimuthalAngle(self.progress, 0.5);
+                        orbitControlsRef.current?.setAzimuthalAngle(angle);
+                    }
+                }
+            });
+        }
+    }, { scope: containerRef });
+
     return (
-        <div className='carrot-model'>
-            <Canvas
-                gl={{ alpha: true }}
-                
-            >
+        <div className='carrot-model' ref={containerRef}>
+            <Canvas gl={{ alpha: true }}>
                 <EffectComposer>
                     <Bloom
                         opacity={0.01}
@@ -47,7 +80,7 @@ const CarrotModel = () => {
                 </EffectComposer>
                 <PerspectiveCamera makeDefault fov={40} position={[0,0,3]} />
                 {/* <CameraControls /> */}
-                {/* <OrbitControls /> */}
+                <OrbitControls ref={orbitControlsRef} enableZoom={false}/>
                 <Environment
                     map={envMap}
                     environmentIntensity={env.str}
@@ -57,7 +90,6 @@ const CarrotModel = () => {
                     <Model/>
                 </Float>
             </Canvas>
-            
         </div>
     )
 }
