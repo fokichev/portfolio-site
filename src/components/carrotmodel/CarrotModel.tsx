@@ -97,18 +97,10 @@ const CarrotModel = () => {
 const Model = () => {
     const { scene } = useGLTF('model/carrot-model.glb');
 
-    const nodes = [] as Mesh[];
-
-    scene.traverse((child) => {
-      if ((child as Mesh).isMesh) {
-        nodes.push(child as Mesh);
-      }
-    });
+    const child = scene.children[0] as Mesh;
     return (
         <group scale={2}>
-            {nodes.map((child, index) => (
                 <mesh
-                    key={index}
                     geometry={child.geometry}
                     position={child.position}
                 >
@@ -128,7 +120,6 @@ const Model = () => {
                     transparent={true}
                 />
                 </mesh>
-            ))}
         </group>
     )
 }
