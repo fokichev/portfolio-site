@@ -4,6 +4,7 @@ import { useMousePositionContext } from '../../../../contexts';
 
 import { gsap } from "gsap";
 import { useGSAP } from '@gsap/react';
+import { Link } from '../../../../components';
 
 const COLORS = {
     pink: [255, 126, 197],
@@ -90,8 +91,8 @@ const Skills = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
             </h2>
             <div className='skills-links'>
                 {/* TODO create links */}
-                <a href=''>Download CV</a>
-                <a href=''>Hire Me :)</a>
+                <Link href=''>Download CV</Link>
+                <Link href=''>Hire Me :)</Link>
             </div>
             <div className='skills-cards' ref={skillsContainerRef}>
                 <div className='half-container'>

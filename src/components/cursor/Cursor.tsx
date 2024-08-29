@@ -1,5 +1,5 @@
 // TODO try out changing rotation based on screen width/height, so mouse moves right = rotate x degress right, etc. OR do speed/velocity
-// TODO fix scroll bars appearing when cursor hits bottom or right edges 
+// TODO fix scroll bars appearing when cursor hits bottom or right edges
 import './Cursor.scss';
 import { useEffect, useRef } from "react";
 import { useMousePositionContext } from '../../contexts';
@@ -29,7 +29,7 @@ const TouchCursor = () => {
 }
 
 const MouseCursor = ({ props }: { props: CursorProps }) => {
-    const { image } = props;
+    const { image, clickable } = props;
     const cursorContainerRef = useRef<HTMLDivElement>(null);
     const cursorRef = useRef<HTMLDivElement>(null);
     const cursorBorderRef = useRef<HTMLDivElement>(null);
@@ -37,16 +37,28 @@ const MouseCursor = ({ props }: { props: CursorProps }) => {
 
     const { x, y } = useMousePositionContext();
     const centerRadius = 14;
+    const centerRadiusClickable = 0;
     const borderRadius = 40;
+    const borderRadiusClickable = borderRadius * 1.5;
 
     const { contextSafe } = useGSAP(() => {
         if (cursorRef.current) {
-            gsap.to(cursorRef.current, {
-                rotation: 360,
-                duration: 5,
-                repeat: -1,
-                ease: 'none'
-            });
+            const tl = gsap.timeline({});
+            tl
+                .to(cursorContainerRef.current, {
+                    opacity: 1,
+                    duration: 1,
+                    delay: 3
+                })
+                .set(document.documentElement, {
+                    cursor: 'none'
+                })
+                .to(cursorRef.current, {
+                    rotation: 360,
+                    duration: 5,
+                    repeat: -1,
+                    ease: 'none'
+                });
         }
     }, { scope: cursorContainerRef });
 
@@ -76,14 +88,16 @@ const MouseCursor = ({ props }: { props: CursorProps }) => {
             withContext(x, xImage);
             withContext(y, yImage);
         }
-        withContext(x - centerRadius / 2, xCursor);
-        withContext(y - centerRadius / 2, yCursor);
+        const cRad = clickable ? centerRadiusClickable : centerRadius;
+        withContext(x - cRad / 2, xCursor);
+        withContext(y - cRad / 2, yCursor);
         
         // if (cursorBorderRef.current) { console.log(parseFloat(getComputedStyle(cursorBorderRef.current).borderWidth)) }
         const borderWidth = 1.6;
-        withContext(x - borderRadius/2 - borderWidth, xBorder);
-        withContext(y - borderRadius/2 - borderWidth, yBorder);
-    }, [x, y, image]);
+        const bRad = clickable ? borderRadiusClickable : borderRadius;
+        withContext(x - bRad/2 - borderWidth, xBorder);
+        withContext(y - bRad/2 - borderWidth, yBorder);
+    }, [x, y, image, clickable]);
 
     useEffect(() => {
         contextSafe(() => {
@@ -100,7 +114,26 @@ const MouseCursor = ({ props }: { props: CursorProps }) => {
                 }
             }
         })();
-    }, [image])
+    }, [image]);
+
+    useEffect(() => {
+        contextSafe(() => {
+            const cRad = clickable ? centerRadiusClickable : centerRadius;
+            const bRad = clickable ? borderRadiusClickable : borderRadius;
+            const ease = 'power4.out';
+            gsap.to(cursorRef.current, {
+                width: cRad,
+                height: cRad,
+                ease
+            })
+            gsap.to(cursorBorderRef.current, {
+                width: bRad,
+                height: bRad,
+                ease
+            })
+
+        })();
+    }, [clickable]);
 
     return (
         <div className="custom-cursor" ref={cursorContainerRef}>

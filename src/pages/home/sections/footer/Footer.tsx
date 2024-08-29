@@ -1,9 +1,10 @@
 import './Footer.scss';
 
-import { MatterCarrots } from '../../../../components';
+import { Link, MatterCarrots } from '../../../../components';
 
 import LinkedInIcon from '../../../../assets/icons/linkedin.svg?react';
 import GithubIcon from '../../../../assets/icons/github.svg?react';
+import { Suspense } from 'react';
 
 const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     const containerHeight = 600;
@@ -19,22 +20,28 @@ const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
             <div className='footer-content'>
                 <div className='top-section margin-content'>
                     <div className='heading'>Contact Me</div>
-                    <a href='' className='email'>contact@fokicheva.com</a>
+                    <Link href=''>
+                        <span className='email'>contact@fokicheva.com</span>
+                    </Link>
                     <div className='links'>
-                        <a href=''>
-                            <LinkedInIcon className='icon'/>
-                        </a>
-                        <a href=''>
-                            <GithubIcon  className='icon'/>
-                        </a>
+                        <Link
+                            href={""}
+                            children={<LinkedInIcon className='icon'/>}
+                        />
+                        <Link
+                            href={""}
+                            children={<GithubIcon  className='icon'/>}
+                        />
                     </div>
                 </div>
                 <div className='bottom-section'>
                     <div className='copywrite'>Lev Fokichev © 2024</div>
-                    <a href=''>website repo :)</a>
+                    <Link href=''>website repo :)</Link>
                 </div>
             </div>
-            <MatterCarrots scope={refProp} height={containerHeight}/>
+            <Suspense>
+                <MatterCarrots scope={refProp} height={containerHeight}/>
+            </Suspense>
         </div>
     )
 }

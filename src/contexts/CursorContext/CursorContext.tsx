@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 import { Cursor } from '../../components';
 
 const CursorContext = createContext({
-    onHoverClickable: () => {},
+    onHoverClickable: (clickable: boolean) => {},
     onHoverImage: (img: string | null) => {}
 });
 
@@ -10,13 +10,9 @@ const CursorProvider = ({ children }: { children: any }) => {
     const [clickable, setClickable] = useState(false);
     const [image, setImage] = useState<string | null>(null);
 
-    const onHoverClickable = () => {
-        console.log("clickable");
-    }
+    const onHoverClickable = (clickable: boolean) => setClickable(clickable);
         
-    const onHoverImage = (img: string | null) => {
-        setImage(img);
-    }
+    const onHoverImage = (img: string | null) => setImage(img);
 
     const props = {onHoverClickable, onHoverImage};
     

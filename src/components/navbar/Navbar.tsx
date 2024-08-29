@@ -3,13 +3,17 @@ import React, { ReactElement, useRef, useState } from 'react';
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useCursorContext } from '../../contexts/CursorContext/CursorContext';
 
 const LINE_HEIGHT = 20;
 
 const Navbar = (props: NavbarProps) => {
     const { sections, scope } = props;
+
     const [active, setActive] = useState(sections[0].key)
     const activeRef = useRef<HTMLDivElement>(null);
+
+    const { onHoverClickable } = useCursorContext();
 
     const setSection = ({ key, index }: { key: string, index: number }) => {
         setActive(key);
@@ -55,6 +59,7 @@ const Navbar = (props: NavbarProps) => {
                                 section={section}
                                 active={active}
                                 key={section.key}
+                                onHover={onHoverClickable}
                             />
                         )
                     }
@@ -65,7 +70,7 @@ const Navbar = (props: NavbarProps) => {
 }
 
 const MenuItem = (props: MenuProps) => {
-    const { active, section } = props;
+    const { active, section, onHover } = props;
     const { key } = section;
     
     const label = `${key[0].toLocaleUpperCase()}${key.slice(1, key.length)}`;
@@ -73,8 +78,10 @@ const MenuItem = (props: MenuProps) => {
     return (
         <div
             className={`menu-item${isActive ? ' --active' : ''}`}
-            onClick={() => gsap.to(window, { scrollTo: `#${key}` })}
             style={{ lineHeight: `${LINE_HEIGHT}px` }}
+            onClick={() => gsap.to(window, { scrollTo: `#${key}` })}
+            onMouseEnter={() => onHover(true)}
+            onMouseLeave={() => onHover(false)}
         >
            {label}
         </div>
@@ -90,7 +97,8 @@ type Section = {
 
 interface MenuProps {
     active: string,
-    section: Section
+    section: Section,
+    onHover: (hover: boolean) => void
 }
 
 interface NavbarProps {
