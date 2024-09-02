@@ -2,8 +2,7 @@
 // TODO fix scroll bars appearing when cursor hits bottom or right edges
 import './Cursor.scss';
 import { useEffect, useRef } from "react";
-import { useMousePositionContext } from '../../contexts';
-
+import { useAppStateContext } from '../../contexts';
 
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
@@ -35,7 +34,8 @@ const MouseCursor = ({ props }: { props: CursorProps }) => {
     const cursorBorderRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
 
-    const { x, y } = useMousePositionContext();
+    const { mousePosition } = useAppStateContext();
+    const { x, y } = mousePosition;
     const centerRadius = 14;
     const centerRadiusClickable = 0;
     const borderRadius = 40;

@@ -1,9 +1,9 @@
 import {
-    MousePositionProvider,
-    useMousePositionContext
-} from "./MousePositionContext/MousePositionContext";
+    AppStateProvider,
+    useAppStateContext
+} from "./AppStateContext/AppStateContext";
 
 export {
-    MousePositionProvider,
-    useMousePositionContext
+    AppStateProvider,
+    useAppStateContext
 };

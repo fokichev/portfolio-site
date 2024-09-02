@@ -1,12 +1,21 @@
+// TODO:
+	// mobile!!!
+	// on touch screen, change cursor behaviour (disable? add effect?)
+	// based on performance, simplify app if needed
+	// add loader
+	// on mobile, sub heavy components for videos/images
+	// test on diff devices + browsers + mac
 import './App.scss'
 import { HomePage } from './pages'
-import { MousePositionProvider } from './contexts';
+import { AppStateProvider } from './contexts';
 
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { CursorProvider } from './contexts/CursorContext/CursorContext';
+import { Suspense } from 'react';
+import { Loader } from './components';
 
 gsap.registerPlugin(
 	useGSAP,
@@ -16,13 +25,15 @@ gsap.registerPlugin(
 
 function App() {
 	return (
-		<MousePositionProvider>
+		<AppStateProvider>
 			<CursorProvider>
 				<div className='app-container' id='app-container'>
-					<HomePage />
+					<Suspense fallback={<Loader />}>
+						<HomePage />
+					</Suspense>
 				</div>
 			</CursorProvider>
-		</MousePositionProvider>
+		</AppStateProvider>
 	)
 }
 

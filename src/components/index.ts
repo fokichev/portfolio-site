@@ -2,6 +2,7 @@ import { CarrotModel } from "./carrotmodel/CarrotModel";
 import { CSSGradient } from "./cssgradient/CSSGradient";
 import { Cursor } from "./cursor/Cursor";
 import { Link } from "./link/Link";
+import { Loader } from "./loader/Loader";
 import { Navbar, Section } from "./navbar/Navbar";
 import { MatterCarrots } from "./mattercarrots/MatterCarrots";
 import { ProgressBar } from "./progressbar/ProgressBar";
@@ -12,6 +13,7 @@ export {
     CSSGradient,
     Cursor,
     Link,
+    Loader,
     Navbar,
     MatterCarrots,
     ProgressBar,
