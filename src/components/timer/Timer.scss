@@ -4,5 +4,14 @@
     font-family: base.$lekton;
     font-size: 16px;
     letter-spacing: -0.04em;
-    padding: 15px 0 0 0;
+    padding-top: 40px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+
+    // desktop
+    @media screen and (min-width: base.$desktop) {
+        padding-top: 15px;
+        height: unset;
+    }
 }
