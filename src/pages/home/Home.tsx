@@ -25,7 +25,7 @@ const HomePage = () => {
 
     useGSAP(() => {
         const contactRef = sections.find(section => section.key === 'contact')?.refProp;
-        if (contactRef?.current) {
+        if (viewport.desktop && contactRef?.current) {
             gsap.to(fixedRef.current, {
                 scrollTrigger: {
                     trigger: contactRef.current,

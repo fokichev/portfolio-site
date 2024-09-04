@@ -19,16 +19,7 @@ const DesktopNavbar = (props: NavbarProps) => {
 
     const { onHoverClickable } = useCursorContext();
 
-    const setSection = ({ key, index }: { key: string, index: number }) => {
-        setActive(key);
-        gsap.to(activeRef.current, {
-            y: index * LINE_HEIGHT,
-            duration: 0.3,
-            // ease: 'power2.inOut' // TODO fix easing
-        });
-    }
-
-    useGSAP(() => {
+    const { contextSafe } = useGSAP(() => {
         sections
             .filter(section => section.menu)
             .forEach((section, index) => {
@@ -41,9 +32,21 @@ const DesktopNavbar = (props: NavbarProps) => {
                         onEnterBack: () => setSection({ key: section.key, index })
                     })
                 };
-
             })
-    }, { scope })
+    }, { scope });
+
+    
+    const setSection = contextSafe(({ key, index }: { key: string, index: number }) => {
+        setActive(key);
+        gsap.to(activeRef.current, {
+            y: index * LINE_HEIGHT,
+            duration: 0.3,
+            // ease: 'power2.inOut' // TODO fix easing
+        });
+    });
+
+    const onMenuItemClick = contextSafe((key: string) => gsap.to(window, { scrollTo: `#${key}` }));
+
     return (
         <div className='desktop-navbar'>
             <div className='logo'>_LF</div>
@@ -64,6 +67,7 @@ const DesktopNavbar = (props: NavbarProps) => {
                                 active={active}
                                 key={section.key}
                                 onHover={onHoverClickable}
+                                onClick={onMenuItemClick}
                             />
                         )
                     }
@@ -74,7 +78,7 @@ const DesktopNavbar = (props: NavbarProps) => {
 }
 
 const MenuItem = (props: MenuProps) => {
-    const { active, section, onHover } = props;
+    const { active, section, onHover, onClick } = props;
     const { key } = section;
     
     const label = `${key[0].toLocaleUpperCase()}${key.slice(1, key.length)}`;
@@ -83,7 +87,7 @@ const MenuItem = (props: MenuProps) => {
         <div
             className={`menu-item${isActive ? ' --active' : ''}`}
             style={{ lineHeight: `${LINE_HEIGHT}px` }}
-            onClick={() => gsap.to(window, { scrollTo: `#${key}` })}
+            onClick={() => onClick(key)}
             onMouseEnter={() => onHover(true)}
             onMouseLeave={() => onHover(false)}
         >
@@ -95,7 +99,8 @@ const MenuItem = (props: MenuProps) => {
 interface MenuProps {
     active: string,
     section: Section,
-    onHover: (hover: boolean) => void
+    onHover: (hover: boolean) => void,
+    onClick: (key: string) => void
 }
 
 export { DesktopNavbar }

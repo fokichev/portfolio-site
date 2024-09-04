@@ -21,9 +21,8 @@
 
 .mobile-menu {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: 100vh;
-    width: 100%;
 
     position: absolute;
     top: 0;
@@ -31,4 +30,38 @@
     background-color: base.$bg1;
 
     z-index: -1;
+
+    width: 100%;
+    padding-top: 150px;
+    
+    font-family: base.$lekton;
+    font-size: 30px;
+
+    &-container {
+        position: relative;
+        width: 100%;
+    }
+
+    &-chosen {
+        position: absolute;
+        top: 0;
+        left: 80px;
+        display: flex;
+        align-items: center;
+    }
+
+    &-items {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        width: 100%;
+    }
+
+    &-item {
+        padding-right: 100px;
+
+        &.--active {
+            font-weight: bold;
+        }
+    }
 }
