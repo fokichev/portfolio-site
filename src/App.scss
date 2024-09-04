@@ -17,8 +17,13 @@
 }
 
 .margin-content {
-    width: 1000px;
-    // TODO breakpoint widths, this is desktop
+    width: 100%;
+    @media screen and (min-width: base.$tablet) and (max-width: base.$desktop) {
+        // width: 1000px;
+    }
+    @media screen and (min-width: base.$desktop) {
+        width: 1000px;
+    }
 }
 
 .border-box {

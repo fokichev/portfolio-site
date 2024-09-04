@@ -1,6 +1,6 @@
 import './Skills.scss';
 import { useEffect, useRef, useState } from 'react';
-import { useAppStateContext } from '../../../../contexts';
+import { useMousePositionContext } from '../../../../contexts';
 
 import { gsap } from "gsap";
 import { useGSAP } from '@gsap/react';
@@ -13,8 +13,7 @@ const COLORS = {
 }
 
 const Skills = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
-    const { mousePosition } = useAppStateContext();
-    const { x, y } = mousePosition;
+    const { x, y } = useMousePositionContext();
     const maxDeg = { x: 10, y: 10 };
 
     const shadow = (spread: number) => `0px 4px 25px ${spread}px rgba(255, 255, 255, 0.08)`;

@@ -1,6 +1,6 @@
 import './CSSGradient.scss';
 import { useEffect, useRef } from 'react';
-import { useAppStateContext } from '../../contexts';
+import { useMousePositionContext } from '../../contexts';
 
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
@@ -103,8 +103,7 @@ const InteractiveCircle = ({ container }: { container: React.RefObject<HTMLDivEl
     const colorStr = hexToRGB(COLORS.red).join(', ')
     const background = `radial-gradient(circle at center, rgba(${colorStr}, 1) 0, rgba(${colorStr}, 0) 50%) no-repeat`;
 
-    const { mousePosition } = useAppStateContext();
-    const { x, y } = mousePosition;
+    const { x, y } = useMousePositionContext();
     const { contextSafe } = useGSAP({ scope: container });
     const cursorRef = useRef<HTMLDivElement>(null);
 

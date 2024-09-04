@@ -6,8 +6,11 @@ import { useGSAP } from '@gsap/react';
 import { About, Footer, Hero, Portfolio, Quote, Skills, Timeline } from "./sections";
 import { Navbar, ProgressBar, Section } from "../../components";
 import { useRef } from 'react';
+import { useViewportContext } from '../../contexts';
 
 const HomePage = () => {
+    const { viewport } = useViewportContext();
+
     const containerRef = useRef<HTMLDivElement>(null);
     const fixedRef = useRef<HTMLDivElement>(null);
     const sections = [
@@ -39,7 +42,7 @@ const HomePage = () => {
     return (
         <div className='home-page' ref={containerRef}>
             <div className='fixed-container' ref={fixedRef}>
-                <ProgressBar scope={containerRef} />
+                { viewport.desktop && <ProgressBar scope={containerRef} /> }
                 <Navbar
                     sections={sections}
                     scope={containerRef}

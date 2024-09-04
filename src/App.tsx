@@ -6,15 +6,19 @@
 	// on mobile, sub heavy components for videos/images
 	// test on diff devices + browsers + mac
 import './App.scss'
-import { HomePage } from './pages'
-import { AppStateProvider } from './contexts';
+import { Suspense } from 'react';
 
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { CursorProvider } from './contexts/CursorContext/CursorContext';
-import { Suspense } from 'react';
+
+import {
+	ViewportProvider,
+	MousePositionProvider,
+	CursorProvider
+} from './contexts';
+import { HomePage } from './pages'
 import { Loader } from './components';
 
 gsap.registerPlugin(
@@ -25,15 +29,17 @@ gsap.registerPlugin(
 
 function App() {
 	return (
-		<AppStateProvider>
-			<CursorProvider>
-				<div className='app-container' id='app-container'>
-					<Suspense fallback={<Loader />}>
-						<HomePage />
-					</Suspense>
-				</div>
-			</CursorProvider>
-		</AppStateProvider>
+		<ViewportProvider>
+			<MousePositionProvider>
+				<CursorProvider>
+					<div className='app-container' id='app-container'>
+						<Suspense fallback={<Loader />}>
+							<HomePage />
+						</Suspense>
+					</div>
+				</CursorProvider>
+			</MousePositionProvider>
+		</ViewportProvider>
 	)
 }
 
