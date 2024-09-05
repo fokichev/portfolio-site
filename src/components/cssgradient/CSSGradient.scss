@@ -1,10 +1,12 @@
 @use '../../base';
 
 .gradient {
-    width: 100%;
-    height: 24rem;
-    margin: 100px 0 50px 0;
-    border-radius: 100px;
+    $paddingX: 30px;
+    margin: 30px $paddingX 30px $paddingX;
+    width: calc(100% - $paddingX*2);
+    height: 60vh;
+    
+    border-radius: 40px;
 
     position: relative;
     overflow: hidden;
@@ -13,13 +15,20 @@
     // border: 1px solid white;
     svg { display: none; }
     
+    @media screen and (min-width: base.$desktop) {
+        height: 24rem;
+        width: 100%;
+        margin: 100px 0 50px 0;
+        border-radius: 100px;
+    }
+    
     &-container {
-        filter: url(#goo) blur(30px);
         width: 100%;
         height: 100%;
         position: absolute;
         top: 0;
         left: 0;
+        background-size: cover;
     }
 
     &-circle {
@@ -49,18 +58,29 @@
 
         color: white;
         mix-blend-mode: exclusion;
+
+        gap: 10px;
         
         .name {
             font-family: base.$titillium;
-            font-size: 85px;
+            font-size: 34px;
             font-weight: 300;
+
+            @media screen and (min-width: base.$desktop) {
+                font-size: 85px;
+                gap: 0px;
+            }
         }
 
         .job {
             font-family: base.$italiana;
-            font-size: 80px;
+            font-size: 32px;
             margin-bottom: 20px;
             text-align: center;
+            
+            @media screen and (min-width: base.$desktop) {
+                font-size: 80px;
+            }
         }
     }
 

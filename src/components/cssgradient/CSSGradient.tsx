@@ -1,44 +1,62 @@
 import './CSSGradient.scss';
 import { useEffect, useRef } from 'react';
-import { useMousePositionContext } from '../../contexts';
+import { useMousePositionContext, useViewportContext } from '../../contexts';
 
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 
 import { CircleType, CIRCLES, COLORS } from './circles';
 import { hexToRGB } from './utils';
+import CirclesStaticImage from '../../assets/css-circles-static.png';
+import CirclesStaticImageHorizontal from '../../assets/css-circles-static-horizontal.png';
 
 const SIZE = 700;
 
 const CSSGradient = () => {
+    const { viewport, orientation } = useViewportContext();
     const containerRef = useRef<HTMLDivElement>(null);
+    const backgroundImgStyle = (url: string) => ({ backgroundImage: `url(${url})` });
+    const imgStyle =
+        viewport.desktop ? { filter: 'url(#goo) blur(30px)' }
+        : orientation.horizontal ? backgroundImgStyle(CirclesStaticImageHorizontal)
+        : orientation.vertical ? backgroundImgStyle(CirclesStaticImage)
+        : {};
+
     return (
         <div
             className='gradient'
         >
-            <div className='gradient-container' ref={containerRef}>
-                <svg xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <filter id="goo">
-                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                            <feColorMatrix
-                                in="blur"
-                                mode="matrix"
-                                values="
-                                    1 0 0 0 0  
-                                    0 1 0 0 0  
-                                    0 0 1 0 0  
-                                    0 0 0 300 -100
-                                "
-                                result="bright"
-                            />
-                            <feBlend in="SourceGraphic" in2="bright" mode="screen"/>
-                        </filter>
-                    </defs>
-                </svg>
-                { CIRCLES.map((circle, i) => <Circle {...circle} key={`circle-${i}`} />) }
-                <InteractiveCircle container={containerRef}/>
-            </div>
+                <div
+                    className='gradient-container'
+                    ref={containerRef}
+                    style={imgStyle}
+                >
+                    { viewport.desktop && (
+                        <>
+                            <svg xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <filter id="goo">
+                                        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                                        <feColorMatrix
+                                            in="blur"
+                                            mode="matrix"
+                                            values="
+                                                1 0 0 0 0  
+                                                0 1 0 0 0  
+                                                0 0 1 0 0
+                                                0 0 0 300 -100
+                                            "
+                                            result="bright"
+                                        />
+                                        <feBlend in="SourceGraphic" in2="bright" mode="screen"/>
+                                    </filter>
+                                </defs>
+                            </svg>
+                            { CIRCLES.map((circle, i) => <Circle {...circle} key={`circle-${i}`} />) }
+                            <InteractiveCircle container={containerRef}/>
+                        </>
+                    )}
+                </div>
             <div className='gradient-text'>
                 <div className='name'>Lev Fokichev</div>
                 <div className='job'>Front End Developer</div>
@@ -80,7 +98,7 @@ const Circle = (props: CircleType) => {
     const left = `calc(${x}% - ${SIZE/2}px)`;
     const top = `calc(${y}% - ${SIZE/2}px)`;
     const offset = 10;
-    const transformOrigin =  `calc(50% + ${offset}%) calc(50% + ${offset}%)`
+    const transformOrigin =  `calc(50% + ${offset}%) calc(50% + ${offset}%)`;
 
     return (
         <div

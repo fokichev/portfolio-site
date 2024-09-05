@@ -6,14 +6,18 @@ const ViewportContext = createContext({
     mobile: false,
     tablet: false,
     desktop: false
+  },
+  orientation: {
+    horizontal: false,
+    vertical: false
   }
 });
 
 const BREAKPOINTS = {
-  mobile: 300, //?
+  mobile: 200, //?
   tablet: 768,
   desktop: 1024 //1200
-}
+};
 
 const ViewportProvider = ({ children }: { children: any }) => {
   const min = (num: number) => `(min-width: ${num}px)`;
@@ -23,8 +27,14 @@ const ViewportProvider = ({ children }: { children: any }) => {
 
   const tablet = isTablet && !desktop;
   const mobile = isMobile && !tablet && !desktop;
-  
-  const props = { viewport: { mobile, tablet, desktop } };
+
+  const horizontal = useMediaQuery('(orientation: landscape)');
+  const vertical = useMediaQuery('(orientation: portrait)');
+
+  const props = {
+    viewport: { mobile, tablet, desktop },
+    orientation: { horizontal, vertical }
+  };
 
   return (
     <ViewportContext.Provider value={props}>

@@ -17,15 +17,20 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: start;
+        justify-content: center;
 
         $padding: 40px;
         padding: 0 $padding;
         width: calc(100% - $padding*2);
 
         .smiley-icon {
-            width: 95px;
+            width: 75px;
             animation: 25s linear 0s infinite normal none running moveInCircle;
+            
+            @media screen and (min-width: base.$desktop) {
+                justify-content: start;
+                width: 95px;
+            }
         }
     }
 }
