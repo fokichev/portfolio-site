@@ -1,8 +1,15 @@
+@use '../../base';
+
 .carrot-model {
-    // TODO make reactive to screen size (JS?)
-    padding-left: 100px;
-    $size: 600px;
+    $size: 250px;
     min-width: $size;
     height: $size;
     overflow: visible;
+
+    @media screen and (min-width: base.$desktop) {
+        padding-left: 100px;
+        $size: 600px;
+        min-width: $size;
+        height: $size;
+    }
 }

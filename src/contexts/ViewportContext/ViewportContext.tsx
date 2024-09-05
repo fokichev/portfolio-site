@@ -5,7 +5,8 @@ const ViewportContext = createContext({
   viewport: {
     mobile: false,
     tablet: false,
-    desktop: false
+    desktop: false,
+    type: ''
   },
   orientation: {
     horizontal: false,
@@ -28,11 +29,13 @@ const ViewportProvider = ({ children }: { children: any }) => {
   const tablet = isTablet && !desktop;
   const mobile = isMobile && !tablet && !desktop;
 
+  const type = desktop ? 'desktop' : tablet ? 'tablet' : mobile ? 'mobile' : '';
+
   const horizontal = useMediaQuery('(orientation: landscape)');
   const vertical = useMediaQuery('(orientation: portrait)');
 
   const props = {
-    viewport: { mobile, tablet, desktop },
+    viewport: { mobile, tablet, desktop, type },
     orientation: { horizontal, vertical }
   };
 

@@ -1,29 +1,52 @@
-import { useGSAP } from '@gsap/react';
-import { CarrotModel } from '../../../../components';
 import './Quote.scss';
-import gsap from 'gsap';
 import { useRef } from 'react';
 
-const TEXT = [
-    'I lose myself in time',
-    'when coding something',
-    'beautiful.'
-    // 'Lorem ipsum dolor sit,',
-    // 'consectetur adipis',
-    // 'elit, sed.',
-]
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
+
+import { CarrotModel } from '../../../../components';
+import { useViewportContext } from '../../../../contexts';
 
 const Quote = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
+    const { viewport } = useViewportContext();
+
+    const text = {
+        mobile: [
+            'I lose myself in',
+            'time when I\'m',
+            'coding something',
+            'beautiful.'
+        ],
+        tablet: [
+            'I lose myself in time',
+            'when coding something',
+            'beautiful.'
+        ],
+        desktop: [
+            'I lose myself in time',
+            'when coding something',
+            'beautiful.'
+        ]
+    };
+    const quote = text[viewport.type as keyof typeof text] ?? text['mobile'];
+
     return (
         <div className='quote-container margin-content' id={id} ref={refProp}>
             <div className='quote-content'>
                 <div className='subtext'>
                     A realisation:
-                    {/* Incididunt ut: */}
                 </div>
-                { TEXT.map((text, index) =>
-                    <QuoteLine text={text} index={index} key={index}/>
-                )}
+                <div className='quote-line-container'>
+                    { quote.map((text, index) =>
+                        <QuoteLine
+                            text={text}
+                            index={index}
+                            key={index}
+                            desktop={viewport.desktop}
+                        />
+                    )}
+                </div>
+
             </div>
             <div className='quote-model'>
                 <CarrotModel />
@@ -32,11 +55,15 @@ const Quote = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEl
     )
 }
 
-const QuoteLine = ({ text, index }: { text: string, index: number }) => {
+const QuoteLine = (
+    { text, index, desktop }:
+    { text: string, index: number, desktop: boolean }
+) => {
     const ref = useRef(null);
-    const offset = 100;
-    const start = -100 + index * offset;
-    const end = 400 + index * offset;
+    const offset = desktop ? 100 : 150;
+    const start = (desktop ? -100 : -500) + index * offset;
+    const end = (desktop ? 400 : 100) + index * offset;
+
     useGSAP(() => {
         gsap.to(ref.current, {
             scrollTrigger: {
@@ -46,7 +73,7 @@ const QuoteLine = ({ text, index }: { text: string, index: number }) => {
                 scrub: 1,
                 // markers: true
             },
-            x: '90%'
+            x: '100%'
         })
     });
     return (

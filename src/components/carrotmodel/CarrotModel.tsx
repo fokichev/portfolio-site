@@ -23,8 +23,11 @@ import {
     EffectComposer,
     
 } from '@react-three/postprocessing';
+import { useViewportContext } from '../../contexts';
 
 const CarrotModel = () => {
+    const { viewport } = useViewportContext();
+
     const containerRef = useRef<HTMLDivElement>(null);
     const orbitControlsRef = useRef<OrbitControlsType>(null);
     
@@ -53,9 +56,10 @@ const CarrotModel = () => {
 
     useGSAP(() => {
         if (containerRef.current) {
+            const start = `${viewport.desktop ? 'top' : '-100%'} center`;
+            const end = `${viewport.desktop ? 'bottom' : '150%'} center`
             ScrollTrigger.create({
-                start: 'top center',
-                end: 'bottom center',
+                start, end,
                 trigger: containerRef.current,
                 scrub: 1,
                 // markers: true,
@@ -71,7 +75,13 @@ const CarrotModel = () => {
 
     return (
         <div className='carrot-model' ref={containerRef}>
-            <Canvas gl={{ alpha: true }}>
+            <Canvas
+                gl={{ alpha: true }}
+                style={viewport.desktop ? {} : {
+                    touchAction: 'pan-y',
+                    pointerEvents: 'none'
+                }}
+            >
                 <EffectComposer>
                     <Bloom
                         opacity={0.01}
@@ -80,7 +90,11 @@ const CarrotModel = () => {
                 </EffectComposer>
                 <PerspectiveCamera makeDefault fov={40} position={[0,0,3]} />
                 {/* <CameraControls /> */}
-                <OrbitControls ref={orbitControlsRef} enableZoom={false}/>
+                <OrbitControls
+                    ref={orbitControlsRef}
+                    enableZoom={false}
+                    enablePan={false}
+                />
                 <Environment
                     map={envMap}
                     environmentIntensity={env.str}
