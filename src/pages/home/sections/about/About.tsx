@@ -6,6 +6,7 @@ import SparkleBig from '../../../../assets/sparkles/sparkle-big.png';
 import SparkleBigAlt from '../../../../assets/sparkles/sparkle-big-alt.png';
 import SparkleSmall from '../../../../assets/sparkles/sparkle-small.png';
 import SparkleSmallAlt from '../../../../assets/sparkles/sparkle-small-alt.png';
+import { useViewportContext } from '../../../../contexts';
 
 const TEXT = {
     objective: "I'm looking for a front end developer role with a digital agency.",
@@ -30,6 +31,8 @@ const TEXT = {
 
 
 const About = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
+    const { viewport } = useViewportContext();
+    
     const [src, setSrc] = useState({ big: SparkleBig, small: SparkleSmallAlt });
     const [alt, setAlt] = useState(false);
 
@@ -46,7 +49,7 @@ const About = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEl
     }, []);
     
     return (
-        <div className='about-container margin-content' id={id} ref={refProp}>
+        <div className={`about-container${viewport.desktop ? ' margin-content' : ''}`} id={id} ref={refProp}>
             <div className='sticky-container'>
                 <div className='photo-title'>
                     Hey, I'm <span className='--red'>Lev</span>! (he/him)

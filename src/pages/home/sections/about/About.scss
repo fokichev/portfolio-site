@@ -2,24 +2,39 @@
 
 .about-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-
-    margin: 300px 0;
+    align-items: center;
 
     position: relative;
+    
+    margin: 300px 30px;
+
+    @media screen and (min-width: base.$desktop) {
+        flex-direction: row;
+        margin: 300px 0;
+    }
 }
 
 .sticky-container {
-    position: sticky;
-    top: 20%;
-    align-self: flex-start;
+    @media screen and (min-width: base.$desktop) {
+        top: 20%;
+        position: sticky;
+        align-self: flex-start;
+    }
 
     .photo-title {
         font-family: base.$lekton;
         font-weight: bold;
         font-size: 18px;
         color: base.$white;
+        text-align: center;
+        margin-bottom: 10px;
+
+        @media screen and (min-width: base.$desktop) {
+            text-align: start;
+            margin-bottom: 0;
+        }
     }
 
     .photo-container {
@@ -62,14 +77,23 @@
     display: flex;
     flex-direction: column;
     gap: 50px;
+    text-align: center;
+    margin-top: 40px;
 
-    width: 500px;
-
+    @media screen and (min-width: base.$desktop) {
+        width: 500px;
+        text-align: start;
+    }
+    
     .section {
         &-title {
             font-family: base.$lekton;
             font-weight: bold;
             font-size: 18px;
+
+            &.objective {
+                line-height: 150%;
+            }
         }
 
         &-text {
