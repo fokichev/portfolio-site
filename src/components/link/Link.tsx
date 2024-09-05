@@ -17,7 +17,7 @@ const Link = (props: LinkProps) => {
 
     return (
         <a
-            href=''
+            href={href}
             onMouseEnter={onEnter}
             onMouseLeave={onLeave}
         >

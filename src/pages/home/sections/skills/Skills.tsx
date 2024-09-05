@@ -90,9 +90,9 @@ const Skills = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
                 Are you a London/remote digital agency,  with a front end developer opening?
             </h2>
             <div className='skills-links'>
-                {/* TODO create links */}
-                <Link href=''>Download CV</Link>
-                <Link href=''>Hire Me :)</Link>
+                {/* TODO create CV download link */}
+                <Link href='TODO'>Download CV</Link>
+                <Link href='mailto:contact@fokicheva.com?subject=Saying%20hi!'>Hire Me :)</Link>
             </div>
             <div className='skills-cards' ref={skillsContainerRef}>
                 <div className='half-container'>

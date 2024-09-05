@@ -9,6 +9,7 @@ import { Suspense } from 'react';
 const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     const containerHeight = 600;
     const bottomPadding = 25;
+    const email = 'contact@fokicheva.com';
 
     return (
         <div
@@ -20,23 +21,23 @@ const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
             <div className='footer-content'>
                 <div className='top-section margin-content'>
                     <div className='heading'>Contact Me</div>
-                    <Link href=''>
-                        <span className='email'>contact@fokicheva.com</span>
+                    <Link href={`mailto:${email}?subject=Saying%20hi!`}>
+                        <span className='email'>{email}</span>
                     </Link>
                     <div className='links'>
                         <Link
-                            href={""}
+                            href='https://www.linkedin.com/in/fokichev'
                             children={<LinkedInIcon className='icon'/>}
                         />
                         <Link
-                            href={""}
+                            href='https://github.com/fokichev'
                             children={<GithubIcon  className='icon'/>}
                         />
                     </div>
                 </div>
                 <div className='bottom-section'>
                     <div className='copywrite'>Lev Fokichev © 2024</div>
-                    <Link href=''>website repo :)</Link>
+                    <Link href='https://github.com/fokichev/portfolio-site'>website repo :)</Link>
                 </div>
             </div>
             <Suspense>
