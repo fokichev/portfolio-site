@@ -10,7 +10,8 @@ import { NavbarProps, Section } from './Navbar';
 const LINE_HEIGHT = 65;
 
 const MobileNavbar = (props: NavbarProps) => {
-    const { sections, scope } = props;
+    const { scope } = props;
+    const sections = props.sections.filter(section => section.menu);
     
     const [active, setActive] = useState(sections[0].key)
     const tl = useRef<gsap.core.Timeline>();
