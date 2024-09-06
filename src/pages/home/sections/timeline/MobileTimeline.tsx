@@ -98,7 +98,7 @@ const MobileTimeline = ({ id, refProp }: { id: string, refProp: React.RefObject<
             .to(curveRef.current, { // make line purple
                 height: coords.curves[0].height,
                 duration: 60,
-            }, '<')
+            })
             .to(levRef.current, { // face follows svg path
                 motionPath: {
                     path: '#curve-path',
@@ -107,7 +107,7 @@ const MobileTimeline = ({ id, refProp }: { id: string, refProp: React.RefObject<
                     end: 0.95
                 },
                 duration: 60
-            })
+            }, '<')
             .to(arrowRef.current, { // present arrow appears
                 opacity: 1,
                 y: -20,

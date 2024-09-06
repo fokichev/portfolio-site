@@ -1,6 +1,6 @@
 import './Skills.scss';
 import { useEffect, useRef, useState } from 'react';
-import { useMousePositionContext } from '../../../../contexts';
+import { useMousePositionContext, useViewportContext } from '../../../../contexts';
 
 import { gsap } from "gsap";
 import { useGSAP } from '@gsap/react';
@@ -13,6 +13,7 @@ const COLORS = {
 }
 
 const Skills = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
+    const { viewport } = useViewportContext();
     const { x, y } = useMousePositionContext();
     const maxDeg = { x: 10, y: 10 };
 
@@ -34,10 +35,32 @@ const Skills = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
     const [active, setActive] = useState<React.RefObject<HTMLDivElement> | null>(null);
     const [rect, setRect] = useState<DOMRect | null>(null);
 
-    const { contextSafe } = useGSAP({ scope: skillsContainerRef });
+    const { contextSafe } = useGSAP(() => {
+        if (viewport.mobile || viewport.tablet) {
+            [
+                { ref: experienceCardRef, color: 'pink' },
+                { ref: educationCardRef, color: 'blue' },
+                { ref: skillsCardRef, color: 'orange' },
+            ].forEach(card => {
+                gsap.to(card.ref.current, {
+                    scrollTrigger: {
+                        trigger: card.ref.current,
+                        start: 'start center',
+                        end: 'bottom center',
+                        toggleActions: 'play reverse play reverse',
+                        // markers: true
+                    },
+                    scale: 1.05,
+                    boxShadow: shadow(20),
+                    backgroundColor: colors[`${card.color}.on`],
+                    duration: 0.3
+                })
+            })
+        }
+    }, { scope: skillsContainerRef });
 
     const mouseMove = () => {
-        if (rect && active?.current) {
+        if (viewport.desktop && rect && active?.current) {
             const degX = Math.round(100 * ((rect.y + (rect.height/2) - y) * maxDeg.y) / (rect.height/2)) / 100;
             const degY = Math.round(100 * ((x - rect.x - (rect.width/2)) * maxDeg.x) / (rect.width/2)) / 100;
             contextSafe(() => {
@@ -52,40 +75,44 @@ const Skills = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
     }
 
     const mouseEnter = (ref: React.RefObject<HTMLDivElement>, color: string) => {
-        setActive(ref);
-        if (ref.current) {
-            setRect(ref.current.getBoundingClientRect());
-            contextSafe(() => {
-                gsap.to(ref.current, {
-                    scale: 1.05,
-                    boxShadow: shadow(20),
-                    backgroundColor: colors[`${color}.on`],
-                })
-            })();
+        if (viewport.desktop) {
+            setActive(ref);
+            if (ref.current) {
+                setRect(ref.current.getBoundingClientRect());
+                contextSafe(() => {
+                    gsap.to(ref.current, {
+                        scale: 1.05,
+                        boxShadow: shadow(20),
+                        backgroundColor: colors[`${color}.on`],
+                    })
+                })();
+            }
         }
     }
 
     const mouseLeave = (ref: React.RefObject<HTMLDivElement>, color: string) => {
-        setActive(null);
-        if (ref.current) {
-            contextSafe(() => {
-                gsap.to(ref?.current, {
-                    rotateX: 0,
-                    rotateY: 0,
-                    scale: 1,
-                    boxShadow: shadow(0),
-                    backgroundColor: colors[`${color}.off`],
-                })
-            })();
+        if (viewport.desktop) {
+            setActive(null);
+            if (ref.current) {
+                contextSafe(() => {
+                    gsap.to(ref.current, {
+                        rotateX: 0,
+                        rotateY: 0,
+                        scale: 1,
+                        boxShadow: shadow(0),
+                        backgroundColor: colors[`${color}.off`],
+                    })
+                })();
+            }
         }
     }
 
     useEffect(() => {
-        if (active) { mouseMove(); }
+        if (viewport.desktop && active) { mouseMove(); }
     }, [x, y, active]);
 
     return (
-        <div className='skills-container margin-content' id={id} ref={refProp}>
+        <div className='skills-container' id={id} ref={refProp}>
             <h2 className='skills-heading'>
                 Are you a London/remote digital agency,  with a front end developer opening?
             </h2>

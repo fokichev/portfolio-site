@@ -1,24 +1,31 @@
 @use '../../../../base';
 
 .skills-container {
-    width: 1100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    margin-bottom: 400px;
+    margin: 0 20px;
+
+    @media screen and (min-width: base.$desktop) {
+        width: 1100px;
+        margin-bottom: 400px;
+    }
 }
 
 .skills-heading {
-    font-family: base.$lekton;
-    font-size: 36px;
-    font-weight: normal;
     line-height: 1.2;
-
     text-align: center;
+    font-family: base.$lekton;
+    font-weight: normal;
+    font-size: 24px;
+
+    @media screen and (min-width: base.$desktop) {
+        font-size: 36px;
+    }
 }
 
-$gap: 100px;
+$gap: 50px;
 
 .skills-links {
     display: flex;
@@ -28,13 +35,17 @@ $gap: 100px;
     gap: $gap;
 
     a {
-        font-family: base.$lekton;
-        font-size: 24px;
-        font-weight: normal;
         color: white;
         text-decoration: none;
         line-height: 1.2;
         border-bottom: 2px solid white;
+        font-family: base.$lekton;
+        font-weight: normal;
+        font-size: 20px;
+
+        @media screen and (min-width: base.$desktop) {
+            font-size: 24px;
+        }
     }
 }
 
@@ -48,8 +59,6 @@ $border: 1px;
     flex-wrap: wrap;
     gap: $gap;
 
-    $width: calc(50% - $gap/2 - $border*2);
-
     .card-wrapper {
         display: flex;
     }
@@ -57,9 +66,30 @@ $border: 1px;
     .half-container {
         display: flex;
         flex-direction: column;
-        width: $width;
-        height: 100%;
-        gap: $gap*0.7;
+        gap: $gap;
+
+        @media screen and (min-width: base.$desktop) {
+            height: 100%;
+        }
+    }
+}
+
+// desktop gap vars
+@media screen and (min-width: base.$desktop) {
+    $gap: 100px;
+
+    .skills-links {
+        gap: $gap;
+    }
+
+    .skills-cards {
+        gap: $gap;
+        $width: calc(50% - $gap/2 - $border*2);
+        
+        .half-container {
+            width: $width;
+            gap: $gap*0.7;
+        }
     }
 }
 
