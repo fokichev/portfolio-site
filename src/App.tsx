@@ -12,6 +12,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { MotionPathPlugin } from 'gsap/all';
 
 import {
 	ViewportProvider,
@@ -24,7 +25,8 @@ import { Loader } from './components';
 gsap.registerPlugin(
 	useGSAP,
 	ScrollTrigger,
-	ScrollToPlugin
+	ScrollToPlugin,
+	MotionPathPlugin
 );
 
 function App() {
