@@ -1,6 +1,6 @@
 import './CarrotModel.scss';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from '@gsap/react';
@@ -14,6 +14,7 @@ import {
     Float,
     MeshTransmissionMaterial,
     OrbitControls,
+    PerformanceMonitor,
     PerspectiveCamera,
     useCubeTexture,
     useGLTF,
@@ -34,7 +35,10 @@ const CarrotModel = () => {
     const [env, setEnv] = useState({
         rot: { x: 4.39, y: 8.07, z: 10 },
         str: 35 // 50 for black sections TODO
-    })
+        // str: 50
+    });
+    const [dpr, setDpr] = useState(1.5);
+
     const envMap = useCubeTexture([
         '1env.png',
         '2env.png',
@@ -42,7 +46,7 @@ const CarrotModel = () => {
         '4env.png',
         '5env.png',
         '6env.png'
-    ], { path: '/model/envMap/' });
+    ], { path: `/model/envMap/${viewport.mobile ? "mobile" : "desktop"}/` });
 
     const convertToAzimuthalAngle = (val: number, rot: number): number  => {
         // const progress = (val * rot) % 1;
@@ -73,6 +77,11 @@ const CarrotModel = () => {
         }
     }, { scope: containerRef });
 
+    const onChangePerformance = ({ factor }: { factor: number }) => {
+        const newDpr = factor * 1.5 + (viewport.desktop ? 0.5 : 0);
+        setDpr(Math.round(newDpr * 10) / 10);
+    }
+
     return (
         <div className='carrot-model' ref={containerRef}>
             <Canvas
@@ -81,28 +90,31 @@ const CarrotModel = () => {
                     touchAction: 'pan-y',
                     pointerEvents: 'none'
                 }}
+                dpr={dpr}
             >
-                <EffectComposer>
-                    <Bloom
-                        opacity={0.01}
-                        intensity={4}
+                <PerformanceMonitor onChange={onChangePerformance}>
+                    <EffectComposer>
+                        <Bloom
+                            opacity={0.01}
+                            intensity={4}
+                        />
+                    </EffectComposer>
+                    <PerspectiveCamera makeDefault fov={40} position={[0,0,3]} />
+                    {/* <CameraControls /> */}
+                    <OrbitControls
+                        ref={orbitControlsRef}
+                        enableZoom={false}
+                        enablePan={false}
                     />
-                </EffectComposer>
-                <PerspectiveCamera makeDefault fov={40} position={[0,0,3]} />
-                {/* <CameraControls /> */}
-                <OrbitControls
-                    ref={orbitControlsRef}
-                    enableZoom={false}
-                    enablePan={false}
-                />
-                <Environment
-                    map={envMap}
-                    environmentIntensity={env.str}
-                    environmentRotation={[env.rot.x,env.rot.y,env.rot.z]}
-                />
-                <Float floatIntensity={1}>
-                    <Model/>
-                </Float>
+                    <Environment
+                        map={envMap}
+                        environmentIntensity={env.str}
+                        environmentRotation={[env.rot.x,env.rot.y,env.rot.z]}
+                    />
+                    <Float floatIntensity={1}>
+                        <Model/>
+                    </Float>
+                </PerformanceMonitor>
             </Canvas>
         </div>
     )
@@ -118,21 +130,21 @@ const Model = () => {
                     geometry={child.geometry}
                     position={child.position}
                 >
-                <MeshTransmissionMaterial
-                    transmission={1}
-                    thickness={1}
-                    roughness={0.01}
-                    chromaticAberration={0.05}
-                    anisotropy={0.5}
-                    distortion={0.1}
-                    distortionScale={0.5}
-                    temporalDistortion={0.2}
-                    ior={1.5}
-                    attenuationDistance={4}
-                    attenuationColor="white"
-                    opacity={0.5}
-                    transparent={true}
-                />
+                    <MeshTransmissionMaterial
+                        transmission={1}
+                        thickness={1}
+                        roughness={0.01}
+                        chromaticAberration={0.05}
+                        anisotropy={0.5}
+                        distortion={0.1}
+                        distortionScale={0.5}
+                        temporalDistortion={0.2}
+                        ior={1.5}
+                        attenuationDistance={4}
+                        attenuationColor="white"
+                        opacity={0.5}
+                        transparent={true}
+                    />
                 </mesh>
         </group>
     )
