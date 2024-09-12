@@ -8,11 +8,25 @@
     flex-direction: column;
     align-items: center;
 
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @media screen and (min-width: base.$desktop) {
+            align-items: start;
+        }
+    }
+
     h3 {
         font-family: base.$italiana;
-        font-size: 52px;
+        font-size: 32px;
         font-weight: normal;
         margin-bottom: 20px;
+
+        @media screen and (min-width: base.$desktop) {
+            font-size: 52px;
+        }
     }
 }
 
@@ -28,16 +42,22 @@
 
 .portfolio-card {
     border: 1px solid #3C3C3C;
-    width: 50%;
-    padding: 30px 40px;
-
     background-color: base.$bg1;
-
     color: white;
     text-decoration: none;
     
-    overflow: hidden;
     transition: all 0.3s ease-in-out;
+    
+    width: 100%;
+    padding: 40px 20px;
+
+    overflow: visible;
+    position: relative;
+
+    @media screen and (min-width: base.$desktop) {
+        width: 50%;
+        padding: 30px 40px;
+    }
 
     &:hover {
         background-color: #0C0C0C;
@@ -53,7 +73,11 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 16px;
+        gap: 10px;
+
+        @media screen and (min-width: base.$desktop) {
+            gap: 16px;
+        }
     }
 
     .skill {
@@ -66,5 +90,14 @@
         border-radius: 20px;
         background-color: #1F1F1F;
         border: 1px solid #7E7E7E;
+    }
+
+    .image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0;
+        z-index: 999;
     }
 }

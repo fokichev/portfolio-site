@@ -1,12 +1,13 @@
 import './Footer.scss';
+import { Suspense } from 'react';
+import { useViewportContext } from '../../../../contexts';
 
 import { Link, MatterCarrots } from '../../../../components';
-
 import LinkedInIcon from '../../../../assets/icons/linkedin.svg?react';
 import GithubIcon from '../../../../assets/icons/github.svg?react';
-import { Suspense } from 'react';
 
 const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
+    const { viewport } = useViewportContext();
     const containerHeight = 600;
     const bottomPadding = 25;
     const email = 'contact@fokicheva.com';

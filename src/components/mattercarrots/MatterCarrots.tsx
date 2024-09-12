@@ -23,6 +23,7 @@ import {
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { useViewportContext } from '../../contexts';
 
 const COLORS = {
     bg1: '060606',
@@ -37,9 +38,12 @@ const COLORS = {
 
 const MatterCarrots = (props: MatterCarrotsProps) => {
     const { height, scope } = props;
+    const { viewport } = useViewportContext();
+
+    const objectNum = viewport.desktop ? 200 : 50;
     
     const containerWidth = document.getElementsByTagName('html')[0].clientWidth;
-    const containerHeight = height;
+    const containerHeight = viewport.desktop ? height : window.innerHeight * 0.95;
     const [svgPaths, setSvgPaths] = useState<SVGPathElement[]>([]);
 
     // MATTER.JS REFS
@@ -126,7 +130,7 @@ const MatterCarrots = (props: MatterCarrotsProps) => {
                 );
         }
 
-        const colors = Array.from(Array(200))
+        const colors = Array.from(Array(objectNum))
             .map((_, index) => `#${COLORS[`c${Math.abs((index % 6) + 1)}` as keyof typeof COLORS]}`);
         
         const SVGs = await Promise.all(colors
@@ -178,57 +182,59 @@ const MatterCarrots = (props: MatterCarrotsProps) => {
         ]);
 
         // MOUSE EVENTS
-        const mouse = Mouse.create(
-            scene.current as HTMLDivElement
-        );
+        if (viewport.desktop) {
+            const mouse = Mouse.create(
+                scene.current as HTMLDivElement
+            );
 
-        // remove capturing scroll events, so I can scroll page normally
-        const { mousewheel } = mouse as any; // type not up to date
-        mouse.element.removeEventListener("wheel", mousewheel);
+            // remove capturing scroll events, so I can scroll page normally
+            const { mousewheel } = mouse as any; // type not up to date
+            mouse.element.removeEventListener("wheel", mousewheel);
 
-        Mouse.setScale(mouse, { x: 1, y: 1 });
-        
-        const mouseConstraint = MouseConstraint.create(engine.current, {
-            mouse,
-            constraint: {
-                stiffness: 0.2,
-                render: {
-                    visible: false
+            Mouse.setScale(mouse, { x: 1, y: 1 });
+            
+            const mouseConstraint = MouseConstraint.create(engine.current, {
+                mouse,
+                constraint: {
+                    stiffness: 0.2,
+                    render: {
+                        visible: false
+                    }
                 }
-            }
-        });
+            });
 
-        const circleSize = 40;
-        const mouseCircle = Bodies.circle(
-            -circleSize,
-            -circleSize,
-            circleSize,
-            {
-                isSensor: true,
-                isStatic: true,
-                render: { visible: false }
-            }
-        )
-        Events.on(mouseConstraint, 'mousemove', (event) => {
-            Body.setPosition(mouseCircle, event.mouse.position);
-            const foundPhysics = Query.collides(mouseCircle, SVGs);
-            foundPhysics.forEach(body => {
-                const targetAngle = Vector.angle(body.bodyA.position, event.mouse.position)
-                const forceMag = 0.01;
-                const force = {
-                    x: Math.cos(targetAngle) * -forceMag,
-                    y: Math.sin(targetAngle) * -forceMag
+            const circleSize = 40;
+            const mouseCircle = Bodies.circle(
+                -circleSize,
+                -circleSize,
+                circleSize,
+                {
+                    isSensor: true,
+                    isStatic: true,
+                    render: { visible: false }
                 }
-                Body.applyForce(
-                    body.bodyA,
-                    event.mouse.position,
-                    force
-                )
-            })
-            // mouseCircle.position = { x: event.mouse.position.x, y: event.mouse.position.y }
-        });
+            )
+            Events.on(mouseConstraint, 'mousemove', (event) => {
+                Body.setPosition(mouseCircle, event.mouse.position);
+                const foundPhysics = Query.collides(mouseCircle, SVGs);
+                foundPhysics.forEach(body => {
+                    const targetAngle = Vector.angle(body.bodyA.position, event.mouse.position)
+                    const forceMag = 0.01;
+                    const force = {
+                        x: Math.cos(targetAngle) * -forceMag,
+                        y: Math.sin(targetAngle) * -forceMag
+                    }
+                    Body.applyForce(
+                        body.bodyA,
+                        event.mouse.position,
+                        force
+                    )
+                })
+                // mouseCircle.position = { x: event.mouse.position.x, y: event.mouse.position.y }
+            });
 
-        composite.current = Composite.add(engine.current.world, [mouseConstraint, mouseCircle]);
+            composite.current = Composite.add(engine.current.world, [mouseConstraint, mouseCircle]);
+        }
     };
 
     useEffect(() => {
