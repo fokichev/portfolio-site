@@ -22,13 +22,7 @@ const Cursor = (props: CursorProps) => {
         }
     };
 
-    return isTouchDevice() ? <TouchCursor /> : <MouseCursor props={props}/>;
-}
-
-const TouchCursor = () => {
-    return (
-        <></>
-    )
+    return isTouchDevice() ? <></> : <MouseCursor props={props}/>;
 }
 
 const MouseCursor = ({ props }: { props: CursorProps }) => {

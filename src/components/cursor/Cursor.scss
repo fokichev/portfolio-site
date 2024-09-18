@@ -12,14 +12,8 @@ html, a{
     
     .cursor-center {
         position: absolute;
-        background: conic-gradient(
-            #C82121 0deg,
-            #E892CE 72deg,
-            #3581AF 144deg,
-            #D9B570 216deg,
-            #E4572A 288deg,
-            #C82121 359deg
-        );
+        background-image: url('../../assets/cursor-center.png');
+        background-size: contain;
         top: 0px;
         left: 0px;
         border-radius: 50%;
