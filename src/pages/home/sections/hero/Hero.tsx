@@ -1,4 +1,7 @@
 import './Hero.scss';
+
+import Lottie from 'lottie-react';
+
 import {
     CSSGradient,
     SkullModel,
@@ -6,6 +9,8 @@ import {
 } from '../../../../components';
 
 import SmileyIcon from '../../../../assets/smiley.svg?react';
+import globeLottie from '../../../../assets/lottie/globe.json';
+import eyeLottie from '../../../../assets/lottie/eye.json';
 
 const Hero = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     return (
@@ -14,6 +19,9 @@ const Hero = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEle
                 <Timer />
                 {/* <CSSGradient/> */}
                 <SkullModel />
+                {/* <Lottie animationData={globeLottie} loop={true} /> */}
+                {/* <Lottie animationData={eyeLottie} loop={true} /> */}
+                
             </div>
             <div className='smiley'>
                 <SmileyIcon className='smiley-icon'/>
