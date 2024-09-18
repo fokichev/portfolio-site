@@ -1,4 +1,3 @@
-import { CSSGradient } from "./cssgradient/CSSGradient";
 import { Cursor } from "./cursor/Cursor";
 import { Link } from "./link/Link";
 import { Loader } from "./loader/Loader";
@@ -12,7 +11,6 @@ import { CarrotModel } from "./threejs/carrotmodel/CarrotModel";
 import { SkullModel } from "./threejs/skullmodel/SkullModel";
 
 export {
-    CSSGradient,
     Cursor,
     Link,
     Loader,

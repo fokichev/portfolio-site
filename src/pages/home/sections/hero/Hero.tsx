@@ -3,7 +3,6 @@ import './Hero.scss';
 import Lottie from 'lottie-react';
 
 import {
-    CSSGradient,
     SkullModel,
     Timer
 } from '../../../../components';
@@ -17,7 +16,6 @@ const Hero = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEle
         <div className='hero-container' id={id} ref={refProp}>
             <div className='hero-content margin-content'>
                 <Timer />
-                {/* <CSSGradient/> */}
                 {/* <SkullModel /> */}
                 {/* <Lottie animationData={globeLottie} loop={true} /> */}
                 {/* <Lottie animationData={eyeLottie} loop={true} /> */}
