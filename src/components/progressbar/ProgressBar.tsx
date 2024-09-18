@@ -13,7 +13,10 @@ const ProgressBar = ({ scope }: { scope: React.RefObject<HTMLDivElement> }) => {
         if (scope.current) {
             ScrollTrigger.create({
                 trigger: scope.current,
-                onUpdate: (e) => setProgress(Math.round(e.progress * 100))
+                start: 'start end',
+                end: 'bottom bottom',
+                onUpdate: (e) => setProgress(Math.round(e.progress * 100)),
+                markers: true
             })
         }
     }, { scope })
