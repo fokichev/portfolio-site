@@ -9,7 +9,7 @@ import { useCursorContext } from '../../contexts/CursorContext/CursorContext';
 
 import { NavbarProps, Section } from './Navbar';
 
-const LINE_HEIGHT = 20;
+const LINE_HEIGHT = 26;
 
 const DesktopNavbar = (props: NavbarProps) => {
     const { sections, scope } = props;

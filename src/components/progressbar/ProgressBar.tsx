@@ -16,7 +16,7 @@ const ProgressBar = ({ scope }: { scope: React.RefObject<HTMLDivElement> }) => {
                 start: 'start end',
                 end: 'bottom bottom',
                 onUpdate: (e) => setProgress(Math.round(e.progress * 100)),
-                markers: true
+                // markers: true
             })
         }
     }, { scope })

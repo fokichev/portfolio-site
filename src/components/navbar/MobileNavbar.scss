@@ -49,6 +49,9 @@
         left: 80px;
         display: flex;
         align-items: center;
+
+        font-weight: bold;
+        color: base.$accent;
     }
 
     &-items {
@@ -62,7 +65,9 @@
         padding-right: 100px;
 
         &.--active {
-            font-weight: bold;
+            font-weight: 600;
+            font-style: italic;
+            color: base.$accent;
         }
     }
 }

@@ -18,7 +18,7 @@ const Hero = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEle
             <div className='hero-content margin-content'>
                 <Timer />
                 {/* <CSSGradient/> */}
-                <SkullModel />
+                {/* <SkullModel /> */}
                 {/* <Lottie animationData={globeLottie} loop={true} /> */}
                 {/* <Lottie animationData={eyeLottie} loop={true} /> */}
                 

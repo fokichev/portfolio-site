@@ -30,6 +30,9 @@
         left: 0;
         display: flex;
         align-items: center;
+
+        font-weight: bold;
+        color: base.$accent;
     }
 
     &-items {
@@ -42,27 +45,20 @@
     &-item {
         text-align: end;
         width: 70px;
-        -webkit-transition: all .5s;
-        -moz-transition: all .5s;
-        -o-transition: all .5s;
-        transition: all .5s;
+        font-weight: normal;
+
+        -webkit-transition: color .3s;
+        -moz-transition: color .3s;
+        -o-transition: color .3s;
+        transition: color .3s;
 
         &.--active {
-            $color: white;
-            $shadow: 0.2px;
-
-            text-shadow: 0 0 10px white;
-            // text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
-            // text-shadow:
-            //     $shadow*-1 $shadow*-1 0 $color,
-            //     $shadow $shadow*-1 0 $color,
-            //     $shadow*-1 $shadow 0 $color,
-            //     $shadow $shadow 0 $color;
+            font-weight: 600;
+            font-style: italic;
         }
 
         &:hover {
-            color: base.$pink;
-            text-shadow: 0 0 10px base.$pink;
-        }
+            color: base.$accent;
+        }  
     }
 }
