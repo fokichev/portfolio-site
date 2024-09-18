@@ -4,77 +4,98 @@ $tablet: 768px;
 $desktop: 1000px;
 
 // FONTS
-// Italiana
+// Playfair
+$playfair: 'Playfair', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 @font-face {
-    font-family: 'Italiana';
-    src: url('/src/assets/fonts/Italiana-Regular.ttf');
-    font-weight: normal;
-    font-style: normal;
-}
-$italiana: 'Italiana', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
-// Lekton
-@font-face {
-    font-family: 'Lekton';
-    src: url('/src/assets/fonts/Lekton-Regular.ttf');
-    font-weight: normal;
+    font-family: "Playfair";
+    src: url('/src/assets/fonts/Playfair/Playfair_144pt-Light.ttf');
+    font-weight: 300;
     font-style: normal;
 }
 @font-face {
-    font-family: 'Lekton';
-    src: url('/src/assets/fonts/Lekton-Bold.ttf');
-    font-weight: bold;
-    font-style: normal;
-}
-$lekton: 'Lekton', 'Courier New', Courier, monospace;
-
-// Roboto
-@font-face {
-    font-family: 'Roboto';
-    src: url('/src/assets/fonts/Roboto-Regular.ttf');
+    font-family: "Playfair";
+    src: url('/src/assets/fonts/Playfair/Playfair_144pt-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
-    font-family: 'Roboto';
-    src: url('/src/assets/fonts/Roboto-MediumItalic.ttf');
+    font-family: "Playfair";
+    src: url('/src/assets/fonts/Playfair/Playfair_144pt-Medium.ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Playfair";
+    src: url('/src/assets/fonts/Playfair/Playfair_144pt-MediumItalic.ttf');
     font-weight: 500;
     font-style: italic;
 }
-$roboto: 'Roboto', Arial, Helvetica, sans-serif;
-
-// TitilliumWeb
 @font-face {
-    font-family: 'TitilliumWeb';
-    src: url('/src/assets/fonts/TitilliumWeb-Regular.ttf');
+    font-family: "Playfair";
+    src: url('/src/assets/fonts/Playfair/Playfair_144pt-BoldItalic.ttf');
+    font-weight: bold;
+    font-style: italic;
+}
+
+// PlayfairSmall
+$playfair: 'PlayfairSmall', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+@font-face {
+    font-family: "PlayfairSmall";
+    src: url('/src/assets/fonts/PlayfairSmall/Playfair_9pt-LightItalic.ttf');
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: "PlayfairSmall";
+    src: url('/src/assets/fonts/PlayfairSmall/Playfair_9pt-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
-    font-family: 'TitilliumWeb';
-    src: url('/src/assets/fonts/TitilliumWeb-Light.ttf');
-    font-weight: 300;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'TitilliumWeb';
-    src: url('/src/assets/fonts/TitilliumWeb-LightItalic.ttf');
-    font-weight: 300;
+    font-family: "PlayfairSmall";
+    src: url('/src/assets/fonts/PlayfairSmall/Playfair_9pt-SemiBoldItalic.ttf');
+    font-weight: 600;
     font-style: italic;
 }
 @font-face {
-    font-family: 'TitilliumWeb';
-    src: url('/src/assets/fonts/TitilliumWeb-Bold.ttf');
-    font-weight: bold;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'TitilliumWeb';
-    src: url('/src/assets/fonts/TitilliumWeb-BoldItalic.ttf');
+    font-family: "PlayfairSmall";
+    src: url('/src/assets/fonts/PlayfairSmall/Playfair_9pt-BoldItalic.ttf');
     font-weight: bold;
     font-style: italic;
 }
-$titillium: 'TitilliumWeb', Arial, Helvetica, sans-serif;
+
+// NeueMontreal
+$neuemontreal: 'NeueMontreal', Arial, Helvetica, sans-serif;
+@font-face {
+    font-family: "NeueMontreal";
+    src: url('/src/assets/fonts/NeueMontreal/PPNeueMontreal-Book.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "NeueMontreal";
+    src: url('/src/assets/fonts/NeueMontreal/PPNeueMontreal-Italic.otf');
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: "NeueMontreal";
+    src: url('/src/assets/fonts/NeueMontreal/PPNeueMontreal-Medium.otf');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: "NeueMontreal";
+    src: url('/src/assets/fonts/NeueMontreal/PPNeueMontreal-SemiBolditalic.otf');
+    font-weight: 600;
+    font-style: italic;
+}
+@font-face {
+    font-family: "NeueMontreal";
+    src: url('/src/assets/fonts/NeueMontreal/PPNeueMontreal-Bold.otf');
+    font-weight: 700;
+    font-style: normal;
+}
 
 // COLOURS
 $bg1: #060606;
