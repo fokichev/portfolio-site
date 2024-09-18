@@ -1,0 +1,15 @@
+@use '../../../base';
+
+.skull-model {
+    $size: 600px;
+    min-width: $size;
+    height: $size;
+    overflow: visible;
+
+    @media screen and (min-width: base.$desktop) {
+        // padding-left: 100px;
+        // $size: 600px;
+        // min-width: $size;
+        // height: $size;
+    }
+}

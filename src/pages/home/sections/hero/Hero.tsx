@@ -1,8 +1,10 @@
 import './Hero.scss';
 import {
     CSSGradient,
+    SkullModel,
     Timer
 } from '../../../../components';
+
 import SmileyIcon from '../../../../assets/smiley.svg?react';
 
 const Hero = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
@@ -10,7 +12,8 @@ const Hero = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEle
         <div className='hero-container' id={id} ref={refProp}>
             <div className='hero-content margin-content'>
                 <Timer />
-                <CSSGradient/>
+                {/* <CSSGradient/> */}
+                <SkullModel />
             </div>
             <div className='smiley'>
                 <SmileyIcon className='smiley-icon'/>

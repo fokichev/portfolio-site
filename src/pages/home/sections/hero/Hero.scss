@@ -23,12 +23,15 @@
         padding: 0 $padding;
         width: calc(100% - $padding*2);
 
+        @media screen and (min-width: base.$desktop) {
+            justify-content: start;
+        }
+
         .smiley-icon {
             width: 75px;
             animation: 25s linear 0s infinite normal none running moveInCircle;
             
             @media screen and (min-width: base.$desktop) {
-                justify-content: start;
                 width: 95px;
             }
         }
