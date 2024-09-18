@@ -16,7 +16,7 @@
 .skills-heading {
     line-height: 1.2;
     text-align: center;
-    font-family: base.$lekton;
+    font-family: base.$neuemontreal;
     font-weight: normal;
     font-size: 24px;
 
@@ -39,7 +39,7 @@ $gap: 50px;
         text-decoration: none;
         line-height: 1.2;
         border-bottom: 2px solid white;
-        font-family: base.$lekton;
+        font-family: base.$neuemontreal;
         font-weight: normal;
         font-size: 20px;
 
@@ -122,12 +122,12 @@ $border: 1px;
         gap: 10px;
         font-size: 20px;
         .carrot {
-            font-family: base.$titillium;
+            font-family: base.$neuemontreal;
             font-weight: normal;
         }
 
         .label {
-            font-family: base.$lekton;
+            font-family: base.$neuemontreal;
             font-weight: bold;
 
             &.--backend {
@@ -137,19 +137,19 @@ $border: 1px;
     }
 
     .company {
-        font-family: base.$titillium;
+        font-family: base.$neuemontreal;
         font-weight: bold;
         font-style: italic;
     }
 
     .timeframe {
-        font-family: base.$titillium;
+        font-family: base.$neuemontreal;
         font-weight: 300;
         font-style: italic;
     }
 
     .description {
-        font-family: base.$lekton;
+        font-family: base.$neuemontreal;
 
         ul {
             margin-top: 10px;
@@ -165,7 +165,7 @@ $border: 1px;
     }
 
     .skills-array {
-        font-family: base.$titillium;
+        font-family: base.$neuemontreal;
         font-weight: normal;
 
         display: flex;

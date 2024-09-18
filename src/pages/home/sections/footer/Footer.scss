@@ -36,13 +36,13 @@
         margin-top: 150px;
 
         .heading {
-            font-family: base.$italiana;
+            font-family: base.$playfair;
             font-size: 78px;
             margin-left: -8px;
         }
 
         .email {
-            font-family: base.$lekton;
+            font-family: base.$neuemontreal;
             font-size: 24px;
             color: white;
             text-decoration: none;
@@ -71,7 +71,7 @@
         padding: 0 $padding;
         width: calc(100% - #{$padding * 2});
 
-        font-family: base.$lekton;
+        font-family: base.$neuemontreal;
         font-size: 16px;
         color: white;
 
