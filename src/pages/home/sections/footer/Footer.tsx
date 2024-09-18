@@ -2,7 +2,7 @@ import './Footer.scss';
 import { Suspense } from 'react';
 import { useViewportContext } from '../../../../contexts';
 
-import { Link, MatterCarrots } from '../../../../components';
+import { Link, MatterCarrots, MatterEmojis } from '../../../../components';
 import LinkedInIcon from '../../../../assets/icons/linkedin.svg?react';
 import GithubIcon from '../../../../assets/icons/github.svg?react';
 
@@ -42,7 +42,8 @@ const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
                 </div>
             </div>
             <Suspense>
-                <MatterCarrots scope={refProp} height={containerHeight}/>
+                {/* <MatterCarrots scope={refProp} height={containerHeight}/> */}
+                <MatterEmojis scope={refProp} height={containerHeight}/>
             </Suspense>
         </div>
     )

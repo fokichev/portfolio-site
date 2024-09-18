@@ -22,6 +22,8 @@
 
     pointer-events: none;
 
+    mix-blend-mode: exclusion;
+
     a {
         pointer-events: auto;
     }
