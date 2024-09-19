@@ -16,16 +16,6 @@
     width: 100%;
 }
 
-.margin-content {
-    width: 100%;
-    @media screen and (min-width: base.$tablet) and (max-width: base.$desktop) {
-        // width: 1000px;
-    }
-    @media screen and (min-width: base.$desktop) {
-        width: 1000px;
-    }
-}
-
 .border-box {
     box-sizing: border-box;
     -moz-box-sizing: border-box;

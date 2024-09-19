@@ -14,13 +14,16 @@ const HomePage = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const fixedRef = useRef<HTMLDivElement>(null);
     const sections = [
-        { key: "hero", Component: Hero, menu: true, refProp: useRef(null) },
-        { key: "quote", Component: Quote, refProp: useRef(null) },
-        { key: "about", Component: About, menu: true, refProp: useRef(null) },
-        { key: "timeline", Component: Timeline, refProp: useRef(null) },
-        { key: "skills", Component: Skills, menu: true, refProp: useRef(null) },
-        { key: "work", Component: Portfolio, menu: true, refProp: useRef(null) },
-        { key: "contact", Component: Footer, menu: true, refProp: useRef(null) },
+        // { key: "test1", Component: Hero, menu: true, refProp: useRef(null) },
+        // { key: "test2", Component: Hero, menu: true, refProp: useRef(null) },
+        // { key: "test3", Component: Hero, menu: true, refProp: useRef(null) },
+        { key: "home", Component: Hero, menu: true, refProp: useRef(null) },
+        // { key: "quote", Component: Quote, refProp: useRef(null) },
+        // { key: "about", Component: About, menu: true, refProp: useRef(null) },
+        // { key: "timeline", Component: Timeline, refProp: useRef(null) },
+        // { key: "skills", Component: Skills, menu: true, refProp: useRef(null) },
+        // { key: "work", Component: Portfolio, menu: true, refProp: useRef(null) },
+        // { key: "contact", Component: Footer, menu: true, refProp: useRef(null) },
     ] satisfies Section[];
 
     useGSAP(() => {

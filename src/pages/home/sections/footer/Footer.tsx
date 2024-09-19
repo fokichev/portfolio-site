@@ -20,7 +20,7 @@ const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
             style={{ height: `${containerHeight + bottomPadding}px` }}
         >
             <div className='footer-content'>
-                <div className='top-section margin-content'>
+                <div className='top-section'>
                     <div className='heading'>Contact Me</div>
                     <Link href={`mailto:${email}?subject=Saying%20hi!`}>
                         <span className='email'>{email}</span>

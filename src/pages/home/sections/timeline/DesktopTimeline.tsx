@@ -90,7 +90,7 @@ const DesktopTimeline = ({ id, refProp }: { id: string, refProp: React.RefObject
     }, { scope: timelineRef })
     return (
         <div
-            className='timeline-container margin-content'
+            className='timeline-container'
             id={id}
             ref={refProp}
             style={{ paddingBottom: `${animationLength + 500}px` }}

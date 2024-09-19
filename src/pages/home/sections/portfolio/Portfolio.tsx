@@ -15,7 +15,7 @@ const Portfolio = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLD
     const cardRefs = useRef<HTMLDivElement>(null);
     return (
         <div className='portfolio-container' id={id} ref={refProp}>
-            <div className='header margin-content'>
+            <div className='header'>
                 <h3>Project Highlights</h3>
                 <div>(pretty version coming soon)</div>
             </div>

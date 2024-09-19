@@ -1,10 +1,11 @@
 @use '../../../base';
 
 .skull-model {
-    $size: 600px;
-    min-width: $size;
+    $size: 140px;
+    width: $size;
     height: $size;
     overflow: visible;
+    // border: 1px solid red;
 
     @media screen and (min-width: base.$desktop) {
         // padding-left: 100px;

@@ -117,7 +117,7 @@ const MobileTimeline = ({ id, refProp }: { id: string, refProp: React.RefObject<
 
     return (
         <div
-            className='timeline-container margin-content'
+            className='timeline-container'
             id={id}
             ref={refProp}
             style={{ paddingBottom: `${animationLength + 200}px` }}

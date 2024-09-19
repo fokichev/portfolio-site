@@ -31,7 +31,7 @@ const Quote = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEl
     const quote = text[viewport.type as keyof typeof text] ?? text['mobile'];
 
     return (
-        <div className='quote-container margin-content' id={id} ref={refProp}>
+        <div className='quote-container' id={id} ref={refProp}>
             <div className='quote-content'>
                 <div className='subtext'>
                     A realisation:

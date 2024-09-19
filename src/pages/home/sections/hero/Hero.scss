@@ -13,29 +13,124 @@
         align-items: center;
     }
 
-    .smiley {
+    .hero-text {
+        font-size: 90px;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
+        // width: 1200px;
 
-        $padding: 40px;
-        padding: 0 $padding;
-        width: calc(100% - $padding*2);
-
-        @media screen and (min-width: base.$desktop) {
-            justify-content: start;
+        .row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            height: 120px;
         }
 
-        .smiley-icon {
-            width: 75px;
-            animation: 25s linear 0s infinite normal none running moveInCircle;
-            
-            @media screen and (min-width: base.$desktop) {
-                width: 95px;
+        .row-one {
+            margin-right: 50px;
+
+            span {
+                font-weight: 500;
+            }
+
+            .lottie-eye {
+                $size: 160px;
+                height: $size;
+            }
+        }
+
+        .row-two {
+            margin-right: 350px;
+
+            .heart {
+                display: flex;
+                align-items: center;
+                svg {
+                    fill: base.$accent;
+                    $size: 85px;
+                    width: $size;
+                    height: $size;
+                    margin-right: 10px;
+                }
+            }
+
+            span {
+                font-style: italic;
+            }
+        }
+
+        .row-three {
+            margin-left: 25px;
+
+            .lottie-globe {
+                $size: 150px;
+                width: $size;
+                height: $size;
+            }
+
+            span {
+                font-weight: bold;
+            }
+        }
+
+        .row-four {
+            span {
+                font-family: base.$playfair;
+                font-size: 110px;
+                color: base.$accent;
+            }
+            .smiley {
+                overflow: hidden;
+                margin: 0 15px;
+                display: flex;
+                align-items: center;
+
+                .smiley-icon {
+                    $size: 100px;
+                    width: $size;
+                    height: $size;
+                    animation: 25s linear 0s infinite normal none running moveInCircle;
+                    
+                    @media screen and (min-width: base.$desktop) {
+                        width: 95px;
+                    }
+                }
             }
         }
     }
+
+    .get-in-touch {
+        border: 1px solid base.$white;
+        border-radius: 20px;
+        padding: 2px 10px;
+        margin-top: 100px;
+        margin-bottom: 20px;
+    }
+
+    // .smiley {
+    //     display: flex;
+    //     flex-direction: row;
+    //     align-items: center;
+    //     justify-content: center;
+
+    //     $padding: 40px;
+    //     padding: 0 $padding;
+    //     width: calc(100% - $padding*2);
+
+    //     @media screen and (min-width: base.$desktop) {
+    //         justify-content: start;
+    //     }
+
+    //     .smiley-icon {
+    //         width: 75px;
+    //         animation: 25s linear 0s infinite normal none running moveInCircle;
+            
+    //         @media screen and (min-width: base.$desktop) {
+    //             width: 95px;
+    //         }
+    //     }
+    // }
 }
 
 @keyframes moveInCircle {

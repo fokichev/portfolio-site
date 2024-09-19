@@ -8,12 +8,10 @@ import { GLTFLoader, OBJLoader } from 'three/examples/jsm/Addons.js';
 const SkullModel = () => {
     return (
         <div className='skull-model'>
-            <Canvas
-
-            >
+            <Canvas>
                 {/* <SpotLight /> */}
                 {/* <camera /> */}
-                <PerspectiveCamera makeDefault position={[0,0,10]}/>
+                <PerspectiveCamera makeDefault fov={30} position={[0,1,10]}/>
                 <OrbitControls
                         // ref={orbitControlsRef}
                         // enableZoom={false}

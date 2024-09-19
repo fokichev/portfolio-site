@@ -49,7 +49,7 @@ const About = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEl
     }, []);
     
     return (
-        <div className={`about-container${viewport.desktop ? ' margin-content' : ''}`} id={id} ref={refProp}>
+        <div className='about-container' id={id} ref={refProp}>
             <div className='sticky-container'>
                 <div className='photo-title'>
                     Hey, I'm <span className='--red'>Lev</span>! (he/him)
