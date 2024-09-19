@@ -14,59 +14,118 @@
     }
 
     .get-in-touch {
-        margin-top: 100px;
-        margin-bottom: 20px;
+        display: none;
+        // margin-top: 40px;
+        // margin-bottom: 60px;
+
+        // desktop
+        @media screen and (min-width: base.$desktop) {
+            display: flex;
+            margin-top: 100px;
+            margin-bottom: 20px;
+        }
     }
 
     .hero-text {
-        font-size: 90px;
+        font-size: 50px;
         display: flex;
         flex-direction: column;
         align-items: center;
         // width: 1200px;
+        margin-top: 40px;
+
+        // desktop
+        @media screen and (min-width: base.$desktop) {
+            margin-top: 0;
+            font-size: 90px;
+        }
 
         .row {
             display: flex;
             flex-direction: row;
             align-items: center;
-            height: 120px;
+            height: 76px;
+
+            @media screen and (min-width: base.$desktop) {
+                height: 120px;
+            }
         }
 
         .row-one {
-            margin-right: 50px;
+            @media screen and (min-width: base.$desktop) {
+                margin-right: 50px;
+            }
 
             span {
                 font-weight: 500;
             }
 
             .lottie-eye {
-                $size: 160px;
+                height: 80px;
+                width: fit-content;
+
+                @media screen and (min-width: base.$desktop) {
+                    height: 160px;
+                }
+            }
+
+            .lottie-globe {
+                $size: 86px;
+                width: $size;
                 height: $size;
+                margin-left: -6px;
+            }
+
+            .front {
+                align-items: end;
+            }
+
+            .end {
+                margin-left: 56px;
+                gap: 10px;
             }
         }
 
-        .row-two {
-            margin-right: 350px;
+        .heart {
+            display: flex;
+            align-items: center;
 
-            .heart {
-                display: flex;
-                align-items: center;
-                svg {
-                    fill: base.$accent;
+            svg {
+                fill: base.$accent;
+                $size: 40px;
+                width: $size;
+                height: $size;
+
+                @media screen and (min-width: base.$desktop) {
                     $size: 85px;
                     width: $size;
                     height: $size;
                     margin-right: 10px;
                 }
             }
+        }
+
+        .row-two {
+            // margin-right: 350px;
+            
+            @media screen and (min-width: base.$desktop) {
+                margin-right: 350px;
+            }
 
             span {
                 font-style: italic;
             }
+
+            img {
+                height: 60px;
+                margin-left: 10px;
+            }
         }
 
         .row-three {
-            margin-left: 25px;
+            @media screen and (min-width: base.$desktop) {
+                margin-left: 25px;
+            }
 
             .lottie-globe {
                 $size: 150px;
@@ -80,11 +139,41 @@
         }
 
         .row-four {
+            width: 100%;
+            height: fit-content;
+            justify-content: space-between;
+            margin-top: 30px;
+            
+            @media screen and (min-width: base.$desktop) {
+                width: fit-content;
+                margin-top: 0px;
+            }
+
             span {
                 font-family: base.$playfair;
-                font-size: 110px;
                 color: base.$accent;
+
+                @media screen and (min-width: base.$desktop) {
+                    font-size: 110px;
+                }
             }
+
+            .text {
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+                height: 150px;
+
+                .lev {
+                    font-size: 86px;
+                }
+    
+                .fokichev {
+                    font-size: 52px;
+                }
+            }
+
+
             .smiley {
                 overflow: hidden;
                 margin: 0 15px;
@@ -92,14 +181,25 @@
                 align-items: center;
 
                 .smiley-icon {
-                    $size: 100px;
+                    $size: 84px;
                     width: $size;
                     height: $size;
                     animation: 25s linear 0s infinite normal none running moveInCircle;
                     
                     @media screen and (min-width: base.$desktop) {
-                        width: 95px;
+                        $size: 95px;
+                        width: $size;
+                        height: $size;
                     }
+                }
+            }
+
+            .arrow {
+                overflow: hidden;
+
+                svg {
+                    height: 150px;
+                    width: auto;
                 }
             }
         }

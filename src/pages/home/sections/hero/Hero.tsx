@@ -1,5 +1,5 @@
 import './Hero.scss';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import Lottie from 'lottie-react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -14,29 +14,16 @@ import {
 
 import HeartEmoji from '../../../../assets/emoji/pixel-style/heart.svg?react';
 import SmileyIcon from '../../../../assets/smiley.svg?react';
+import Arrow from '../../../../assets/arrows/arrow-straight-long.svg?react';
 
 import globeLottie from '../../../../assets/lottie/globe.json';
 import eyeLottie from '../../../../assets/lottie/eye.json';
 
+import spinSkull from '../../../../assets/spin-skull.gif';
+
 const Hero = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     const { viewport } = useViewportContext();
-    return (
-        <div className='hero-container' id={id} ref={refProp}>
-            <div className='hero-content'>
-                <Timer />
-                <FlipButton
-                    text='Get in Touch'
-                    className='get-in-touch'
-                />
-                { viewport.desktop ? <DesktopTextSection/> : <MobileTextSection/> }
-                
-            </div>
-        </div>
-    )
-}
-
-const DesktopTextSection = () => {
-    const rowTwoRef = useRef<HTMLDivElement>(null);
+    const scopeRef = useRef<HTMLDivElement>(null);
     const heartEmojiRef = useRef<HTMLDivElement>(null);
     useGSAP(() => {
         const tl = gsap.timeline({ repeat: -1, yoyo: true });
@@ -46,8 +33,27 @@ const DesktopTextSection = () => {
             duration: 0.18,
             delay: 0.3
         });
-    }, { scope: rowTwoRef })
+    }, { scope: scopeRef });
 
+    const props = { scopeRef, heartEmojiRef };
+    return (
+        <div className='hero-container' id={id} ref={refProp}>
+            <div className='hero-content'>
+                <Timer />
+                <FlipButton
+                    text='Get in Touch'
+                    className='get-in-touch'
+                />
+                { viewport.desktop
+                    ? <DesktopTextSection {...props} />
+                    : <MobileTextSection {...props} />
+                }
+            </div>
+        </div>
+    )
+}
+
+const DesktopTextSection = ({ scopeRef, heartEmojiRef }: { scopeRef: RefType, heartEmojiRef: RefType }) => {
     return (
         <div className='hero-text'>
             <div className='row row-one'>
@@ -59,7 +65,7 @@ const DesktopTextSection = () => {
                 />
                 <span>END</span>
             </div>
-            <div className='row row-two' ref={rowTwoRef}>
+            <div className='row row-two' ref={scopeRef}>
                 <span ref={heartEmojiRef} className='heart'><HeartEmoji/></span>
                 <span>CREATIVE</span>
                 <SkullModel />
@@ -83,13 +89,75 @@ const DesktopTextSection = () => {
     )
 }
 
-const MobileTextSection = () => {
+const MobileTextSection = ({ scopeRef, heartEmojiRef }: { scopeRef: RefType, heartEmojiRef: RefType }) => {
+    const arrowRef = useRef<HTMLDivElement>(null);
 
+    useGSAP(() => {
+        const tl = gsap.timeline({ repeat: -1, yoyo: false });
+        const duration = 0.6;
+        tl.
+            to(arrowRef.current, {
+                delay: 1,
+                y: '150%',
+                duration,
+                ease: 'power4.in',
+            })
+            .set(arrowRef.current, { y: '-150%' })
+            .to(arrowRef.current, {
+                y: '0%',
+                duration,
+                ease: 'power4.out'
+            });
+    }, { scope: arrowRef })
     return (
         <div className='hero-text'>
-
+            <div className='row-one'>
+                <div className='row front'>
+                    <span>FRONT</span>
+                    <Lottie
+                        animationData={globeLottie}
+                        loop={true}
+                        className='lottie-globe'
+                    />
+                </div>
+                <div className='row end'>
+                    <Lottie
+                        animationData={eyeLottie}
+                        loop={true}
+                        className='lottie-eye'
+                    />
+                    <span>END</span>
+                </div>
+            </div>
+            <div className='row row-two'>
+                <span>CREATIVE</span>
+                <img src={spinSkull}/>
+            </div>
+            <div className='row row-three' ref={scopeRef}>
+                <span>DEVEL</span>
+                <span ref={heartEmojiRef} className='heart'><HeartEmoji/></span>
+                <span>PER</span>
+            </div>
+            <div className='row row-four'>
+                <div className='text'>
+                    <div className='row lev'>
+                        <span>LEV</span>
+                        <div className='smiley'>
+                            <SmileyIcon className='smiley-icon'/>
+                        </div>
+                    </div>
+                    <span className='fokichev'>FOKICHEV</span>
+                </div>
+                <div className='arrow'>
+                    <div ref={arrowRef}>
+                        <Arrow/>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
+
+type RefType = React.RefObject<HTMLDivElement>;
 
 export { Hero }
