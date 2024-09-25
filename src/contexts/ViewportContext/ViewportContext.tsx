@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { useMediaQuery } from './useMediaQuery';
 
 const ViewportContext = createContext({
@@ -38,10 +38,25 @@ const ViewportProvider = ({ children }: { children: any }) => {
 	const horizontal = useMediaQuery('(orientation: landscape)');
 	const vertical = useMediaQuery('(orientation: portrait)');
 
-	const measurements = {
+	const [measurements, setMeasurements] = useState({
 		width: window.innerWidth,
 		height: window.innerHeight
-	}
+	})
+
+	useEffect(() => {
+		const handleResize = () => {
+			setMeasurements({
+				width: window.innerWidth,
+				height: window.innerHeight
+			});
+		};
+
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
 
 	const props = {
 		viewport: { mobile, tablet, desktop, type },
@@ -51,7 +66,7 @@ const ViewportProvider = ({ children }: { children: any }) => {
 
 	return (
 		<ViewportContext.Provider value={props}>
-		{children}
+			{children}
 		</ViewportContext.Provider>
 	);
 };

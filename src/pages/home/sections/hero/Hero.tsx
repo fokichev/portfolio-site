@@ -11,8 +11,8 @@ import {
     SkullModel,
     Timer
 } from '../../../../components';
+import { HeartEmoji } from '../../../../components/emoji';
 
-import HeartEmoji from '../../../../assets/emoji/pixel-style/heart.svg?react';
 import SmileyIcon from '../../../../assets/smiley.svg?react';
 import Arrow from '../../../../assets/arrows/arrow-straight-long.svg?react';
 

@@ -1,0 +1,31 @@
+@use '../../../base';
+
+.emoji-divider-wrapper {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    margin: 200px 0;
+}
+
+.emoji-divider {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    gap: 10px;
+
+    .item {
+        $size: 60px;
+        width: $size;
+
+        svg {
+            fill: base.$white;
+            width: $size;
+            color: base.$accent;
+        }
+    }
+
+    .accent svg{
+        fill: base.$accent;
+    }
+}
