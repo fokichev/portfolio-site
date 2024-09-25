@@ -55,7 +55,6 @@ const Quote = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEl
                         </div>
                     </QuoteLine>
                 </div>
-
             </div>
             <div className='quote-model'>
                 <CarrotModel />
@@ -69,9 +68,11 @@ const QuoteLine = (
     { children: any, index: number, desktop: boolean }
 ) => {
     const ref = useRef(null);
-    const offset = desktop ? 30 : 150;
-    const start = (desktop ? -100 : -500) + (index + 1) * offset;
-    const end = (desktop ? -50 : 100) + (index + 1) * offset;
+    // first line is larger, offset this
+    const firstLineOffset = (!desktop && index) ? 0 : 40;
+    const offset = desktop ? 30 : 60;
+    const start = (desktop ? -400 : -500) + (index + 1) * offset + firstLineOffset*4;
+    const end = (desktop ? -100 :-100) + (index + 1) * offset + firstLineOffset;
 
     useGSAP(() => {
         gsap.to(ref.current, {
@@ -88,7 +89,7 @@ const QuoteLine = (
     return (
         <span className='quote-line'>
             <span className='quote-line-content'>{children}</span>
-            <span className={`mask --${index+1}`} ref={ref}></span>
+            <span className={`mask${desktop ? ` --${index+1}` : ""}`} ref={ref}></span>
         </span>
     )
 }

@@ -5,7 +5,11 @@
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    margin: 250px 0 50px 0;
+    margin: 150px 0 0px 0;
+
+    @media screen and (min-width: base.$desktop) {
+        margin: 250px 0 50px 0;
+    }
 }
 
 .emoji-divider {
@@ -15,13 +19,20 @@
     gap: 10px;
 
     .item {
-        $size: 60px;
+        $size: 40px;
         width: $size;
 
         svg {
             fill: base.$white;
             width: $size;
             color: base.$accent;
+        }
+
+        @media screen and (min-width: base.$desktop) {
+           $size: 60px;
+           width: $size;
+
+           svg { width: $size };
         }
     }
 
