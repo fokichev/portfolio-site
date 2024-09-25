@@ -21,7 +21,7 @@ const ViewportContext = createContext({
 const BREAKPOINTS = {
 	mobile: 200, //?
 	tablet: 768,
-	desktop: 1000 //1200
+	desktop: 1200 //1200
 };
 
 const ViewportProvider = ({ children }: { children: any }) => {

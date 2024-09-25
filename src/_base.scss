@@ -1,7 +1,7 @@
 // BREAKPOINTS
 $mobile: 200px;
 $tablet: 768px;
-$desktop: 1000px;
+$desktop: 1200px;
 
 // FONTS
 // Playfair
@@ -38,18 +38,18 @@ $playfair: 'Playfair', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', san
 }
 
 // PlayfairSmall
-$playfair: 'PlayfairSmall', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-@font-face {
-    font-family: "PlayfairSmall";
-    src: url('/src/assets/fonts/PlayfairSmall/Playfair_9pt-LightItalic.ttf');
-    font-weight: 300;
-    font-style: italic;
-}
+$playfairSmall: 'PlayfairSmall', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 @font-face {
     font-family: "PlayfairSmall";
     src: url('/src/assets/fonts/PlayfairSmall/Playfair_9pt-Regular.ttf');
     font-weight: normal;
     font-style: normal;
+}
+@font-face {
+    font-family: "PlayfairSmall";
+    src: url('/src/assets/fonts/PlayfairSmall/Playfair_9pt-LightItalic.ttf');
+    font-weight: 300;
+    font-style: italic;
 }
 @font-face {
     font-family: "PlayfairSmall";

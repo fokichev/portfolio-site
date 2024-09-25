@@ -4,47 +4,56 @@ import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 
-import { CarrotModel } from '../../../../components';
 import { useViewportContext } from '../../../../contexts';
+import { AnimatedEmoji, CarrotModel } from '../../../../components';
+import {
+    HumanEmoji,
+    HumanHandsDownEmoji,
+    HumanHandsUpEmoji
+} from '../../../../components/emoji';
 
 const Quote = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     const { viewport } = useViewportContext();
 
-    const text = {
-        mobile: [
-            'I lose myself in',
-            'time when I\'m',
-            'coding something',
-            'beautiful.'
-        ],
-        tablet: [
-            'I lose myself in time',
-            'when coding something',
-            'beautiful.'
-        ],
-        desktop: [
-            'I lose myself in time',
-            'when coding something',
-            'beautiful.'
-        ]
-    };
-    const quote = text[viewport.type as keyof typeof text] ?? text['mobile'];
-
     return (
         <div className='quote-container' id={id} ref={refProp}>
             <div className='quote-content'>
-                <div className='subtext'>
-                    A realisation:
-                </div>
                 <div className='quote-line-container'>
-                    { quote.map((text, index) =>
-                        <QuoteLine
-                            text={text}
-                            index={index}
-                            key={index}
-                            desktop={viewport.desktop}
-                        />
-                    )}
+                    <QuoteLine index={0} desktop={viewport.desktop}>
+                        <>
+                            Hey, I'm
+                            <div className='name'>
+                                <span className='pronouns-text'>(he/him)</span>
+                                <div className='underline'>
+                                    <span className='accent-text'>Lev</span>
+                                    <span>!</span>
+                                </div>
+                                <div className='line'/>
+                            </div>
+                        </>
+                    </QuoteLine>
+                    <QuoteLine index={1} desktop={viewport.desktop}>
+                        <div className='second-line'>
+                            A <i>twenty six</i> year old
+                        </div>
+                    </QuoteLine>
+                    <QuoteLine index={2} desktop={viewport.desktop}>
+                        <div className='third-line'>
+                            front stack dev with
+                        </div>
+                    </QuoteLine>
+                    <QuoteLine index={3} desktop={viewport.desktop}>
+                        <div className='fourth-line'>
+                            a&nbsp;<span className='accent-text'>creative flair</span>.
+                            <AnimatedEmoji
+                                emoji={{
+                                    id: 'human-emoji',
+                                    svgArr: [HumanEmoji, HumanHandsUpEmoji, HumanEmoji, HumanHandsDownEmoji]
+                                }}
+                                className='human-emoji'
+                            />
+                        </div>
+                    </QuoteLine>
                 </div>
 
             </div>
@@ -56,13 +65,13 @@ const Quote = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEl
 }
 
 const QuoteLine = (
-    { text, index, desktop }:
-    { text: string, index: number, desktop: boolean }
+    { children, index, desktop }:
+    { children: any, index: number, desktop: boolean }
 ) => {
     const ref = useRef(null);
-    const offset = desktop ? 100 : 150;
-    const start = (desktop ? -100 : -500) + index * offset;
-    const end = (desktop ? 400 : 100) + index * offset;
+    const offset = desktop ? 30 : 150;
+    const start = (desktop ? -100 : -500) + (index + 1) * offset;
+    const end = (desktop ? -50 : 100) + (index + 1) * offset;
 
     useGSAP(() => {
         gsap.to(ref.current, {
@@ -78,8 +87,8 @@ const QuoteLine = (
     });
     return (
         <span className='quote-line'>
-            <span className='text'>{text}</span>
-            <span className='mask' ref={ref}></span>
+            <span className='quote-line-content'>{children}</span>
+            <span className={`mask --${index+1}`} ref={ref}></span>
         </span>
     )
 }

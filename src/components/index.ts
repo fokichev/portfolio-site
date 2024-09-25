@@ -1,4 +1,5 @@
 import { Cursor } from "./cursor/Cursor";
+import { EmojiDivider, AnimatedEmoji } from "./dividers/emojidivider/EmojiDivider";
 import { FlipButton } from "./flipbutton/FlipButton";
 import { Link } from "./link/Link";
 import { Loader } from "./loader/Loader";
@@ -13,8 +14,10 @@ import { SkullModel } from "./threejs/skullmodel/SkullModel";
 
 
 export {
+    AnimatedEmoji,
     Cursor,
     FlipButton,
+    EmojiDivider,
     Link,
     Loader,
     Navbar,

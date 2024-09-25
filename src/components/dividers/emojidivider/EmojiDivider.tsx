@@ -61,20 +61,20 @@ const EmojiDivider = () => {
 				duration,
 				...props
 			}, '<');
-	}, { scope: wrapperRef })
+	}, { scope: wrapperRef });
 
 	return (
 		<div className='emoji-divider-wrapper' ref={wrapperRef}>
 			<div className="emoji-divider" ref={firstHalfRef}>
 				{ emojiArr.map((item, index) => item.svg
-					? <Emoji emoji={item} accent={ACCENTS.includes(index)} />
-					: <AnimatedEmoji emoji={item} accent={ACCENTS.includes(index)} />
+					? <Emoji emoji={item} className={ACCENTS.includes(index) ? "accent" : ""} />
+					: <AnimatedEmoji emoji={item} className={ACCENTS.includes(index) ? "accent" : ""} />
 				)}
 			</div>
 			<div className="emoji-divider" ref={secondHalfRef}>
 				{ emojiArr.map((item, index) => item.svg
-					? <Emoji emoji={item} accent={ACCENTS.includes(index)} />
-					: <AnimatedEmoji emoji={item} accent={ACCENTS.includes(index)} />
+					? <Emoji emoji={item} className={ACCENTS.includes(index) ? "accent" : ""} />
+					: <AnimatedEmoji emoji={item} className={ACCENTS.includes(index) ? "accent" : ""} />
 				)}
 			</div>
 		</div>
@@ -82,18 +82,18 @@ const EmojiDivider = () => {
 }
 
 const Emoji = (
-	{ emoji, accent }:
-	{ emoji: EmojiItem, accent: boolean }
+	{ emoji, className }:
+	{ emoji: EmojiItem, className?: string }
 ) => {
 
 	return (
-		<div className={`item${accent ? " accent" : ""}`} id={emoji.id}>
+		<div className={`item ${className}`} id={emoji.id}>
 			<emoji.svg />
 		</div>
 	)
 }
 
-const AnimatedEmoji = ({ emoji, accent }: { emoji: AnimatedEmojiItem, accent: boolean }) => {
+const AnimatedEmoji = ({ emoji, className }: { emoji: AnimatedEmojiItem, className?: string }) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -105,7 +105,7 @@ const AnimatedEmoji = ({ emoji, accent }: { emoji: AnimatedEmojiItem, accent: bo
 
 	const emojiItem = { ...emoji, svg: emoji.svgArr[currentIndex], svgArr: undefined }
 
-  	return <Emoji emoji={emojiItem} accent={accent} />
+  	return <Emoji emoji={emojiItem} className={className} />
 }
 
 
