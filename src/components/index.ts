@@ -1,3 +1,4 @@
+import { AboutDivider } from "./dividers/aboutdivider/AboutDivider";
 import { Cursor } from "./cursor/Cursor";
 import { EmojiDivider, AnimatedEmoji } from "./dividers/emojidivider/EmojiDivider";
 import { FlipButton } from "./flipbutton/FlipButton";
@@ -14,6 +15,7 @@ import { SkullModel } from "./threejs/skullmodel/SkullModel";
 
 
 export {
+    AboutDivider,
     AnimatedEmoji,
     Cursor,
     FlipButton,

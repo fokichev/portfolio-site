@@ -11,6 +11,7 @@
     @media screen and (min-width: base.$desktop) {
         height: 100vh;
         flex-direction: row;
+        margin-top: 0;
     }
 
     .quote-content {

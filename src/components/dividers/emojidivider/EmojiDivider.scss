@@ -16,7 +16,9 @@
     display: flex;
     flex-direction: row;
     align-items: start;
-    gap: 10px;
+    $gap: 10px;
+    gap: $gap;
+    padding-left: $gap;
 
     .item {
         $size: 40px;

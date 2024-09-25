@@ -12,9 +12,9 @@ const EmojiDivider = () => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const firstHalfRef = useRef<HTMLDivElement>(null);
 	const secondHalfRef = useRef<HTMLDivElement>(null);
-	const { measurements } = useViewportContext();
+	const {viewport, measurements } = useViewportContext();
 
-	const EMOJI_WIDTH = 70;
+	const EMOJI_WIDTH = viewport.desktop ? 70 : 50;
 	const REPEAT = Math.ceil(measurements.width / (EMOJIS.length * EMOJI_WIDTH));
 	const ACCENTS = Array(Math.ceil((REPEAT * EMOJIS.length) / 10) * 2)
 		.fill([2,9])
@@ -47,7 +47,7 @@ const EmojiDivider = () => {
 		// 	}, '<');
 
 		// SCROLL PASSIVELY LOGIC
-		let duration = 30;
+		let duration = viewport.desktop ? 30 : 15;
 		const props = { ease: 'none' };
 		gsap.timeline({ repeat: -1 })
 			.set(secondHalfRef.current, { xPercent: -200 })
