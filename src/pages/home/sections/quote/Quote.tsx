@@ -14,6 +14,22 @@ import {
 
 const Quote = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     const { viewport } = useViewportContext();
+    const lineRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        gsap.fromTo(lineRef.current, { width: 0 }, {
+            width: '100%',
+            duration: 0.5,
+            ease: 'power2.inOut',
+            scrollTrigger: {
+                trigger: lineRef.current,
+                start: '-150px center',
+                end: '+400px center',
+                toggleActions: 'restart none none reverse',
+                // markers: true,
+            }
+        })
+    }, { scope: refProp })
 
     return (
         <div className='quote-container' id={id} ref={refProp}>
@@ -28,7 +44,7 @@ const Quote = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEl
                                     <span className='accent-text'>Lev</span>
                                     <span>!</span>
                                 </div>
-                                <div className='line'/>
+                                <div className='line' ref={lineRef}/>
                             </div>
                         </>
                     </QuoteLine>
