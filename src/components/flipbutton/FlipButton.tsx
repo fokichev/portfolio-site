@@ -86,7 +86,7 @@ const DesktopVer = ({ text, className }: { text: string, className: string }) =>
             onMouseLeave={() => onHover(false)}
         >
             { textArray.map((char, index) => (
-                <div ref={textRefs.current[index]}>{char === ' ' ? '\u00A0' : char}</div>
+                <div ref={textRefs.current[index]} key={index}>{char === ' ' ? '\u00A0' : char}</div>
             ))}
         </div>
     )

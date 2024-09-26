@@ -56,8 +56,8 @@ const Model = () => {
 
     return (
         <group ref={groupRef}>
-            { meshes.map(mesh => (
-                <mesh geometry={mesh.geometry}>
+            { meshes.map((mesh, i) => (
+                <mesh geometry={mesh.geometry} key={i}>
                     <meshStandardMaterial
                         color={color}
                         roughnessMap={(mesh.material  as any).roughnessMap}

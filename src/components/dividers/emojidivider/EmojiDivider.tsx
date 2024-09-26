@@ -1,5 +1,5 @@
 import './EmojiDivider.scss';
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useViewportContext } from '../../../contexts';
 
 import { EMOJIS, EmojiItem, AnimatedEmojiItem } from './Emojis';
+import { horizontalLoop } from '../../../helpers';
 
 const EmojiDivider = () => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
@@ -24,9 +25,39 @@ const EmojiDivider = () => {
 	const emojiArr = Array(REPEAT).fill(EMOJIS).flat();
 
 	useGSAP(() => {
-		// SCROLL WITH SCROLL AND PASSIVELY LOGIC
-		// TODO when forum reply
-		// https://gsap.com/resources/st-mistakes/#nesting-scrolltriggers-inside-multiple-timeline-tweens
+		const speed = 0.7;
+		const minSpeed = -1.5;
+		const loop = horizontalLoop([firstHalfRef.current, secondHalfRef.current], {
+			repeat: -1,
+			speed,
+			reversed: true,
+			paddingRight: 0
+		});
+		let tl: gsap.core.Timeline;
+		ScrollTrigger.observe({
+			target: window,
+			type: 'scroll',
+			onChangeY: (self) => {
+                if (Math.abs(self.velocityY) > 700) {
+					tl && tl.kill;
+
+					const factor = speed + self.velocityY / 300; // adjust for speed
+					const timeScale = factor > minSpeed ? factor : minSpeed;
+
+					tl = gsap
+						.timeline()
+						.to(loop, {
+							timeScale: -timeScale,
+							duration: 0.25,
+						})
+						.to(loop, {
+							timeScale: -speed,
+							duration: 1,
+						});
+				}
+			}
+		})
+
 		
 		// SCROLL WITH SCROLL LOGIC
 		// gsap.set(secondHalfRef.current, { xPercent: -200 })
@@ -47,34 +78,34 @@ const EmojiDivider = () => {
 		// 	}, '<');
 
 		// SCROLL PASSIVELY LOGIC
-		let duration = viewport.desktop ? 30 : 15;
-		const props = { ease: 'none' };
-		gsap.timeline({ repeat: -1 })
-			.set(secondHalfRef.current, { xPercent: -200 })
-			.to(firstHalfRef.current, {
-				xPercent: 100,
-				duration,
-				...props
-			})
-			.to(secondHalfRef.current, {
-				xPercent: -100,
-				duration,
-				...props
-			}, '<');
+		// let duration = viewport.desktop ? 30 : 15;
+		// const props = { ease: 'none' };
+		// gsap.timeline({ repeat: -1 })
+		// 	.set(secondHalfRef.current, { xPercent: -200 })
+		// 	.to(firstHalfRef.current, {
+		// 		xPercent: 100,
+		// 		duration,
+		// 		...props
+		// 	})
+		// 	.to(secondHalfRef.current, {
+		// 		xPercent: -100,
+		// 		duration,
+		// 		...props
+		// 	}, '<');
 	}, { scope: wrapperRef });
 
 	return (
 		<div className='emoji-divider-wrapper' ref={wrapperRef}>
 			<div className="emoji-divider" ref={firstHalfRef}>
 				{ emojiArr.map((item, index) => item.svg
-					? <Emoji emoji={item} className={ACCENTS.includes(index) ? "accent" : ""} />
-					: <AnimatedEmoji emoji={item} className={ACCENTS.includes(index) ? "accent" : ""} />
+					? <Emoji emoji={item} className={ACCENTS.includes(index) ? "accent" : ""} key={index}/>
+					: <AnimatedEmoji emoji={item} className={ACCENTS.includes(index) ? "accent" : ""} key={index}/>
 				)}
 			</div>
 			<div className="emoji-divider" ref={secondHalfRef}>
 				{ emojiArr.map((item, index) => item.svg
-					? <Emoji emoji={item} className={ACCENTS.includes(index) ? "accent" : ""} />
-					: <AnimatedEmoji emoji={item} className={ACCENTS.includes(index) ? "accent" : ""} />
+					? <Emoji emoji={item} className={ACCENTS.includes(index) ? "accent" : ""} key={index}/>
+					: <AnimatedEmoji emoji={item} className={ACCENTS.includes(index) ? "accent" : ""} key={index}/>
 				)}
 			</div>
 		</div>

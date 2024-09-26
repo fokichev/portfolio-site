@@ -18,7 +18,8 @@
     align-items: start;
     $gap: 10px;
     gap: $gap;
-    padding-left: $gap;
+    padding-left: 5px;
+    will-change: transform;
 
     .item {
         $size: 40px;
