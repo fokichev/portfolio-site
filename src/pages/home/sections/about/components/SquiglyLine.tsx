@@ -14,7 +14,6 @@ const SquiglyLine = ({ desktop }: { desktop: boolean }) => {
             <SquiglyLineSVG/>
             <SquiglyLineSVG/>
             <SquiglyLineSVG/>
-            <SquiglyLineSVG/>
         </div>
     )
 }

@@ -1,8 +1,13 @@
+import { DownloadCVButton, GetInTouchButton, HireMeButton } from './Buttons';
 import { InfoSectionOne, InfoSectionTwo } from "./InfoSections";
+import { PhotoSection } from './PhotoSection';
+import { ReasonOne, ReasonTwo, ReasonThree, ReasonBonus } from './Reasons';
 import { SquiglyLine } from "./SquiglyLine";
 
 export {
-    InfoSectionOne,
-    InfoSectionTwo,
+    DownloadCVButton, GetInTouchButton, HireMeButton,
+    InfoSectionOne, InfoSectionTwo,
+    PhotoSection,
+    ReasonOne, ReasonTwo, ReasonThree, ReasonBonus,
     SquiglyLine
 }
