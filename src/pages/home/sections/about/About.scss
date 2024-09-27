@@ -3,105 +3,132 @@
 .about-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-
     position: relative;
-    
-    margin: 300px 30px;
+
+    width: 100%;
 
     @media screen and (min-width: base.$desktop) {
-        flex-direction: row;
-        margin: 300px 0;
+
     }
 }
 
-.sticky-container {
-    @media screen and (min-width: base.$desktop) {
-        top: 20%;
-        position: sticky;
-        align-self: flex-start;
-    }
-
-    .photo-title {
-        font-family: base.$neuemontreal;
-        font-weight: bold;
-        font-size: 18px;
-        color: base.$white;
-        text-align: center;
-        margin-bottom: 10px;
-
-        @media screen and (min-width: base.$desktop) {
-            text-align: start;
-            margin-bottom: 0;
-        }
-    }
-
-    .photo-container {
-        $width: 228px;
-        $height: 300px;
-        $border: 6px;
-        position: relative;
-        
-        .photo {
-            width: $width;
-            height: $height;
-            border: solid $border base.$white;
-        }
-
-        .sparkle-big {
-            position: absolute;
-            top: calc($height * 0.2);
-            left: calc($width * 0.8);
-            width: calc($width * 0.15);
-
-            &.--alt {
-                top: calc($height * 0.22)
-            }
-        }
-
-        .sparkle-small {
-            position: absolute;
-            top: calc($height * 0.55);
-            left: calc($width * 0.1);
-            width: calc($width * 0.12);
-
-            &.--alt {
-                top: calc($height * 0.52);
-            }
-        }
-    }
+// DESKTOP SPECIFIC
+.top-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
 }
 
-.text-container {
+
+// MOBILE SPECIFIC
+
+
+// COMPONENTS
+.squigly-line-container {
     display: flex;
     flex-direction: column;
-    gap: 50px;
-    text-align: center;
-    margin-top: 40px;
+    width: 180px;
+    align-items: center;
 
-    @media screen and (min-width: base.$desktop) {
-        width: 500px;
-        text-align: start;
+    svg {
+        margin-bottom: -1px;
+        width: 60px;
+        height: fit-content;
+    }
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 200px;
+
+    .section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+    }
+    .heading {
+        font-family: base.$playfair;
+        font-size: 28px;
+        font-weight: bold;
+        font-style: italic;
     }
     
-    .section {
-        &-title {
-            font-family: base.$neuemontreal;
-            font-weight: bold;
-            font-size: 18px;
-
-            &.objective {
-                line-height: 150%;
-            }
+    .content {
+        line-height: 130%;
+        font-weight: 300;
+        letter-spacing: 0.03em;
+        
+        
+        p {
+            margin: 0 0 10px 0;
         }
+    }
 
-        &-text {
-            font-family: base.$neuemontreal;
-            font-weight: normal;
-            font-size: 16px;
-            line-height: 1.8;
-            color: base.$white;
+    .accent {
+        font-weight: 600;
+        font-style: italic;
+    }
+
+}
+
+.info-one {
+    min-width: 420px;
+    width: 30%;
+    gap: 70px;
+
+    text-align: end;
+
+    .sparkle-heading {
+        display: flex;
+        flex-direction: row;
+        align-self: end;
+        gap: 4px;
+
+        .sparkle {
+            $size: 30px;
+            width: $size;
+            height: $size;
+
+            svg {
+                width: $size;
+                height: $size;
+            }
         }
     }
 }
+
+.info-two {
+    min-width: 630px;
+    width: 45%;
+
+    .section {
+        gap: 70px;
+    }
+
+    .subsection {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .subheading {
+            font-size: 20px;
+            font-style: italic;
+            color: base.$accent;
+        }
+    }
+
+    .subsection-row {
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+
+        .subsection {
+            width: 50%;
+            max-width: 350px;
+        }
+    }
+}
+

@@ -15,7 +15,7 @@ const AboutDivider = () => {
     const lineTwo = useRef<HTMLDivElement>(null);
     const { viewport, measurements } = useViewportContext();
 
-    const TEXT_WIDTH = viewport.desktop ? 480 : 250;
+    const TEXT_WIDTH = viewport.desktop ? 370 : 250;
     const REPEAT = Math.ceil(measurements.width / TEXT_WIDTH);
 
     useGSAP(() => {

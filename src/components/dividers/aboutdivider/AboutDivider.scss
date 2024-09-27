@@ -7,7 +7,7 @@
     overflow: hidden;
 
     padding: 14px 0;
-    margin: 100px 0;
+    margin-top: 100px;
 
     $border: 4px solid white;
     border-top: $border;
@@ -16,7 +16,7 @@
     font-size: 22px;
 
     @media screen and (min-width: base.$desktop) {
-        font-size: 50px;
+        font-size: 40px;
     }
 
     .divider-line {
