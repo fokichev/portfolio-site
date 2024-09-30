@@ -1,3 +1,5 @@
+import CurvedLineDivider from '../../../../../assets/curved-line-divider.svg?react';
+
 const REASONS = [
     {
         number: '1.',
@@ -37,16 +39,25 @@ const Reason = ({ number, heading, text, align }: ReasonType) => {
     )
 }
 
-const ReasonOne = () => <Reason {...REASONS[0]} />
-const ReasonTwo = () => <Reason {...REASONS[1]} />
-const ReasonThree = () => <Reason {...REASONS[2]} />
-const ReasonBonus = () => <Reason {...REASONS[3]} />
+const ReasonOne = ({ align }: { align?: AlignType }) => <Reason {...REASONS[0]} {...(align ? {align} : {})} />
+const ReasonTwo = ({ align }: { align?: AlignType }) => <Reason {...REASONS[1]} {...(align ? {align} : {})} />
+const ReasonThree = ({ align }: { align?: AlignType }) => <Reason {...REASONS[2]} {...(align ? {align} : {})} />
+const ReasonBonus = ({ align }: { align?: AlignType }) => <Reason {...REASONS[3]} {...(align ? {align} : {})} />
 
+const ReasonDivider = () => {
+    return (
+        <div className='curved-line-divider'>
+            <CurvedLineDivider />
+        </div>
+    )
+}
+
+type AlignType = 'start' | 'end';
 type ReasonType = {
     number: string,
     heading: string,
     text: string, 
-    align: 'start' | 'end'
+    align: AlignType
 }
 
-export { ReasonOne, ReasonTwo, ReasonThree, ReasonBonus }
+export { ReasonOne, ReasonTwo, ReasonThree, ReasonBonus, ReasonDivider }

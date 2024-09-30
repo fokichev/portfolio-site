@@ -3,14 +3,41 @@
 .about-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     position: relative;
 
     width: 100%;
+}
 
-    @media screen and (min-width: base.$desktop) {
+// MOBILE SPECIFIC
+.links-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    gap: 60px;
+    height: 90vh;
+    width: 100%;
+    margin-bottom: 100px;
+
+    .sparkle {
+        position: absolute;
+        
+        &.--big {
+            top: 75%;
+            left: 15%;
+        }   
+
+        &.--small {
+            top: 20%;
+            left: 75%;
+        }
 
     }
 }
+
 
 // DESKTOP SPECIFIC
 .top-section {
@@ -50,51 +77,104 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
-
-        .reasons-column {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 140px;
-            gap: 120px;
-        }
     }
 }
 
+.reasons-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
 
-// MOBILE SPECIFIC
-
+    @media screen and (min-width: base.$desktop) {
+        margin-top: 140px;
+        gap: 120px;
+    }
+}
 
 // COMPONENTS
 .squigly-line-container {
     display: flex;
     flex-direction: column;
-    width: 180px;
-    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
+    margin-top: 70px;
+
+    @media screen and (min-width: base.$desktop) {
+        margin: 0;
+        width: 180px;
+        align-items: center;
+    }
 
     svg {
+        $size: 40px;
+        height: $size;
+        width: $size;
         margin-bottom: -1px;
-        width: 60px;
-        height: fit-content;
+
+        @media screen and (min-width: base.$desktop) {
+            transform: none;
+            width: 60px;
+            height: fit-content;
+        }
+    }
+
+    .squiggly-line {
+        display: flex;
+        flex-direction: row;
+
+        svg {
+            margin-bottom: 0;
+            margin-right: -0.3px;
+        }
+
+        &.--top {
+            svg {
+                transform: rotate(-90deg);
+            }
+        }
+
+        &.--bottom {
+            svg {
+                transform: rotate(90deg) translateX(-15px) translateY(50%);
+            }
+        }
     }
 }
 
 .info {
     display: flex;
     flex-direction: column;
-    margin-top: 200px;
+    margin: 80px 40px 0 40px;
+    text-align: center;
+
+    @media screen and (min-width: base.$desktop) {
+        margin-top: 200px;
+        text-align: start;
+    }
 
     .section {
         display: flex;
         flex-direction: column;
         gap: 20px;
-
     }
+
     .heading {
         font-family: base.$playfair;
         font-size: 28px;
         font-weight: bold;
         font-style: italic;
+        color: base.$accent;
+
+        &.--special {
+            font-size: 32px;
+            font-style: normal;
+            color: base.$white;
+        }
+
+        @media screen and (min-width: base.$desktop) {
+            color: base.$white;
+        }
     }
     
     .content {
@@ -114,17 +194,23 @@
 }
 
 .info-one {
-    min-width: 420px;
-    width: 30%;
     gap: 70px;
 
-    text-align: end;
+    @media screen and (min-width: base.$desktop) {
+        width: 30%;
+        min-width: 420px;
+        text-align: end;
+    }
 
     .sparkle-heading {
         display: flex;
         flex-direction: row;
-        align-self: end;
+        justify-content: center;
         gap: 4px;
+
+        @media screen and (min-width: base.$desktop) {
+            align-self: end;
+        }
 
         .sparkle {
             $size: 30px;
@@ -140,11 +226,20 @@
 }
 
 .info-two {
-    min-width: 630px;
-    width: 45%;
+    margin-top: 60px;
+
+    @media screen and (min-width: base.$desktop) {
+        margin-top: 200px;
+        min-width: 630px;
+        width: 45%;    
+    }
 
     .section {
-        gap: 70px;
+        gap: 50px;
+
+        @media screen and (min-width: base.$desktop) {
+            gap: 70px;
+        }
     }
 
     .subsection {
@@ -161,35 +256,115 @@
 
     .subsection-row {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         gap: 50px;
 
+        @media screen and (min-width: base.$desktop) {
+            flex-direction: row;
+        }
+
         .subsection {
-            width: 50%;
-            max-width: 350px;
+            @media screen and (min-width: base.$desktop) {
+                width: 50%;
+                max-width: 350px;
+            }
         }
     }
 }
 
 .hire-me {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    margin: 80px 0;
+
+    @media screen and (min-width: base.$desktop) {
+        width: unset;
+        margin: 0 100px;
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        
+        background-color: base.$accent;
+        color: white;
     
-    background-color: base.$accent;
-    color: white;
+        -webkit-text-stroke: 5px base.$black;
+        paint-order: stroke fill;
+    
+        font-weight: bold;
+        font-size: 24px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    
+        padding: 30px 0;
+    
+        $border: 8px;
+        border: $border solid white;
+        width: calc(100% - $border*2);
+    
+        @media screen and (min-width: base.$desktop) {
+            font-size: 32px;
+            border-radius: 100px;
+            padding: 22px 30px;
+            width: unset;
+            border: none;
+        }
+    }
 
-    -webkit-text-stroke: 5px base.$black;
-    paint-order: stroke fill;
+    .arrows {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100%;
 
-    font-weight: bold;
-    font-size: 32px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+        &.--top {
+            align-items: end;
+            margin-bottom: 20px;
 
-    padding: 22px 30px;
-    border-radius: 100px;
-    margin: 0 100px;
+            .slight-curve {
+                transform: rotate(-30deg);
+                margin-bottom: 6px;
+                margin-left: 10px;
+            }
+            
+            .double-loop {
+                transform: rotate(50deg);
+                margin-bottom: 10px;
+                margin-left: 10px;
+
+            }
+            .circled {
+                $size: 45px;
+                width: $size;
+                height: $size;
+                transform: rotate(70deg) scale(-1, 1);
+            }
+        }
+        &.--bottom {
+            align-items: start;
+            margin-top: 20px;
+
+            .circled {
+                $size: 45px;
+                width: $size;
+                height: $size;
+                transform: rotate(-90deg) scale(-1, 1);
+            }
+            .slight-curve {
+                $size: 50px;
+                width: $size;
+                height: $size;
+                transform: rotate(190deg) scale(-1, 1);
+
+            }
+            .loop {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
 }
 
 .link-button {
@@ -202,14 +377,19 @@
         width: 100%;
         height: 4px;
         background-color: base.$accent;
-
     }
 }
 
 .reason-item {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
+    margin: 0 20px;
+
+    @media screen and (min-width: base.$desktop) {
+        gap: 30px;
+        margin: 0;
+    }
 
     &.align-start {
         flex-direction: row;
@@ -223,27 +403,45 @@
     .number {
         color: base.$accent;
         font-family: base.$playfairSmall;
-        font-size: 90px;
+        font-size: 100px;
         line-height: 100%;
+
+        @media screen and (min-width: base.$desktop) {
+            font-size: 90px;
+        }
     }
 
     .text {
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        width: 350px;
+        gap: 6px;
+
+        @media screen and (min-width: base.$desktop) {
+            gap: 10px;
+            width: 350px;
+        }
 
         .heading {
             text-transform: uppercase;
             white-space: pre-wrap;
             font-weight: 500;
-            font-size: 24px;
+            font-size: 18px;
+
+            @media screen and (min-width: base.$desktop) {
+                font-size: 24px;
+            }
         }
 
         .subtext {
             font-weight: 300;
         }
     }
+}
+
+.curved-line-divider {
+    display: flex;
+    flex-direction: row;
+    width: min-content;
 }
 
 .photo-section {
@@ -281,13 +479,11 @@
         .about-row {
             text-align: justify;
             text-justify: inter-word;
+            
             .subheading {
                 color: base.$accent;
                 font-weight: 600;
                 font-style: italic;
-            }
-
-            .text {
             }
         }
     }

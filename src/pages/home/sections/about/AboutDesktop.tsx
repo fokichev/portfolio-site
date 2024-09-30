@@ -1,4 +1,5 @@
 import { RefObject } from "react";
+
 import {
     DownloadCVButton, GetInTouchButton, HireMeButton,
     InfoSectionOne, InfoSectionTwo,
@@ -6,20 +7,22 @@ import {
     ReasonOne, ReasonTwo, ReasonThree, ReasonBonus,
     SquiglyLine
 } from "./components";
+
 import CircleArrow from '../../../../assets/arrows/circled-arrow.svg?react';
 
-const AboutDesktop = ({ ref }: { ref: RefObject<HTMLDivElement> }) => {
+const AboutDesktop = ({ ref, id }: { ref: RefObject<HTMLDivElement>, id: string }) => {
+    const desktop = { desktop: true };
     return (
-        <div className='about-container' ref={ref}>
+        <div className='about-container' id={id} ref={ref}>
             <div className="top-section">
-                <InfoSectionOne desktop={true} />
-                <SquiglyLine desktop={true}/>
-                <InfoSectionTwo desktop={true} />
+                <InfoSectionOne {...desktop} />
+                <SquiglyLine {...desktop}/>
+                <InfoSectionTwo {...desktop} />
             </div>
             <div className="bottom-section">
                 <div className="button-row">
                     <DownloadCVButton />
-                    <HireMeButton />
+                    <HireMeButton {...desktop} />
                     <GetInTouchButton />
                     <CircleArrow className="circle-arrow"/>
                 </div>

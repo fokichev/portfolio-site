@@ -48,7 +48,7 @@ const InfoSectionTwo = ({ desktop }: { desktop: boolean }) => {
     return (
         <div className="info info-two">
             <div className="section">
-                <div className="heading">
+                <div className={`heading${desktop ? "" : " --special"}`}>
                     Why digital agency?
                 </div>
                 <div className="subsection">
