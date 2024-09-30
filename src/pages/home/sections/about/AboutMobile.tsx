@@ -15,11 +15,11 @@ import SparkleBigAlt from '../../../../assets/sparkles/sparkle-big-alt.svg?react
 import SparkleSmall from '../../../../assets/sparkles/sparkle-small.svg?react';
 import SparkleSmallAlt from '../../../../assets/sparkles/sparkle-small-alt.svg?react';
 
-const AboutMobile = ({ ref, id }: { ref: RefObject<HTMLDivElement>, id: string }) => {
+const AboutMobile = ({ refProp, id }: { refProp: RefObject<HTMLDivElement>, id: string }) => {
     const desktop = { desktop: false };
     
     return (
-        <div className="about-container" id={id} ref={ref}>
+        <div className="about-container" id={id} ref={refProp}>
             <PhotoSection />
             <InfoSectionOne {...desktop} />
             <SquiglyLine {...desktop} />

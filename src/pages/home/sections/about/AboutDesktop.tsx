@@ -10,10 +10,10 @@ import {
 
 import CircleArrow from '../../../../assets/arrows/circled-arrow.svg?react';
 
-const AboutDesktop = ({ ref, id }: { ref: RefObject<HTMLDivElement>, id: string }) => {
+const AboutDesktop = ({ refProp, id }: { refProp: RefObject<HTMLDivElement>, id: string }) => {
     const desktop = { desktop: true };
     return (
-        <div className='about-container' id={id} ref={ref}>
+        <div className='about-container' id={id} ref={refProp}>
             <div className="top-section">
                 <InfoSectionOne {...desktop} />
                 <SquiglyLine {...desktop}/>

@@ -97,46 +97,52 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
     margin-top: 70px;
 
     @media screen and (min-width: base.$desktop) {
         margin: 0;
         width: 180px;
+        height: 1000px;
         align-items: center;
-    }
-
-    svg {
-        $size: 40px;
-        height: $size;
-        width: $size;
-        margin-bottom: -1px;
-
-        @media screen and (min-width: base.$desktop) {
-            transform: none;
-            width: 60px;
-            height: fit-content;
-        }
     }
 
     .squiggly-line {
         display: flex;
         flex-direction: row;
+        $size: 40px;
+        height: $size;
+        width: $size;
+
+        @media screen and (min-width: base.$desktop) {
+            width: 60px;
+            height: fit-content;
+        }
 
         svg {
+            height: $size;
+            width: $size;
             margin-bottom: 0;
-            margin-right: -0.3px;
+
+            @media screen and (min-width: base.$desktop) {
+                margin-bottom: -1px;
+                transform: none;
+                width: 60px;
+                height: fit-content;
+            }
         }
 
         &.--top {
             svg {
                 transform: rotate(-90deg);
+                margin-right: -1px;
             }
         }
 
         &.--bottom {
             svg {
-                transform: rotate(90deg) translateX(-15px) translateY(50%);
+                transform: rotate(90deg) translateX(-5px) translateY(50%);
+                margin-left: -1px;
             }
         }
     }
@@ -479,7 +485,7 @@
         .about-row {
             text-align: justify;
             text-justify: inter-word;
-            
+
             .subheading {
                 color: base.$accent;
                 font-weight: 600;
