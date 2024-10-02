@@ -21,7 +21,9 @@
 
 .title {
     font-family: base.$playfair;
-    font-size: 32px;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 40px;
     margin-bottom: 20px;
 }
 
@@ -62,7 +64,10 @@
         }
 
         .year {
+            font-family: base.$playfair;
+            font-style: italic;
             font-weight: bold;
+            font-size: 24px;
             text-align: center;
         }
 
@@ -72,8 +77,10 @@
 
 
             &.--present {
+                font-weight: 500;
+                color: base.$black;
                 padding: 6px 0;
-                background-image: linear-gradient(90deg, #9275A9, #004A77);
+                background-image: linear-gradient(90deg, base.$accent, #FAFFE0);
                 border-radius: 20px;
             }
         }
@@ -83,13 +90,20 @@
         }
     }
 
+    .line-container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: end;
+    }
+
     .line-mask {
         position: absolute;
-        top: 0;
+        top: 1px;
         width: 0;
-        height: calc(50% + 1px);
+        height: calc(50%);
 
-        background-image: linear-gradient(to right, base.$purple 33%, rgba(255,255,255,0) 0%);
+        background-image: linear-gradient(to right, base.$accent 33%, rgba(255,255,255,0) 0%);
     }
 
     .curve-mask {

@@ -15,6 +15,7 @@ const DesktopTimeline = ({ id, refProp }: { id: string, refProp: React.RefObject
     const levRef = useRef(null);
     const arrowRef = useRef(null);
     const lineRef = useRef(null);
+    const lineWhiteRef = useRef(null);
     const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     
     const [levSrc, setLevSrc] = useState(MiniLev);
@@ -27,7 +28,7 @@ const DesktopTimeline = ({ id, refProp }: { id: string, refProp: React.RefObject
         present: 160,
         line: 200,
         lev: 40,
-        arrow: 60
+        arrow: 120
     };
     const getWidth = (type: keyof typeof widths) => ({ width: `${widths[type]}px` });
     const miniLevLeft = widths.year + widths.role + widths.gap*2 - widths.lev/2;
@@ -82,6 +83,10 @@ const DesktopTimeline = ({ id, refProp }: { id: string, refProp: React.RefObject
                 width: `${widths.line}px`,
                 duration: 60
             }, '<')
+            .to(lineWhiteRef.current, {
+                width: `0`,
+                duration: 60
+            }, '<')
             .to(arrowRef.current, {
                 opacity: 1,
                 y: -20,
@@ -100,7 +105,7 @@ const DesktopTimeline = ({ id, refProp }: { id: string, refProp: React.RefObject
                 <div className='timeline' ref={timelineRef}>
                     <div className='timeline-row' style={{ gap: `${widths.gap}px` }}>
                         <span
-                            className='year --lightblue'
+                            className='year --accent'
                             style={getWidth('year')}
                         >
                             2021
@@ -111,11 +116,21 @@ const DesktopTimeline = ({ id, refProp }: { id: string, refProp: React.RefObject
                         >
                             Full Stack Dev
                         </span>
-                        <span
-                            className='dash line'
-                            style={getWidth('line')}
-                            id='animated-line'
-                        />
+                        <div
+                            className='line-container'
+                            style={{ ...getWidth('line'), position: 'relative' }}
+                        >
+                            <span
+                                className='dash line'
+                                style={{
+                                    ...getWidth('line'),
+                                    position: 'absolute',
+                                    right: '0'
+                                }}
+                                id='animated-line'
+                                ref={lineWhiteRef}
+                            />
+                        </div>
                         <span
                             className='role --present'
                             style={getWidth('present')}
@@ -133,7 +148,7 @@ const DesktopTimeline = ({ id, refProp }: { id: string, refProp: React.RefObject
                             Creative Dev
                         </span>
                         <span
-                            className='year --blue'
+                            className='year --accent'
                             style={getWidth('year')}
                         >
                             202X
@@ -165,7 +180,7 @@ const DesktopTimeline = ({ id, refProp }: { id: string, refProp: React.RefObject
                         }}
                     >
                         <ArrowUp className='arrow' />
-                        <span className='label'>present</span>
+                        <span className='label'>present day</span>
                     </div>
                 </div>
                 <KeepScrolling className='keep-scrolling'/>

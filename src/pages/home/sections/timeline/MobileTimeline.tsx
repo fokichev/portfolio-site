@@ -137,7 +137,7 @@ const MobileTimeline = ({ id, refProp }: { id: string, refProp: React.RefObject<
                             marginBottom: `${coords.gaps[0]}px`
                         }}
                     >
-                        <span className='year --lightblue'>2021</span>
+                        <span className='year --accent'>2021</span>
                         <span className='role'>Full Stack Dev</span>
                     </div>
                     <svg
@@ -176,7 +176,7 @@ const MobileTimeline = ({ id, refProp }: { id: string, refProp: React.RefObject<
                             <path
                                 id='curve-path-color'
                                 d="M14.0011 0.999997C120.5 33.5 92.9993 123 1.00002 152"
-                                stroke="#8D74A7"
+                                stroke="#D6FF00"
                                 stroke-dasharray="5 5"
                             />
                         </svg>
@@ -219,7 +219,7 @@ const MobileTimeline = ({ id, refProp }: { id: string, refProp: React.RefObject<
                         }}
                     >
                         <span className='role'>Creative Dev</span>
-                        <span className='year --blue'>202X</span>
+                        <span className='year --accent'>202X</span>
                     </div>
                     <img
                         ref={levRef}
