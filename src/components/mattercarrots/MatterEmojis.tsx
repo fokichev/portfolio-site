@@ -44,21 +44,6 @@ const MatterEmojis = (props: MatterEmojisProps) => {
     const engine = useRef(Engine.create());
     const composite = useRef<Composite>();
     const runner = useRef(Runner.create());
-
-    // FUNCTIONS
-    // const fetchSVG = async ({ path }: { path: string }) => {
-    //     try {
-    //         const response = await fetch(path);
-    //         if (!response.ok) {
-    //             throw new Error("Can't fetch SVG path")
-    //         }
-    //         const svgText = await response.text();
-    //         const svgDoc = (new DOMParser()).parseFromString(svgText, 'image/svg+xml');
-    //         return svgDoc
-    //     } catch (error) {
-    //         console.error('Error fetching or parsing SVG:', error);
-    //     }
-    // }
     
     const getTextures = (number: number) => {
         return Array.from(Array(number)).map((_, index) => 
@@ -71,7 +56,7 @@ const MatterEmojis = (props: MatterEmojisProps) => {
         const boundaryParams = {
             isStatic: true,
             render: {
-                // strokeStyle: `red`,
+                // strokeStyle: `red`, // for testing
                 // fillStyle: `blue`,
                 strokeStyle: `#${COLORS.bg1}`,
                 fillStyle: `#${COLORS.bg1}`
@@ -186,7 +171,6 @@ const MatterEmojis = (props: MatterEmojisProps) => {
                         force
                     )
                 })
-                // TODO uncomment above w/ emojis
 
                 // mouseCircle.position = { x: event.mouse.position.x, y: event.mouse.position.y }
             });
@@ -250,7 +234,6 @@ const MatterEmojis = (props: MatterEmojisProps) => {
         <div
             ref={scene}
             className="matter-carrots-container"
-            // style={{ maxHeight: `${containerHeight}px` }} // creates weird margin at bottom, but don't remember why I had it
         >
         </div>
     )
