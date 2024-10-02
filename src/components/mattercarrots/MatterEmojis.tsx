@@ -63,7 +63,7 @@ const MatterEmojis = (props: MatterEmojisProps) => {
     
     const getTextures = (number: number) => {
         return Array.from(Array(number)).map((_, index) => 
-            `matterjs/${EMOJIS[index % EMOJIS.length]}.svg`
+            `matterjs/${EMOJIS[index % EMOJIS.length]}`
         )
     };
 
