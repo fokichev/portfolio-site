@@ -1,12 +1,11 @@
-import { RefObject } from "react";
+import { RefObject, useRef } from "react";
 
 import {
     DownloadCVButton, GetInTouchButton, HireMeButton,
     InfoSectionOne, InfoSectionTwo,
     PhotoSection,
     ReasonOne, ReasonTwo, ReasonThree, ReasonBonus,
-    SquiglyLine,
-    ReasonDivider
+    SquiglyLine
 } from "./components";
 import { AnimatedEmoji } from "../../../../components";
 
@@ -17,6 +16,7 @@ import SparkleSmallAlt from '../../../../assets/sparkles/sparkle-small-alt.svg?r
 
 const AboutMobile = ({ refProp, id }: { refProp: RefObject<HTMLDivElement>, id: string }) => {
     const desktop = { desktop: false };
+    const reasonsRef = useRef<HTMLDivElement>(null);
     
     return (
         <div className="about-container" id={id} ref={refProp}>
@@ -25,18 +25,15 @@ const AboutMobile = ({ refProp, id }: { refProp: RefObject<HTMLDivElement>, id: 
             <SquiglyLine {...desktop} />
             <InfoSectionTwo {...desktop} />
             <HireMeButton {...desktop}/>
-            <div className="reasons-column">
-                <ReasonOne />
-                <ReasonDivider />
-                <ReasonTwo />
-                <ReasonDivider />
-                <ReasonThree align='start'/>
-                <ReasonDivider />
-                <ReasonBonus align='end' />
+            <div className="reasons-column" ref={reasonsRef}>
+                <ReasonOne containerRef={reasonsRef} {...desktop}/>
+                <ReasonTwo containerRef={reasonsRef} {...desktop}/>
+                <ReasonThree align='start' containerRef={reasonsRef} {...desktop}/>
+                <ReasonBonus align='end' containerRef={reasonsRef} {...desktop}/>
             </div>
             <div className="links-section">
-                <DownloadCVButton />
-                <GetInTouchButton />
+                <DownloadCVButton {...desktop} />
+                <GetInTouchButton {...desktop} />
                 <div className='sparkle --big' >
                     <AnimatedEmoji
                         emoji={{

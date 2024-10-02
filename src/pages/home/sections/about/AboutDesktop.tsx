@@ -1,4 +1,4 @@
-import { RefObject } from "react";
+import { RefObject, useRef } from "react";
 
 import {
     DownloadCVButton, GetInTouchButton, HireMeButton,
@@ -12,29 +12,32 @@ import CircleArrow from '../../../../assets/arrows/circled-arrow.svg?react';
 
 const AboutDesktop = ({ refProp, id }: { refProp: RefObject<HTMLDivElement>, id: string }) => {
     const desktop = { desktop: true };
+    const topSectionRef = useRef<HTMLDivElement>(null);
+    const contentRowRef = useRef<HTMLDivElement>(null);
+
     return (
         <div className='about-container' id={id} ref={refProp}>
-            <div className="top-section">
-                <InfoSectionOne {...desktop} />
+            <div className="top-section" ref={topSectionRef}>
+                <InfoSectionOne {...desktop} containerRef={topSectionRef} />
                 <SquiglyLine {...desktop}/>
-                <InfoSectionTwo {...desktop} />
+                <InfoSectionTwo {...desktop} containerRef={topSectionRef} />
             </div>
             <div className="bottom-section">
                 <div className="button-row">
-                    <DownloadCVButton />
+                    <DownloadCVButton {...desktop} />
                     <HireMeButton {...desktop} />
-                    <GetInTouchButton />
+                    <GetInTouchButton {...desktop} />
                     <CircleArrow className="circle-arrow"/>
                 </div>
-                <div className="content-row">
+                <div className="content-row" ref={contentRowRef}>
                     <div className="reasons-column">
-                        <ReasonOne />
-                        <ReasonTwo />
+                        <ReasonOne {...desktop} containerRef={contentRowRef} />
+                        <ReasonTwo {...desktop} containerRef={contentRowRef} />
                     </div>
                     <PhotoSection />
                     <div className="reasons-column">
-                        <ReasonThree />
-                        <ReasonBonus />
+                        <ReasonThree {...desktop} containerRef={contentRowRef} />
+                        <ReasonBonus {...desktop} containerRef={contentRowRef} />
                     </div>
                 </div>
             </div>

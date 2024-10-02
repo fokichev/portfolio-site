@@ -1,48 +1,96 @@
+import { useGSAP } from '@gsap/react';
 import CurvedLineDivider from '../../../../../assets/curved-line-divider.svg?react';
+import { RefObject, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/all';
 
 const REASONS = [
     {
         number: '1.',
         heading: 'Strong sense of\npersonal responsibility',
         text: 'You can trust me to carry my weight and more.',
-        align: 'start'
+        align: 'start',
+        index: 0
     },
     {
         number: '2.',
         heading: 'Problem solving fiend',
         text: 'I actually love solving bugs. Leave them to me!',
-        align: 'end'
+        align: 'end',
+        index: 1
     },
     {
         number: '3.',
         heading: '(Too) high standards',
         text: 'I am physically unable to half-a** things. Fortunate for the user, but often unfortunate for me...',
-        align: 'end'
+        align: 'end',
+        index: 2
     },
     {
         number: '*',
         heading: 'Bonus',
         text: 'I actually empty the office dishwasher ;)',
-        align: 'start'
+        align: 'start',
+        index: 3
     },
 ] satisfies ReasonType[];
 
-const Reason = ({ number, heading, text, align }: ReasonType) => {
+const Reason = (
+    { number, heading, text, align, index, containerRef, desktop }: 
+    ReasonType & { containerRef: RefObject<HTMLDivElement>, desktop?: boolean }
+) => {
+    const reasonRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        if (containerRef.current) {
+            const duration = 0.8;
+            const delay = duration/(desktop ? 2 : 3);
+
+            const move = gsap.from(reasonRef.current, {
+                opacity: 0,
+                scale: desktop ? 2 : 1.2,
+                duration,
+                ease: 'power4.in',
+                paused: true
+            })
+
+            ScrollTrigger.create({
+                trigger: containerRef.current,
+                onEnter: () => gsap.delayedCall(index * delay, () => move.play(0)),
+                onEnterBack: () => gsap.delayedCall((desktop ? index : (3 - index)) * delay, () => move.play(0)),
+                onLeave: () => move.time(0).pause(),
+                onLeaveBack: () => move.time(0).pause()
+            })
+        }
+
+    }, { scope: containerRef });
     return (
-        <div className={`reason-item align-${align}`}>
-            <div className="number">{number}</div>
-            <div className="text">
-                <div className="heading">{heading}</div>
-                <div className="subtext">{text}</div>
+        <div className='reason-item-wrapper' ref={reasonRef}>
+            <div className={`reason-item align-${align}`}>
+                <div className="number">{number}</div>
+                <div className="text">
+                    <div className="heading">{heading}</div>
+                    <div className="subtext">{text}</div>
+                </div>
             </div>
+            { (!desktop && index < 3) && <ReasonDivider /> }
         </div>
+
     )
 }
 
-const ReasonOne = ({ align }: { align?: AlignType }) => <Reason {...REASONS[0]} {...(align ? {align} : {})} />
-const ReasonTwo = ({ align }: { align?: AlignType }) => <Reason {...REASONS[1]} {...(align ? {align} : {})} />
-const ReasonThree = ({ align }: { align?: AlignType }) => <Reason {...REASONS[2]} {...(align ? {align} : {})} />
-const ReasonBonus = ({ align }: { align?: AlignType }) => <Reason {...REASONS[3]} {...(align ? {align} : {})} />
+const ReasonOne = ({ align, containerRef, desktop }: { align?: AlignType, containerRef: RefObject<HTMLDivElement>, desktop?: boolean }) => 
+    <Reason {...REASONS[0]} {...(align ? {align} : {})} containerRef={containerRef} desktop={desktop}/>
+
+const ReasonTwo = ({ align, containerRef, desktop }: { align?: AlignType, containerRef: RefObject<HTMLDivElement>, desktop?: boolean }) => 
+    <Reason {...REASONS[1]} {...(align ? {align} : {})} containerRef={containerRef} desktop={desktop}/>
+
+const ReasonThree = ({ align, containerRef, desktop }: { align?: AlignType, containerRef: RefObject<HTMLDivElement>, desktop?: boolean }) => 
+    <Reason {...REASONS[2]} {...(align ? {align} : {})} containerRef={containerRef} desktop={desktop}/>
+
+const ReasonBonus = ({ align, containerRef, desktop }: { align?: AlignType, containerRef: RefObject<HTMLDivElement>, desktop?: boolean }) => 
+    <Reason {...REASONS[3]} {...(align ? {align} : {})} containerRef={containerRef} desktop={desktop}/>
+
 
 const ReasonDivider = () => {
     return (
@@ -57,7 +105,8 @@ type ReasonType = {
     number: string,
     heading: string,
     text: string, 
-    align: AlignType
+    align: AlignType,
+    index: number
 }
 
 export { ReasonOne, ReasonTwo, ReasonThree, ReasonBonus, ReasonDivider }
