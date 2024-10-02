@@ -92,7 +92,7 @@
     padding: 50px 0;
 
     @media screen and (min-width: base.$desktop) {
-        margin-top: 140px;
+        margin-top: 100px;
         gap: 120px;
         overflow: visible;
     }
@@ -398,6 +398,7 @@
     flex-direction: column;
     gap: 30px;
     align-items: center;
+    padding: 30px;
 }
 
 .reason-item {

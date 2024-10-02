@@ -1,8 +1,9 @@
 import { useGSAP } from '@gsap/react';
 import CurvedLineDivider from '../../../../../assets/curved-line-divider.svg?react';
-import { RefObject, useRef } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
+import { useMousePositionContext, useViewportContext } from '../../../../../contexts';
 
 const REASONS = [
     {
@@ -39,9 +40,10 @@ const Reason = (
     { number, heading, text, align, index, containerRef, desktop }: 
     ReasonType & { containerRef: RefObject<HTMLDivElement>, desktop?: boolean }
 ) => {
+    const { viewport } = useViewportContext();
     const reasonRef = useRef<HTMLDivElement>(null);
 
-    useGSAP(() => {
+    const { contextSafe } = useGSAP(() => {
         if (containerRef.current) {
             const duration = 0.8;
             const delay = duration/(desktop ? 2 : 3);
@@ -64,8 +66,33 @@ const Reason = (
         }
 
     }, { scope: containerRef });
+
+    const mouseEnter = () => {
+        if (viewport.desktop && reasonRef.current) {
+            contextSafe(() => {
+                gsap.to(reasonRef.current, {
+                    scale: 1.1
+                })
+            })();
+        }
+    }
+
+    const mouseLeave = () => {
+        if (viewport.desktop && reasonRef.current) {
+            contextSafe(() => {
+                gsap.to(reasonRef.current, {
+                    scale: 1
+                })
+            })();
+        }
+    }
     return (
-        <div className='reason-item-wrapper' ref={reasonRef}>
+        <div
+            className='reason-item-wrapper'
+            ref={reasonRef}
+            onMouseEnter={() => mouseEnter()}
+            onMouseLeave={() => mouseLeave()}
+        >
             <div className={`reason-item align-${align}`}>
                 <div className="number">{number}</div>
                 <div className="text">

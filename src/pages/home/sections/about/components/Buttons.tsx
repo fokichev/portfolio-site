@@ -19,7 +19,7 @@ const HireMeButton = ({ desktop }: { desktop: boolean }) => {
         { xPercent: -15, yPercent: -15 },
     ];
 
-    useGSAP(() => {
+    const { contextSafe } = useGSAP(() => {
         const props = {
             repeat: -1,
             yoyo: true,
@@ -35,8 +35,13 @@ const HireMeButton = ({ desktop }: { desktop: boolean }) => {
         })
 
     }, { scope: containerRef });
+
+    const onClick = contextSafe(() => {
+        gsap.to(window, { scrollTo: '#reasons', ease: 'power1.inOut' });
+    });
+
     return (
-        <div className="hire-me" ref={containerRef}>
+        <div className="hire-me" ref={containerRef} onClick={onClick}>
             { !desktop && <div className='arrows --top'>
                     <div ref={arrowRefs.current[0]}><SlightlyCurvedArrow className='slight-curve' /></div>
                     <div ref={arrowRefs.current[1]}><DoubleLoopArrow className='double-loop' /></div>

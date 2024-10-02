@@ -25,7 +25,7 @@ const AboutMobile = ({ refProp, id }: { refProp: RefObject<HTMLDivElement>, id: 
             <SquiglyLine {...desktop} />
             <InfoSectionTwo {...desktop} />
             <HireMeButton {...desktop}/>
-            <div className="reasons-column" ref={reasonsRef}>
+            <div className="reasons-column" id="reasons" ref={reasonsRef}>
                 <ReasonOne containerRef={reasonsRef} {...desktop}/>
                 <ReasonTwo containerRef={reasonsRef} {...desktop}/>
                 <ReasonThree align='start' containerRef={reasonsRef} {...desktop}/>

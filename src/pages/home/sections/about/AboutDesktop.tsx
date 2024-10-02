@@ -22,7 +22,7 @@ const AboutDesktop = ({ refProp, id }: { refProp: RefObject<HTMLDivElement>, id:
                 <SquiglyLine {...desktop}/>
                 <InfoSectionTwo {...desktop} containerRef={topSectionRef} />
             </div>
-            <div className="bottom-section">
+            <div className="bottom-section" id="reasons">
                 <div className="button-row">
                     <DownloadCVButton {...desktop} />
                     <HireMeButton {...desktop} />
