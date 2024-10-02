@@ -109,22 +109,7 @@ $white: white;
 $gray: #AAADAC;
 $accent: #D6FF00;
 
-// TODO DEPRECATED, PHASE OUT
-$blue: #0075BC;
-$lightblue: #A0EAF2;
-$orange: #F2620F;
-$pink: #F74CC7;
-$purple: #D5ACFF;
-$red: #D90404;
-
 .--black { color: $black; }
 .--white { color: $white; }
 .--gray { color: $gray; }
 .--accent { color: $accent; }
-
-// TODO DEPRECATED, PHASE OUT
-.--blue { color: $blue; }
-.--lightblue { color: $lightblue; }
-.--orange { color: $orange; }
-.--pink { color: $pink; }
-.--red { color: $red; }

@@ -32,13 +32,12 @@ const COLORS = {
 
 const MatterEmojis = (props: MatterEmojisProps) => {
     const { height, scope } = props;
-    const { viewport } = useViewportContext();
+    const { viewport, measurements } = useViewportContext();
     
-    const objectNum = 200;
-    // const objectNum = viewport.desktop ? 200 : 50;
+    const objectNum = viewport.desktop ? 200 : 50;
     
-    const containerWidth = document.getElementsByTagName('html')[0].clientWidth;
-    const containerHeight = viewport.desktop ? height : window.innerHeight * 0.95;
+    const containerWidth = measurements.width;
+    const containerHeight = height;
 
     // MATTER.JS REFS
     const scene = useRef<HTMLDivElement>(null);

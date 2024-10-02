@@ -24,10 +24,11 @@ import {
     EffectComposer,
     
 } from '@react-three/postprocessing';
-import { useViewportContext } from '../../../contexts';
+import { useCursorContext, useViewportContext } from '../../../contexts';
 
 const CarrotModel = () => {
     const { viewport } = useViewportContext();
+    const { onHoverClickable } = useCursorContext();
 
     const containerRef = useRef<HTMLDivElement>(null);
     const orbitControlsRef = useRef<OrbitControlsType>(null);
@@ -83,7 +84,12 @@ const CarrotModel = () => {
     }
 
     return (
-        <div className='carrot-model' ref={containerRef}>
+        <div
+            className='carrot-model'
+            ref={containerRef}
+            onMouseEnter={() => onHoverClickable(true)}
+            onMouseLeave={() => onHoverClickable(false)}
+        >
             <Canvas
                 gl={{ alpha: true }}
                 style={viewport.desktop ? {} : {

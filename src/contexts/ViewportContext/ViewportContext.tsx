@@ -46,8 +46,8 @@ const ViewportProvider = ({ children }: { children: any }) => {
 	useEffect(() => {
 		const handleResize = () => {
 			setMeasurements({
-				width: window.innerWidth,
-				height: window.innerHeight
+				...(mobile ? { height: window.innerHeight } : measurements), // height not reactive on mobiele because address bar :')
+				width: window.innerWidth
 			});
 		};
 

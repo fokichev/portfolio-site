@@ -6,6 +6,7 @@ import SlightlyCurvedArrow from '../../../../../assets/arrows/slightly-curved-ar
 import CircledArrow from '../../../../../assets/arrows/circled-arrow.svg?react';
 import LoopArrow from '../../../../../assets/arrows/loop-arrow.svg?react';
 import DoubleLoopArrow from '../../../../../assets/arrows/double-loop-arrow.svg?react';
+import { useCursorContext } from '../../../../../contexts';
 
 const HireMeButton = ({ desktop }: { desktop: boolean }) => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -18,6 +19,8 @@ const HireMeButton = ({ desktop }: { desktop: boolean }) => {
         { xPercent: 0, yPercent: -20 },
         { xPercent: -15, yPercent: -15 },
     ];
+
+    const { onHoverClickable } = useCursorContext();
 
     const { contextSafe } = useGSAP(() => {
         const props = {
@@ -48,7 +51,12 @@ const HireMeButton = ({ desktop }: { desktop: boolean }) => {
                     <div ref={arrowRefs.current[2]}><CircledArrow className='circled' /></div>
                 </div>
             }
-            <span>Why you should hire me</span>
+            <span
+                onMouseEnter={() => onHoverClickable(true)}
+                onMouseLeave={() => onHoverClickable(false)}
+            >
+                Why you should hire me
+            </span>
             { !desktop && <div className='arrows --bottom'>
                     <div ref={arrowRefs.current[3]}><CircledArrow className='circled' /></div>
                     <div ref={arrowRefs.current[4]}><SlightlyCurvedArrow className='slight-curve'/></div>
@@ -64,6 +72,8 @@ const LinkButton = ({ text, href, desktop }: { text: string, href: string, deskt
     const lineRef = useRef<HTMLDivElement>(null);
     const tlRef = useRef<gsap.core.Timeline>();
 
+    const { onHoverClickable } = useCursorContext();
+
     const { contextSafe } = useGSAP(() => {
         const tl = gsap.timeline({ paused: true });
         
@@ -77,7 +87,8 @@ const LinkButton = ({ text, href, desktop }: { text: string, href: string, deskt
     }, { scope: buttonRef });
 
     const onHover = contextSafe(() => {
-        tlRef.current?.restart()
+        onHoverClickable(true);
+        tlRef.current?.restart();
     });
 
     return (
@@ -86,6 +97,7 @@ const LinkButton = ({ text, href, desktop }: { text: string, href: string, deskt
             href={href}
             ref={buttonRef}
             onMouseEnter={desktop ? onHover : () => {}}
+            onMouseLeave={() => desktop ? onHoverClickable(false) : {}}
         >
             <div>{text}</div>
             <div className="line" ref={lineRef}/>

@@ -2,12 +2,23 @@
 
 .carrot-model {
     $size: 350px;
-    min-width: $size;
+    width: $size;
     height: $size;
     overflow: visible;
 
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+
+    &:active {
+        cursor: grabbing;
+        cursor: -moz-grabbing;
+        cursor: -webkit-grabbing;
+    }
+
     @media screen and (min-width: base.$desktop) {
-        padding-left: 100px;
+        margin-left: 100px;
         $size: 600px;
         min-width: $size;
         height: $size;
