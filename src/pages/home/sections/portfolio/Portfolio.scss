@@ -8,21 +8,65 @@
     flex-direction: column;
     align-items: center;
 
+    @media screen and (min-width: base.$desktop) {
+        align-items: start;
+    }
+
     .header {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: end;
 
         @media screen and (min-width: base.$desktop) {
-            align-items: start;
+            margin-left: 10%;
+        }
+
+        .header-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            @media screen and (min-width: base.$desktop) {
+                gap: 10px;
+            }
+    
+            .sparkle {
+                $height: 35px;
+                height: $height;
+
+                svg { height: $height }
+
+                @media screen and (min-width: base.$desktop) {
+                    $height: 50px;
+                    height: $height;
+    
+                    svg { height: $height }
+                }
+            }
+        }
+
+        .underline {
+            margin-top: -5px;
+            $width: 290px;
+            width: $width;
+
+            svg { width: $width; }
+
+            @media screen and (min-width: base.$desktop) {
+                margin-top: 0;
+                $width: 370px;
+                width: $width;
+    
+                svg { width: $width; }
+            }
         }
     }
 
     h3 {
         font-family: base.$playfair;
-        font-size: 32px;
+        font-size: 40px;
         font-weight: normal;
-        margin-bottom: 20px;
+        margin: 0px;
 
         @media screen and (min-width: base.$desktop) {
             font-size: 52px;
@@ -37,7 +81,7 @@
     flex-wrap: wrap;
     justify-content: center;
 
-    margin-top: 60px;
+    margin-top: 30px;
 }
 
 .portfolio-card {
@@ -49,7 +93,7 @@
     transition: all 0.3s ease-in-out;
     
     width: 100%;
-    padding: 40px 20px;
+    padding: 25px 15px;
 
     overflow: visible;
     position: relative;
@@ -61,12 +105,18 @@
 
     &:hover {
         background-color: #0C0C0C;
-        border-color: #CACACA;
+        border-color: base.$accent;
     }
 
     .title {
-        font-family: base.$neuemontreal;
-        font-size: 20px;
+        font-family: base.$playfairSmall;
+        font-size: 22px;
+        color: base.$accent;
+        font-weight: normal;
+
+        @media screen and (min-width: base.$desktop) {
+            font-size: 24px;
+        }
     }
 
     .skills {
@@ -86,10 +136,9 @@
         font-weight: 300;
         font-size: 16px;
 
-        padding: 4px 14px;
+        padding: 6px 16px;
         border-radius: 20px;
         background-color: #1F1F1F;
-        border: 1px solid #7E7E7E;
     }
 
     .image {

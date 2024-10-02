@@ -8,6 +8,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useViewportContext, useCursorContext } from '../../../../contexts';
 import { CARDS, CARD } from './cards';
 
+import CurvedLine from '../../../../assets/curved-line-underline.svg?react';
+import SparkleBig from '../../../../assets/sparkles/sparkle-big.svg?react';
+import SparkleBigAlt from '../../../../assets/sparkles/sparkle-big-alt.svg?react';
+import { AnimatedEmoji } from '../../../../components';
+
 const Portfolio = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     const { onHoverImage } = useCursorContext();
     const { viewport } = useViewportContext();
@@ -16,8 +21,20 @@ const Portfolio = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLD
     return (
         <div className='portfolio-container' id={id} ref={refProp}>
             <div className='header'>
-                <h3>Project Highlights</h3>
-                <div>(pretty version coming soon)</div>
+                <div className='header-row'>
+                    <div className='sparkle' >
+                        <AnimatedEmoji
+                            emoji={{
+                                id: 'sparkle-big',
+                                svgArr: [SparkleBig, SparkleBigAlt]
+                            }}
+                        />
+                    </div>
+                    <h3>Project Highlights</h3>
+                </div>
+                <div className='underline'>
+                    <CurvedLine />
+                </div>
             </div>
             <div className='portfolio-cards' ref={cardRefs}>
                 { CARDS.map(card =>
