@@ -253,7 +253,8 @@ const MatterEmojis = (props: MatterEmojisProps) => {
 
         if (!viewport.desktop) {
             // fix pixelated textures on mobile
-            Render.setPixelRatio(render, 'auto' as any); // as any due to incorrect typing
+            // const pixelRatio = 'auto' as any; // as any due to incorrect typing
+            Render.setPixelRatio(render, 1.4); 
         }
 
         // run the renderer
