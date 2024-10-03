@@ -10,6 +10,16 @@
     font-family: base.$neuemontreal, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+::-moz-selection { /* Code for Firefox */
+    color: #1b00a3;
+    background-color: base.$accent;
+}
+  
+::selection {
+    color: #1b00a3;
+    background-color: base.$accent;
+}
+
 .app-container {
     // position: relative;
     // z-index: 1;
