@@ -32,8 +32,7 @@
             justify-content: center;
 
             height: 100%;
-            gap: 10px;
-            margin-bottom: 30%;
+            margin-bottom: 50%;
 
             @media screen and (min-width: base.$desktop) {
                 align-items: start;
@@ -45,39 +44,60 @@
                 width: calc(100% - $left);
             }
 
-            .heading {
+            .tilt {
                 display: flex;
                 flex-direction: column;
-                
-                font-family: base.$playfairSmall;
-                font-size: 68px;
-                color: base.$accent;
-                width: min-content;
-                white-space: nowrap;
+                align-items: center;
+                gap: 4px;
 
-                @media screen and (min-width: base.$desktop) {
-                    font-size: 78px;
-                    margin-left: -8px;
-                }
+                margin-bottom: 15%;
 
-                .heading-line {
-                    height: 4px;
-                    width: 0%;
-                    background-color: base.$accent;
-                }
-            }
-
-            .links {
-                display: flex;
-                flex-direction: row;
-                gap: 12px;
-                font-family: base.$neuemontreal;
                 font-style: italic;
                 font-size: 14px;
+                opacity: 0;
+            }
 
-                @media screen and (min-width: base.$desktop) {
-                    gap: 30px;
-                    font-size: 16px;
+            .text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+
+                .heading {
+                    display: flex;
+                    flex-direction: column;
+                    
+                    font-family: base.$playfairSmall;
+                    font-size: 68px;
+                    color: base.$accent;
+                    width: min-content;
+                    white-space: nowrap;
+    
+                    @media screen and (min-width: base.$desktop) {
+                        font-size: 78px;
+                        margin-left: -8px;
+                    }
+    
+                    .heading-line {
+                        height: 4px;
+                        width: 0%;
+                        background-color: base.$accent;
+                    }
+                }
+    
+                .links {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 12px;
+                    font-family: base.$neuemontreal;
+                    font-style: italic;
+                    font-size: 14px;
+    
+                    @media screen and (min-width: base.$desktop) {
+                        gap: 30px;
+                        font-size: 16px;
+                    }
                 }
             }
         }

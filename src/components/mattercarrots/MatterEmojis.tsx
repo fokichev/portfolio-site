@@ -25,16 +25,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useViewportContext } from '../../contexts';
 import { EMOJIS, EMOJIS_MOBILE } from './emojis';
-import { useOrientation } from '../../helpers/hooks';
 
 const COLORS = {
     bg1: '060606'
 }
 
 const MatterEmojis = (props: MatterEmojisProps) => {
-    const { height, scope } = props;
+    const { height, scope, orientationProps } = props;
     const { viewport, measurements } = useViewportContext();
-    const { gamma, beta } = useOrientation();
+    const { gamma, beta } = orientationProps;
 
     const [setupComplete, setSetupComplete] = useState(false);
     
@@ -214,17 +213,17 @@ const MatterEmojis = (props: MatterEmojisProps) => {
         const { gravity } = engine.current;
 
         if (orientation === 0) {
-            gravity.x = Common.clamp(gamma!, -90, 90) / factor;
-            gravity.y = Common.clamp(beta!, -90, 90) / factor;
+            gravity.x = Common.clamp(gamma, -90, 90) / factor;
+            gravity.y = Common.clamp(beta, -90, 90) / factor;
         } else if (orientation === 180) {
-            gravity.x = Common.clamp(gamma!, -90, 90) / factor;
-            gravity.y = Common.clamp(-beta!, -90, 90) / factor;
+            gravity.x = Common.clamp(gamma, -90, 90) / factor;
+            gravity.y = Common.clamp(-beta, -90, 90) / factor;
         } else if (orientation === 90) {
-            gravity.x = Common.clamp(beta!, -90, 90) / factor;
-            gravity.y = Common.clamp(-gamma!, -90, 90) / factor;
+            gravity.x = Common.clamp(beta, -90, 90) / factor;
+            gravity.y = Common.clamp(-gamma, -90, 90) / factor;
         } else if (orientation === -90) {
-            gravity.x = Common.clamp(-beta!, -90, 90) / factor;
-            gravity.y = Common.clamp(gamma!, -90, 90) / factor;
+            gravity.x = Common.clamp(-beta, -90, 90) / factor;
+            gravity.y = Common.clamp(gamma, -90, 90) / factor;
         }
     }
 
@@ -309,7 +308,8 @@ const MatterEmojis = (props: MatterEmojisProps) => {
 
 interface MatterEmojisProps {
     height: number,
-    scope: React.RefObject<HTMLDivElement>
+    scope: React.RefObject<HTMLDivElement>,
+    orientationProps: { gamma: number, beta: number }
 }
 
 export { MatterEmojis }
