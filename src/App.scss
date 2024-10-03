@@ -31,3 +31,32 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
+
+// scrollbar
+body {
+    --sb-track-color: #242424;
+    --sb-thumb-color: #d6ff00;
+    --sb-size: 14px;
+}
+
+body::-webkit-scrollbar {
+    width: var(--sb-size)
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 9px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 9px;
+    
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    body {
+    scrollbar-color: var(--sb-thumb-color)
+                    var(--sb-track-color);
+    }
+}
