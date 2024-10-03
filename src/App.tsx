@@ -6,7 +6,7 @@
 	// on mobile, sub heavy components for videos/images
 	// test on diff devices + browsers + mac
 import './App.scss'
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -19,7 +19,7 @@ import {
 	MousePositionProvider,
 	CursorProvider
 } from './contexts';
-import { HomePage } from './pages'
+import HomePage from './pages/home/Home'
 import { Loader } from './components';
 
 gsap.registerPlugin(
@@ -30,6 +30,15 @@ gsap.registerPlugin(
 );
 
 function App() {
+
+	// const HomePage = lazy(() => {
+	// 	return Promise.all([
+	// 	  import("./pages/home/Home"),
+	// 	  new Promise(resolve => setTimeout(resolve, 2000))
+	// 	])
+	// 	.then(([moduleExports]) => moduleExports);
+	//   });
+	
 	return (
 		<ViewportProvider>
 			<MousePositionProvider>

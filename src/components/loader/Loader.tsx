@@ -1,9 +1,11 @@
 import './Loader.scss';
+import SkullGif from '../../assets/spin-skull.gif';
 
 const Loader = () => {
     return (
         <div className='loader'>
-            ...loading...
+            loading
+            <img src={SkullGif} />
         </div>
     )
 }
