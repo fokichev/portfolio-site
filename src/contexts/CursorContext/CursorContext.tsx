@@ -2,8 +2,8 @@ import React, { createContext, useState } from 'react';
 import { Cursor } from '../../components';
 
 const CursorContext = createContext({
-    onHoverClickable: (clickable: boolean) => {},
-    onHoverImage: (img: string | null) => {}
+    onHoverClickable: (clickable: boolean) => { clickable },
+    onHoverImage: (img: string | null) => { img }
 });
 
 const CursorProvider = ({ children }: { children: any }) => {

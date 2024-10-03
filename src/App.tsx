@@ -6,7 +6,7 @@
 	// on mobile, sub heavy components for videos/images
 	// test on diff devices + browsers + mac
 import './App.scss'
-import { lazy, Suspense } from 'react';
+import { Suspense } from 'react';
 
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";

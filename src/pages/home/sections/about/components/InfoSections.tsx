@@ -18,7 +18,7 @@ const InfoSectionOne = ({ desktop, containerRef }: InfoProps) => {
         if (desktop && containerRef?.current) {
             const delay = 0.5;
             const tl = gsap.timeline({ delay });
-            sectionRefs.current.map((ref, i) => {
+            sectionRefs.current.map(ref => {
                 tl.from(ref.current, {
                     opacity: 0,
                     xPercent: 10,
@@ -89,7 +89,7 @@ const InfoSectionTwo = ({ desktop, containerRef }: InfoProps) => {
                 duration
             }, `-=${overlap}`)
 
-            sectionRefs.current.slice(1,4).map((ref, i) => {
+            sectionRefs.current.slice(1,4).map(ref => {
                 tl.from(ref.current, {
                     opacity: 0,
                     yPercent: -10,
@@ -107,7 +107,7 @@ const InfoSectionTwo = ({ desktop, containerRef }: InfoProps) => {
             const delay = 0.5;
             const tl = gsap.timeline({ delay });
 
-            sectionRefs.current.slice(1,4).map((ref, i) => {
+            sectionRefs.current.slice(1,4).map(ref => {
                 tl.from(ref.current, {
                     opacity: 0,
                     duration

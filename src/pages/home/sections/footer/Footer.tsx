@@ -1,5 +1,5 @@
 import './Footer.scss';
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { Suspense, useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from "gsap";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -7,7 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useOrientation } from '../../../../helpers/hooks';
 import { useViewportContext } from '../../../../contexts';
 
-import { Link, MatterCarrots, MatterEmojis } from '../../../../components';
+import { Link, MatterEmojis } from '../../../../components';
 
 import TiltIcon from '../../../../assets/icons/tilt-icon.svg?react';
 

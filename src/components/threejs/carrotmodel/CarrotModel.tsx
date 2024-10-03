@@ -1,6 +1,6 @@
 import './CarrotModel.scss';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from '@gsap/react';
@@ -9,7 +9,6 @@ import { Mesh } from 'three';
 import { OrbitControls as OrbitControlsType } from 'three-stdlib';
 import { Canvas } from '@react-three/fiber';
 import {
-    CameraControls,
     Environment,
     Float,
     MeshTransmissionMaterial,
@@ -33,11 +32,16 @@ const CarrotModel = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const orbitControlsRef = useRef<OrbitControlsType>(null);
     
-    const [env, setEnv] = useState({
+    // const [env, setEnv] = useState({
+    //     rot: { x: 4.39, y: 8.07, z: 10 },
+    //     str: 35 // 50 for black sections TODO
+    //     // str: 50
+    // });
+    const env = {
         rot: { x: 4.39, y: 8.07, z: 10 },
         str: 35 // 50 for black sections TODO
         // str: 50
-    });
+    };
     const [dpr, setDpr] = useState(1.5);
 
     const envMap = useCubeTexture([
@@ -50,6 +54,7 @@ const CarrotModel = () => {
     ], { path: `/models/carrot/envMap/${viewport.mobile ? "mobile" : "desktop"}/` });
 
     const convertToAzimuthalAngle = (val: number, rot: number): number  => {
+        rot; // temp
         // const progress = (val * rot) % 1;
         const progress = val;
         if (progress <= 0.5) {

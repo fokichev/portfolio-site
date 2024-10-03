@@ -1,10 +1,6 @@
 import './Portfolio.scss';
 import { useRef } from 'react';
 
-import { gsap } from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 import { useViewportContext, useCursorContext } from '../../../../contexts';
 import { CARDS, CARD } from './cards';
 
@@ -69,7 +65,8 @@ const Card = (
     } = card;
 
     const cardRef = useRef<HTMLAnchorElement>(null);
-    const imageRef = useRef<HTMLImageElement>(null);
+    // const imageRef = useRef<HTMLImageElement>(null);
+    mobile; container; // temp
 
     const onMouseEnter = () => {
         onHover(image);

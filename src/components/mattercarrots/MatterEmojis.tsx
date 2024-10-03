@@ -17,7 +17,6 @@ import {
     Query,
     Render,
     Runner,
-    Svg,
     Vector
 } from "matter-js";
 
