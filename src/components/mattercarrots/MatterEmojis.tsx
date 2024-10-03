@@ -24,7 +24,8 @@ import {
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useViewportContext } from '../../contexts';
-import { EMOJIS } from './emojis';
+import { EMOJIS, EMOJIS_MOBILE } from './emojis';
+import { useOrientation } from '../../helpers/hooks';
 
 const COLORS = {
     bg1: '060606'
@@ -33,12 +34,16 @@ const COLORS = {
 const MatterEmojis = (props: MatterEmojisProps) => {
     const { height, scope } = props;
     const { viewport, measurements } = useViewportContext();
+    const { gamma, beta } = useOrientation();
+
+    const [setupComplete, setSetupComplete] = useState(false);
     
     const objectNum = viewport.desktop ? 200 : 50;
     
     const containerWidth = measurements.width;
     const containerHeight = height;
 
+    const timeoutRef = useRef<number>();
     // MATTER.JS REFS
     const scene = useRef<HTMLDivElement>(null);
     const engine = useRef(Engine.create());
@@ -46,25 +51,43 @@ const MatterEmojis = (props: MatterEmojisProps) => {
     const runner = useRef(Runner.create());
     
     const getTextures = (number: number) => {
+        const ARR = viewport.desktop ? EMOJIS : EMOJIS_MOBILE;
         return Array.from(Array(number)).map((_, index) => 
-            `matterjs/${EMOJIS[index % EMOJIS.length]}`
+            `matterjs/${ARR[index % ARR.length]}`
         )
     };
 
+    const boundaryParams = {
+        isStatic: true,
+        render: {
+            // strokeStyle: `red`, // for testing
+            // fillStyle: `blue`,
+            strokeStyle: `#${COLORS.bg1}`,
+            fillStyle: `#${COLORS.bg1}`
+        }
+    }
+
+    const wallThickness = 100; // can't be 0.1 or they clip out easily
+
+    // mobile only
+    const topWallSetup = () => {
+        const timeout = setTimeout(() => {
+            const topWall = Bodies.rectangle(
+                containerWidth/2,
+                0.1 - wallThickness/2,
+                containerWidth,
+                wallThickness,
+                boundaryParams
+            );
+    
+            composite.current = Composite.add(engine.current.world, [ topWall ]);
+            setSetupComplete(true);
+        }, 3000);
+        timeoutRef.current = timeout;
+    }
+
     const objectSetup = async () => {
         // ENVIRONMENT
-        const boundaryParams = {
-            isStatic: true,
-            render: {
-                // strokeStyle: `red`, // for testing
-                // fillStyle: `blue`,
-                strokeStyle: `#${COLORS.bg1}`,
-                fillStyle: `#${COLORS.bg1}`
-            }
-        }
-
-        const wallThickness = 100; // can't be 0.1 or they clip out easily
-
         const ground = Bodies.rectangle(
             containerWidth/2,
             containerHeight+wallThickness/2,
@@ -91,12 +114,15 @@ const MatterEmojis = (props: MatterEmojisProps) => {
 
         // OBJECTS
         const objectScale = 0.2;
-        const textureScle = 0.7;
+        const textureScale = 0.7;
         const radius = 25;
         const textures = getTextures(objectNum);
         const emojis = textures.map((texture, index) => {
             const x = containerWidth * 0.8 + index * 0.01;
             const y = -100 * objectScale * index - 300;
+            // const y = viewport.desktop
+            //     ? (-100 * objectScale * index - 300)
+            //     : index * radius;
             return Bodies.circle(x, y, radius,
             {
                 friction: 0.001,
@@ -106,8 +132,8 @@ const MatterEmojis = (props: MatterEmojisProps) => {
                 render: {
                     sprite: {
                         texture,
-                        xScale: textureScle,
-                        yScale: textureScle
+                        xScale: textureScale,
+                        yScale: textureScale
                     }
                 }
             });
@@ -118,7 +144,6 @@ const MatterEmojis = (props: MatterEmojisProps) => {
             ground,
             leftWall,
             rightWall,
-            // TODO emojis go here
             ...emojis
         ]);
 
@@ -179,6 +204,38 @@ const MatterEmojis = (props: MatterEmojisProps) => {
         }
     };
 
+    const factor = 30;
+
+    // Tilt controls
+    const updateGravity = () => {
+        if (!engine.current) return;
+        
+        const orientation = window.orientation;
+        const { gravity } = engine.current;
+
+        if (orientation === 0) {
+            gravity.x = Common.clamp(gamma!, -90, 90) / factor;
+            gravity.y = Common.clamp(beta!, -90, 90) / factor;
+        } else if (orientation === 180) {
+            gravity.x = Common.clamp(gamma!, -90, 90) / factor;
+            gravity.y = Common.clamp(-beta!, -90, 90) / factor;
+        } else if (orientation === 90) {
+            gravity.x = Common.clamp(beta!, -90, 90) / factor;
+            gravity.y = Common.clamp(-gamma!, -90, 90) / factor;
+        } else if (orientation === -90) {
+            gravity.x = Common.clamp(-beta!, -90, 90) / factor;
+            gravity.y = Common.clamp(gamma!, -90, 90) / factor;
+        }
+    }
+
+    const runRender = () => {
+        // run the engine
+        Runner.run(runner.current, engine.current);
+        if (!viewport.desktop && !setupComplete) {
+            topWallSetup();
+        }
+    }
+
     useEffect(() => {
         // SETUP
         // create a renderer
@@ -187,11 +244,17 @@ const MatterEmojis = (props: MatterEmojisProps) => {
             engine: engine.current,
             options: {
                 wireframes: false,
+                // wireframes: true,
                 width: containerWidth,
                 height: containerHeight,
                 background: `#${COLORS.bg1}`
             }
         });
+
+        if (!viewport.desktop) {
+            // fix pixelated textures on mobile
+            Render.setPixelRatio(render, 'auto' as any); // as any due to incorrect typing
+        }
 
         // run the renderer
         Render.run(render);
@@ -201,6 +264,7 @@ const MatterEmojis = (props: MatterEmojisProps) => {
         // Runner.run(runner.current, engine.current);
 
         objectSetup();
+
         return () => {
             // CLEANUP
             Runner.stop(runner.current);
@@ -209,13 +273,16 @@ const MatterEmojis = (props: MatterEmojisProps) => {
             Engine.clear(engine.current);
             render.canvas.remove();
             render.textures = {};
+
+            // If mobile, cleanup timeout
+            if (!viewport.desktop) { clearTimeout(timeoutRef.current); }
         }
     }, []);
 
-    const runRender = () => {
-        // run the engine
-        Runner.run(runner.current, engine.current);
-    }
+    // mobile only, for tilt controls
+    useEffect(() => {
+        if (setupComplete && gamma !== undefined && beta !== undefined) { updateGravity() };
+    }, [setupComplete, gamma, beta]);
 
     useGSAP(() => {
         if (scene.current) {

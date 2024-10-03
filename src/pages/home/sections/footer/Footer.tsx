@@ -12,7 +12,7 @@ const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
     const lineRef = useRef<HTMLDivElement>(null);
 
     const bottomPadding = viewport.desktop ? 25 : 50;
-    const containerHeight = viewport.desktop ? 600 : measurements.height;
+    const containerHeight = viewport.desktop ? 600 : measurements.height - bottomPadding;
     const email = 'contact@fokicheva.com';
 
     const { contextSafe } = useGSAP({ scope: headingRef });

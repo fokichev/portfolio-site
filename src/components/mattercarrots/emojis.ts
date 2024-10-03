@@ -1,4 +1,4 @@
-export const EMOJIS = [
+const EMOJIS = [
     'alien.svg',
     'artist-palette.svg',
     'atom-symbol_accent.svg',
@@ -62,3 +62,20 @@ export const EMOJIS = [
     'yellow-heart.svg',
     'yin-yang.svg',
 ]
+
+const EMOJIS_MOBILE = [
+    'alien.svg',
+    'atom-symbol_accent.svg',
+    'beaming-face-with-smiling-eyes.svg',
+    'doughnut.svg',
+    'four-leaf-clover_accent.svg',
+    'game-die.svg',
+    'globe-showing-europe-africa_accent.svg',
+    'grinning-cat-face-with-smiling-eyes.svg',
+    'peace-symbol.svg',
+    'sign-of-the-horns.svg',
+    'skull.svg',
+    'whale.svg'
+]
+
+export { EMOJIS, EMOJIS_MOBILE }
