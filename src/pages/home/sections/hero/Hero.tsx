@@ -23,8 +23,12 @@ import spinSkull from '../../../../assets/spin-skull.gif';
 
 const Hero = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     const { viewport } = useViewportContext();
+
+    const email = 'contact@fokicheva.com';
+
     const scopeRef = useRef<HTMLDivElement>(null);
     const heartEmojiRef = useRef<HTMLDivElement>(null);
+    
     useGSAP(() => {
         const tl = gsap.timeline({ repeat: -1, yoyo: true });
         tl.to(heartEmojiRef.current, {
@@ -40,10 +44,11 @@ const Hero = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEle
         <div className='hero-container' id={id} ref={refProp}>
             <div className='hero-content'>
                 <Timer />
-                <FlipButton
+                { viewport.desktop && <FlipButton
                     text='Get in Touch'
                     className='get-in-touch'
-                />
+                    href={`mailto:${email}?subject=Saying%20hi!`}
+                /> }
                 { viewport.desktop
                     ? <DesktopTextSection {...props} />
                     : <MobileTextSection {...props} />

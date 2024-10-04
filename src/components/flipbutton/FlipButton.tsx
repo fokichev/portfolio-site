@@ -7,15 +7,15 @@ import { useGSAP } from '@gsap/react';
 import { useCursorContext, useViewportContext } from '../../contexts';
 
 
-const FlipButton = (props: { text: string, className: string }) => {
+const FlipButton = (props: { text: string, className: string, href: string }) => {
     const { viewport } = useViewportContext();
     return viewport.desktop ? <DesktopVer {...props} /> : <MobileVer {...props} />
 }
 
-const DesktopVer = ({ text, className }: { text: string, className: string }) => {
+const DesktopVer = ({ text, className, href }: { text: string, className: string, href: string }) => {
     // https://gsap.com/community/forums/topic/14114-animating-fill-color-to-match-background-color-as-you-scroll-down-the-page/
     // TODO for color fill when time
-    const containerRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLAnchorElement>(null);
     const textArray = text.split('');
     const textRefs = useRef(textArray.map(() => createRef<HTMLDivElement>()));
     const tl = useRef<gsap.core.Timeline>();
@@ -79,24 +79,25 @@ const DesktopVer = ({ text, className }: { text: string, className: string }) =>
     });
 
     return (
-        <div
+        <a
             className={`flip-button ${className}`}
             ref={containerRef}
+            href={href}
             onMouseEnter={() => onHover(true)}
             onMouseLeave={() => onHover(false)}
         >
             { textArray.map((char, index) => (
                 <div ref={textRefs.current[index]} key={index}>{char === ' ' ? '\u00A0' : char}</div>
             ))}
-        </div>
+        </a>
     )
 }
 
-const MobileVer = ({ text, className }: { text: string, className: string }) => {
+const MobileVer = ({ text, className, href }: { text: string, className: string, href: string }) => {
     return (
-        <div className={`flip-button ${className}`}>
+        <a className={`flip-button ${className}`} href={href}>
             {text}
-        </div>
+        </a>
     )
 }
 
