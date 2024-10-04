@@ -10,13 +10,16 @@ import { NavbarProps, Section } from './Navbar';
 const LINE_HEIGHT = 65;
 
 const MobileNavbar = (props: NavbarProps) => {
-    const { scope } = props;
     const sections = props.sections.filter(section => section.menu);
     
     const [active, setActive] = useState(sections[0].key)
     const tl = useRef<gsap.core.Timeline>();
+    const containerRef = useRef<HTMLDivElement>(null);
     const menuRef = useRef<HTMLDivElement>(null);
     const activeRef = useRef<HTMLDivElement>(null);
+    const burgerTop = useRef(null);
+    const burgerMiddle = useRef(null);
+    const burgerBottom = useRef(null);
 
     const svgSize = 20;
     const p = svgSize - 1;
@@ -33,38 +36,40 @@ const MobileNavbar = (props: NavbarProps) => {
     }
 
     const { contextSafe } = useGSAP(() => {
-        // Set section according to key
-        sections
-            .filter(section => section.menu)
-            .forEach((section, index) => {
-                if (section.refProp.current) {
-                    ScrollTrigger.create({
-                        trigger: section.refProp.current,
-                        start: 'top center',
-                        end: 'bottom center',
-                        onEnter: () => setSection({ key: section.key, index }),
-                        onEnterBack: () => setSection({ key: section.key, index })
-                    })
-                };
-            })
+        if (menuRef.current && burgerTop.current && burgerMiddle.current && burgerBottom.current) {
+            // Set section according to key
+            sections
+                .filter(section => section.menu)
+                .forEach((section, index) => {
+                    if (section.refProp.current) {
+                        ScrollTrigger.create({
+                            trigger: section.refProp.current,
+                            start: 'top center',
+                            end: 'bottom center',
+                            onEnter: () => setSection({ key: section.key, index }),
+                            onEnterBack: () => setSection({ key: section.key, index })
+                        })
+                    };
+                })
 
-        // Initialise timeline
-        tl.current = gsap.timeline({ paused: true });
+            // Initialise timeline
+            tl.current = gsap.timeline({ paused: true });
 
-        const ease = 'power2.inOut';
-        const stages = [
-            { start: 0, options: { ease, duration: 0.3} },
-            { start: 0.2, options: { ease, duration: 0.6 }}
-        ];
+            const ease = 'power2.inOut';
+            const stages = [
+                { start: 0, options: { ease, duration: 0.3} },
+                { start: 0.2, options: { ease, duration: 0.6 }}
+            ];
 
-        tl.current
-            // burger menu animation
-            .to('#burger-middle', { ...stages[0].options, opacity: 0 }, stages[0].start)
-            .to('#burger-top', { ...stages[0].options, attr: { d: paths.top[1] } }, stages[0].start)
-            .to('#burger-bottom', { ...stages[0].options, attr: { d: paths.bottom[1] } }, stages[0].start)
-            // menu sliding out
-            .to(menuRef.current, { ...stages[1].options, x: '-100%' }, stages[1].start)
-    }, { scope });
+            tl.current
+                // burger menu animation
+                .to(burgerMiddle.current, { ...stages[0].options, opacity: 0 }, stages[0].start)
+                .to(burgerTop.current, { ...stages[0].options, attr: { d: paths.top[1] } }, stages[0].start)
+                .to(burgerBottom.current, { ...stages[0].options, attr: { d: paths.bottom[1] } }, stages[0].start)
+                // menu sliding out
+                .to(menuRef.current, { ...stages[1].options, x: '-100%' }, stages[1].start)
+        }
+    }, { scope: containerRef });
 
     const onMenuClick = contextSafe(() => {
         if (tl.current?.paused()) { tl.current.play(); }
@@ -89,7 +94,7 @@ const MobileNavbar = (props: NavbarProps) => {
     });
 
     return (
-        <div className='mobile-navbar'>
+        <div className='mobile-navbar' ref={containerRef}>
             <div className='top-row'>
                 <div className='logo'>_LF</div>
                 <div
@@ -104,18 +109,21 @@ const MobileNavbar = (props: NavbarProps) => {
                         xmlns="http://www.w3.org/2000/svg"
                     >
                         <path
+                            ref={burgerTop}
                             id='burger-top'
                             d={paths.top[0]}
                             stroke="white"
                             strokeLinecap="round"
                         />
                         <path
+                            ref={burgerMiddle}
                             id='burger-middle'
                             d={paths.middle[0]}
                             stroke="white"
                             strokeLinecap="round"
                         />
                         <path
+                            ref={burgerBottom}
                             id='burger-bottom'
                             d={paths.bottom[0]}
                             stroke="white"

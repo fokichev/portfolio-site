@@ -137,7 +137,7 @@ const InfoSectionTwo = ({ desktop, containerRef }: InfoProps) => {
                     <div className="content">
                         <p>The fast paced and varied nature of digital agency work forces <span className="accent">quick growth.</span></p>
                         <p>I experienced a similar effect when working at a young startup, which boosted my full stack skills.</p>
-                        <p>Digital agencies then, in my mind, are a <span className="accent">goldmine</span> of front end and design knowledge.</p>
+                        <p>Digital agencies are then, in my mind, a <span className="accent">goldmine</span> of front end and design knowledge.</p>
                     </div>
                 </div>
                 <div className="subsection-row">

@@ -294,7 +294,7 @@ const MatterEmojis = (props: MatterEmojisProps) => {
                 onEnter: () => runRender()
             });
         }
-    }, { scope });
+    }, { scope: scene });
 
     return (
         <div
