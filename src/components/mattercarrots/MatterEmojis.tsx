@@ -30,7 +30,7 @@ const COLORS = {
 }
 
 const MatterEmojis = (props: MatterEmojisProps) => {
-    const { height, scope, orientationProps } = props;
+    const { height, orientationProps } = props;
     const { viewport, measurements } = useViewportContext();
     const { gamma, beta } = orientationProps;
 
