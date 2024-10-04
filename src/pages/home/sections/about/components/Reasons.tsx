@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react';
 import CurvedLineDivider from '../../../../../assets/curved-line-divider.svg?react';
-import { RefObject, useEffect, useRef } from 'react';
+import { RefObject, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
 import { useViewportContext } from '../../../../../contexts';
