@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react';
 import CurvedLineDivider from '../../../../../assets/curved-line-divider.svg?react';
-import { RefObject, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
 import { useViewportContext } from '../../../../../contexts';
@@ -61,11 +61,12 @@ const Reason = (
                 onEnter: () => gsap.delayedCall(index * delay, () => move.play(0)),
                 onEnterBack: () => gsap.delayedCall((desktop ? index : (3 - index)) * delay, () => move.play(0)),
                 onLeave: () => move.time(0).pause(),
-                onLeaveBack: () => move.time(0).pause()
+                onLeaveBack: () => move.time(0).pause(),
+                // markers: true
             })
         }
 
-    }, { scope: containerRef });
+    }, { scope: containerRef, dependencies: [containerRef] });
 
     const mouseEnter = () => {
         if (viewport.desktop && reasonRef.current) {
