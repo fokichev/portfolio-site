@@ -107,13 +107,12 @@ const LinkButton = ({ text, href, desktop }: { text: string, href: string, deskt
 }
 
 const DownloadCVButton = ({ desktop }: { desktop: boolean }) => {
-    // TODO href
-    return <LinkButton text='Download CV' href='TODO' desktop={desktop} />
+    return <LinkButton text='Download CV' href='/CV_Lev_Fokichev.pdf' desktop={desktop} />
 }
 
 const GetInTouchButton = ({ desktop }: { desktop: boolean }) => {
-    // TODO href
-    return <LinkButton text='Get in touch' href='TODO' desktop={desktop} />
+    const email = 'contact@fokicheva.com';
+    return <LinkButton text='Get in touch' href={`mailto:${email}?subject=Saying%20hi!`} desktop={desktop} />
 }
 
 export {
