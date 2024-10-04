@@ -51,12 +51,13 @@ const HireMeButton = ({ desktop }: { desktop: boolean }) => {
                     <div ref={arrowRefs.current[2]}><CircledArrow className='circled' /></div>
                 </div>
             }
-            <span
+            <div
+                className='button'
                 onMouseEnter={() => onHoverClickable(true)}
                 onMouseLeave={() => onHoverClickable(false)}
             >
-                Why you should hire me
-            </span>
+                <span>Why you should hire me</span>
+            </div>
             { !desktop && <div className='arrows --bottom'>
                     <div ref={arrowRefs.current[3]}><CircledArrow className='circled' /></div>
                     <div ref={arrowRefs.current[4]}><SlightlyCurvedArrow className='slight-curve'/></div>

@@ -293,7 +293,7 @@
         margin: 0 100px;
     }
 
-    span {
+    .button {
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -302,9 +302,6 @@
         
         background-color: base.$accent;
         color: white;
-    
-        -webkit-text-stroke: 5px base.$black;
-        paint-order: stroke fill;
     
         font-weight: bold;
         font-size: 24px;
@@ -323,6 +320,14 @@
             padding: 22px 30px;
             width: unset;
             border: none;
+        }
+
+        span {
+            padding: 0 4px;
+            background: base.$black;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-stroke: 5px transparent;
         }
     }
 
