@@ -85,7 +85,8 @@ const CarrotModel = () => {
 
     const onChangePerformance = ({ factor }: { factor: number }) => {
         const newDpr = factor * 1.5 + (viewport.desktop ? 0.5 : 0);
-        setDpr(Math.round(newDpr * 10) / 10);
+        const rounded = Number.parseFloat(newDpr.toFixed(1));
+        setDpr(rounded < 0.5 ? 0.5 : rounded);
     }
 
     return (
