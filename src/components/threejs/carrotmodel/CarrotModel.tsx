@@ -1,5 +1,3 @@
-import './CarrotModel.scss';
-
 import { useRef, useState } from 'react';
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
