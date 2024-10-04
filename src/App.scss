@@ -34,29 +34,61 @@
 
 // scrollbar
 body {
-    --sb-track-color: #242424;
-    --sb-thumb-color: #d6ff00;
-    --sb-size: 14px;
+    $track-color: #242424;
+    $thumb-color: #d6ff00;
+    $size: 14px;
+    $cursor: default;
+
+    &::-webkit-scrollbar {
+        cursor: $cursor;
+        width: $size
+    }
+
+    &::-webkit-scrollbar-track {
+        cursor: $cursor;
+        background: $track-color;
+        border-radius: 9px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        cursor: $cursor;
+        background: $thumb-color;
+        border-radius: 9px;
+        
+    }
+
+    @supports not selector(::-webkit-scrollbar) {
+        body {
+            cursor: $cursor;
+            scrollbar-color: $thumb-color $track-color;
+        }
+    }
 }
 
-body::-webkit-scrollbar {
-    width: var(--sb-size)
-}
 
-body::-webkit-scrollbar-track {
-    background: var(--sb-track-color);
-    border-radius: 9px;
-}
 
-body::-webkit-scrollbar-thumb {
-    background: var(--sb-thumb-color);
-    border-radius: 9px;
+// body::-webkit-scrollbar {
+//     cursor: var(--cursor);
+//     width: var(--sb-size)
+// }
+
+// body::-webkit-scrollbar-track {
+//     cursor: var(--cursor);
+//     background: var(--sb-track-color);
+//     border-radius: 9px;
+// }
+
+// body::-webkit-scrollbar-thumb {
+//     cursor: var(--cursor);
+//     background: var(--sb-thumb-color);
+//     border-radius: 9px;
     
-}
+// }
 
 @supports not selector(::-webkit-scrollbar) {
     body {
-    scrollbar-color: var(--sb-thumb-color)
+        cursor: var(--cursor);
+        scrollbar-color: var(--sb-thumb-color)
                     var(--sb-track-color);
     }
 }
