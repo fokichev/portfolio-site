@@ -3,7 +3,7 @@ import './SkullModel.scss';
 import { Group, Mesh, Object3DEventMap } from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF, PerspectiveCamera, OrbitControls, Float} from '@react-three/drei';
-import { useRef } from 'react';
+import { Suspense, useRef } from 'react';
 import { useMousePositionContext, useViewportContext } from '../../../contexts';
 
 const SkullModel = () => {
@@ -19,7 +19,9 @@ const SkullModel = () => {
                 {/* <ambientLight intensity={1}/> */}
                 <pointLight position={[0,0,10]} intensity={80}/>
                 <Float floatIntensity={2}>
-                    <Model/>
+                    <Suspense>
+                        <Model/>
+                    </Suspense>
                 </Float>
             </Canvas>
         </div>

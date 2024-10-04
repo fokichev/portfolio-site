@@ -1,5 +1,5 @@
 import './Quote.scss';
-import { useRef } from 'react';
+import { Suspense, useRef } from 'react';
 
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -73,7 +73,9 @@ const Quote = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEl
                 </div>
             </div>
             <div className='quote-model'>
-                <CarrotModel />
+                <Suspense>
+                    <CarrotModel />
+                </Suspense>
             </div>
         </div>
     )

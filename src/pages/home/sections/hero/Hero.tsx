@@ -1,5 +1,5 @@
 import './Hero.scss';
-import React, { useRef } from 'react';
+import React, { Suspense, useRef } from 'react';
 import Lottie from 'lottie-react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -68,7 +68,9 @@ const DesktopTextSection = ({ scopeRef, heartEmojiRef }: { scopeRef: RefType, he
             <div className='row row-two' ref={scopeRef}>
                 <span ref={heartEmojiRef} className='heart'><HeartEmoji/></span>
                 <span>CREATIVE</span>
-                <SkullModel />
+                <Suspense>
+                    <SkullModel />
+                </Suspense>
             </div>
             <div className='row row-three'>
                 <Lottie

@@ -15,7 +15,7 @@ const HomePage = () => {
     const fixedRef = useRef<HTMLDivElement>(null);
     const sections = [
         { key: "home", Component: Hero, menu: true, refProp: useRef(null) },
-        { key: "emojidivider", Component: EmojiDivider, menu: false, refProp: useRef(null) },
+        { key: "emojidivider", Component: EmojiDivider, refProp: useRef(null) },
         { key: "quote", Component: Quote, refProp: useRef(null) },
         { key: "aboutdivider", Component: AboutDivider, refProp: useRef(null) },
         { key: "about", Component: About, menu: true, refProp: useRef(null) },

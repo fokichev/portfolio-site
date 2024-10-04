@@ -1,10 +1,3 @@
-// TODO:
-	// mobile!!!
-	// on touch screen, change cursor behaviour (disable? add effect?)
-	// based on performance, simplify app if needed
-	// add loader
-	// on mobile, sub heavy components for videos/images
-	// test on diff devices + browsers + mac
 import './App.scss'
 import { Suspense } from 'react';
 
@@ -30,7 +23,6 @@ gsap.registerPlugin(
 );
 
 function App() {
-
 	// const HomePage = lazy(() => {
 	// 	return Promise.all([
 	// 	  import("./pages/home/Home"),
