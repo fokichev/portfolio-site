@@ -107,6 +107,12 @@
                 }
 
                 .third-line {
+                    font-weight: 500;
+                    
+                    i {
+                        font-weight: 600;
+                    }
+
                     @media screen and (min-width: base.$desktop) {
                         margin-left: $marginThree;
                     }

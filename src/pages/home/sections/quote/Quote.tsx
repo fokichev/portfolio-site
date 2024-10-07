@@ -50,12 +50,12 @@ const Quote = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEl
                     </QuoteLine>
                     <QuoteLine index={1} desktop={viewport.desktop}>
                         <div className='second-line'>
-                            A <i>twenty six</i> year old
+                            A <i>full stack</i> turned
                         </div>
                     </QuoteLine>
                     <QuoteLine index={2} desktop={viewport.desktop}>
                         <div className='third-line'>
-                            front stack dev with
+                            <i>front end</i> dev with
                         </div>
                     </QuoteLine>
                     <QuoteLine index={3} desktop={viewport.desktop}>
