@@ -1,26 +1,8 @@
 import './ProgressBar.scss';
-import { useState } from 'react';
-
-import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const BARS = 62;
 
-const ProgressBar = ({ scope }: { scope: React.RefObject<HTMLDivElement> }) => {
-    const [progress, setProgress] = useState(0);
-
-    useGSAP(() => {
-        if (scope.current) {
-            ScrollTrigger.create({
-                trigger: scope.current,
-                start: 'start end',
-                end: 'bottom bottom',
-                onUpdate: (e) => setProgress(Math.round(e.progress * 100)),
-                // markers: true
-            })
-        }
-    }, { scope })
-
+const ProgressBar = ({ progress }: { progress: number }) => {
     const arrTop = Array.from({ length: BARS/2 }, (_, i) => i*100/BARS);
     const arrBot = arrTop.map(el => el + 50);
     return (

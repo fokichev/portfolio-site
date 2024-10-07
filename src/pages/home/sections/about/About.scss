@@ -109,6 +109,7 @@
     @media screen and (min-width: base.$desktop) {
         margin: 0;
         width: 180px;
+        min-width: 60px;
         height: 1000px;
         align-items: center;
     }

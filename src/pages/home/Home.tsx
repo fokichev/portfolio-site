@@ -1,15 +1,18 @@
 import './Home.scss';
+import { useRef, useState } from 'react';
 
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { useViewportContext } from '../../contexts';
 import { About, Footer, Hero, Portfolio, Quote, Timeline } from "./sections";
 import { AboutDivider, EmojiDivider, Navbar, ProgressBar, Section } from "../../components";
-import { useRef } from 'react';
-import { useViewportContext } from '../../contexts';
 
 const HomePage = () => {
     const { viewport } = useViewportContext();
+
+    const [progress, setProgress] = useState(0);
 
     const containerRef = useRef<HTMLDivElement>(null);
     const fixedRef = useRef<HTMLDivElement>(null);
@@ -25,17 +28,29 @@ const HomePage = () => {
     ] satisfies Section[];
 
     useGSAP(() => {
-        const contactRef = sections.find(section => section.key === 'contact')?.refProp;
-        if (viewport.desktop && contactRef?.current) {
-            gsap.to(fixedRef.current, {
-                scrollTrigger: {
-                    trigger: contactRef.current,
-                    start: 'top bottom',
+        if (viewport.desktop) {
+            const contactRef = sections.find(section => section.key === 'contact')?.refProp;
+            if (contactRef?.current) {
+                gsap.to(fixedRef.current, {
+                    scrollTrigger: {
+                        trigger: contactRef.current,
+                        start: 'top bottom',
+                        end: 'bottom bottom',
+                        scrub: 1,
+                    },
+                    opacity: 0
+                });
+            }
+            if (containerRef?.current) {
+                ScrollTrigger.create({
+                    trigger: containerRef.current,
+                    start: 'start end',
                     end: 'bottom bottom',
-                    scrub: 1,
-                },
-                opacity: 0
-            });
+                    onUpdate: (e) => setProgress(Math.round(e.progress * 100)),
+                    // markers: true
+                })
+            }
+
         }
 
     }, { scope: containerRef });
@@ -43,7 +58,7 @@ const HomePage = () => {
     return (
         <div className='home-page' ref={containerRef}>
             <div className='fixed-container' ref={fixedRef}>
-                { viewport.desktop && <ProgressBar scope={containerRef} /> }
+                { viewport.desktop && <ProgressBar progress={progress} /> }
                 <Navbar
                     sections={sections}
                     scope={containerRef}

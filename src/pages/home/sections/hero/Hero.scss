@@ -61,11 +61,14 @@
             }
 
             .lottie-eye {
-                height: 80px;
-                width: fit-content;
+                $size: 80px;
+                width: $size;
+                height: $size;
 
                 @media screen and (min-width: base.$desktop) {
-                    height: 160px;
+                    $size: 160px;
+                    width: $size;
+                    height: $size;
                 }
             }
 
