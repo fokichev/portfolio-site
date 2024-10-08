@@ -122,8 +122,15 @@
         width: $size;
 
         @media screen and (min-width: base.$desktop) {
-            width: 60px;
             height: fit-content;
+            display: flex;
+            height: 100px;
+            width: auto;
+        }
+
+        .svg-container {
+            height: $size;
+            width: $size;
         }
 
         svg {
@@ -134,8 +141,9 @@
             @media screen and (min-width: base.$desktop) {
                 margin-bottom: -1px;
                 transform: none;
-                width: 60px;
-                height: fit-content;
+                height: 100px;
+                width: auto;
+                
             }
         }
 
