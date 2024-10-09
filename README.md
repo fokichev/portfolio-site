@@ -1,30 +1,12 @@
-# React + TypeScript + Vite
+# Personal Portfolio Site - React + TypeScript + Vite
+Hey, thanks for being here!
+The main goal for this site was to have fun and create something I'm proud of.
+I discovered motion design and creative development for myself earlier this year, and decided I wanted to make the switch eventually. This site was me learning some related technologies (ThreeJS, GSAP), as well as exploring my inspirations through design. I had a lot of fun!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Instructions
+To run the site locally, just clone the repo, then run `npm run install` followed up `npm run dev`. 
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Demo
+You can view this site on https://fokichev.com. The live auto-updated version is also on https://portfolio-site-rouge-mu.vercel.app.
+(There's animations, check it out!)
+![image](https://github.com/user-attachments/assets/96c7bcb3-5799-4311-8d2f-766e5ef7fc4a)
