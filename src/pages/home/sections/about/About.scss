@@ -147,17 +147,21 @@
             }
         }
 
+        $margin: 0px;
+
         &.--top {
+            margin-right: $margin;
             svg {
                 transform: rotate(-90deg);
-                margin-right: -1px;
+                margin-right: $margin;
             }
         }
 
         &.--bottom {
+            margin-left: $margin;
             svg {
                 transform: rotate(90deg) translateX(-5px) translateY(50%);
-                margin-left: -1px;
+                margin-left: $margin;
             }
         }
     }

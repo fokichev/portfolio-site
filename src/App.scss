@@ -64,31 +64,3 @@ body {
         }
     }
 }
-
-
-
-// body::-webkit-scrollbar {
-//     cursor: var(--cursor);
-//     width: var(--sb-size)
-// }
-
-// body::-webkit-scrollbar-track {
-//     cursor: var(--cursor);
-//     background: var(--sb-track-color);
-//     border-radius: 9px;
-// }
-
-// body::-webkit-scrollbar-thumb {
-//     cursor: var(--cursor);
-//     background: var(--sb-thumb-color);
-//     border-radius: 9px;
-    
-// }
-
-@supports not selector(::-webkit-scrollbar) {
-    body {
-        cursor: var(--cursor);
-        scrollbar-color: var(--sb-thumb-color)
-                    var(--sb-track-color);
-    }
-}
