@@ -119,7 +119,7 @@ const Skills = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
             <div className='skills-links'>
                 {/* TODO create CV download link */}
                 <Link href='TODO'>Download CV</Link>
-                <Link href='mailto:contact@fokicheva.com?subject=Saying%20hi!'>Hire Me :)</Link>
+                <Link href='mailto:contact@fokichev.com?subject=Saying%20hi!'>Hire Me :)</Link>
             </div>
             <div className='skills-cards' ref={skillsContainerRef}>
                 <div className='half-container'>

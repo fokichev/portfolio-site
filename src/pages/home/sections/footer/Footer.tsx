@@ -24,7 +24,7 @@ const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
 
     const bottomPadding = viewport.desktop ? 25 : 50;
     const containerHeight = viewport.desktop ? 600 : measurements.height - bottomPadding;
-    const email = 'contact@fokicheva.com';
+    const email = 'contact@fokichev.com';
 
     useEffect(() => {
         setShowPermissionsButton(permission.required && !permission.granted);

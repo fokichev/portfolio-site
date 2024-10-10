@@ -111,7 +111,7 @@ const DownloadCVButton = ({ desktop }: { desktop: boolean }) => {
 }
 
 const GetInTouchButton = ({ desktop }: { desktop: boolean }) => {
-    const email = 'contact@fokicheva.com';
+    const email = 'contact@fokichev.com';
     return <LinkButton text='Get in touch' href={`mailto:${email}?subject=Saying%20hi!`} desktop={desktop} />
 }
 

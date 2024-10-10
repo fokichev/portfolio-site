@@ -24,7 +24,7 @@ import spinSkull from '../../../../assets/spin-skull.gif';
 const Hero = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     const { viewport } = useViewportContext();
 
-    const email = 'contact@fokicheva.com';
+    const email = 'contact@fokichev.com';
 
     const scopeRef = useRef<HTMLDivElement>(null);
     const heartEmojiRef = useRef<HTMLDivElement>(null);
