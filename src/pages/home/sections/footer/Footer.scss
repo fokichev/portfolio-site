@@ -17,9 +17,11 @@
         align-items: center;
         width: 100%;
 
-        pointer-events: none;
-
         mix-blend-mode: exclusion;
+
+        @media screen and (min-width: base.$desktop) {
+            pointer-events: none;
+        }
 
         a {
             pointer-events: auto;
@@ -54,7 +56,25 @@
 
                 font-style: italic;
                 font-size: 14px;
-                opacity: 0;
+
+                &.--reminder {
+                    opacity: 0;
+                }
+
+                &.--permissions {
+                    gap: 10px;
+                    position: relative;
+
+                    span {
+                        border: 1px solid base.$accent;
+                        border-radius: 100px;
+                        padding: 6px 16px;
+                        background-color: base.$black;
+                        z-index: 10;
+                        // background-color: base.$black;
+                        // mix-blend-mode: initial;
+                    }
+                }
             }
 
             .text {

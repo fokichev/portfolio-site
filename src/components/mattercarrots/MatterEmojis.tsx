@@ -38,7 +38,7 @@ const MatterEmojis = (props: MatterEmojisProps) => {
     
     const objectNum = viewport.desktop ? 200 : 50;
     
-    const containerWidth = measurements.width;
+    const containerWidth = measurements.width - (viewport.desktop ? 14 : 0); // 14 is scrollbar width
     const containerHeight = height;
 
     const timeoutRef = useRef<number>();
@@ -211,18 +211,20 @@ const MatterEmojis = (props: MatterEmojisProps) => {
         const orientation = window.orientation;
         const { gravity } = engine.current;
 
+        console.log(gamma, beta);
+
         if (orientation === 0) {
-            gravity.x = Common.clamp(gamma, -90, 90) / factor;
-            gravity.y = Common.clamp(beta, -90, 90) / factor;
+            gravity.x = Common.clamp(gamma!, -90, 90) / factor;
+            gravity.y = Common.clamp(beta!, -90, 90) / factor;
         } else if (orientation === 180) {
-            gravity.x = Common.clamp(gamma, -90, 90) / factor;
-            gravity.y = Common.clamp(-beta, -90, 90) / factor;
+            gravity.x = Common.clamp(gamma!, -90, 90) / factor;
+            gravity.y = Common.clamp(-beta!, -90, 90) / factor;
         } else if (orientation === 90) {
-            gravity.x = Common.clamp(beta, -90, 90) / factor;
-            gravity.y = Common.clamp(-gamma, -90, 90) / factor;
+            gravity.x = Common.clamp(beta!, -90, 90) / factor;
+            gravity.y = Common.clamp(-gamma!, -90, 90) / factor;
         } else if (orientation === -90) {
-            gravity.x = Common.clamp(-beta, -90, 90) / factor;
-            gravity.y = Common.clamp(gamma, -90, 90) / factor;
+            gravity.x = Common.clamp(-beta!, -90, 90) / factor;
+            gravity.y = Common.clamp(gamma!, -90, 90) / factor;
         }
     }
 
@@ -280,8 +282,8 @@ const MatterEmojis = (props: MatterEmojisProps) => {
 
     // mobile only, for tilt controls
     useEffect(() => {
-        if (setupComplete && gamma !== undefined && beta !== undefined) { updateGravity() };
-    }, [setupComplete, gamma, beta]);
+        if (!viewport.desktop && setupComplete && gamma && beta) { updateGravity() };
+    }, [viewport, setupComplete, gamma, beta]);
 
     useGSAP(() => {
         if (scene.current) {
@@ -308,7 +310,7 @@ const MatterEmojis = (props: MatterEmojisProps) => {
 interface MatterEmojisProps {
     height: number,
     scope: React.RefObject<HTMLDivElement>,
-    orientationProps: { gamma: number, beta: number }
+    orientationProps: { gamma: number | null, beta: number | null }
 }
 
 export { MatterEmojis }

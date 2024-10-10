@@ -1,5 +1,5 @@
 import './Footer.scss';
-import { Suspense, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from "gsap";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -13,16 +13,22 @@ import TiltIcon from '../../../../assets/icons/tilt-icon.svg?react';
 
 const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivElement> }) => {
     const { viewport, measurements } = useViewportContext();
-    const { gamma, beta, active } = useOrientation();
+    const { gamma, beta, tilting, permission, requestPermissions } = useOrientation();
+
     const headingRef = useRef<HTMLDivElement>(null);
     const lineRef = useRef<HTMLDivElement>(null);
     const tiltRef = useRef<HTMLDivElement>(null);
 
     const [scrolledIn, setScrolledIn] = useState(false);
+    const [showPermissionsButton, setShowPermissionsButton] = useState(permission.required && !permission.granted);
 
     const bottomPadding = viewport.desktop ? 25 : 50;
     const containerHeight = viewport.desktop ? 600 : measurements.height - bottomPadding;
     const email = 'contact@fokicheva.com';
+
+    useEffect(() => {
+        setShowPermissionsButton(permission.required && !permission.granted);
+    }, [permission]);
 
     const { contextSafe } = useGSAP(() => {
         ScrollTrigger.create({
@@ -34,15 +40,7 @@ const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
         });
     }, { scope: headingRef });
 
-    useGSAP(() => {
-        if (scrolledIn) {
-            gsap.to(tiltRef.current, {
-                opacity: active ? 0: 1,
-                duration: 0.5
-            })
-        }
-    }, [active, scrolledIn]);
-
+    
     const onHoverEnter = contextSafe(() => {
         if (viewport.desktop) {
             gsap.to(lineRef.current, {
@@ -59,6 +57,15 @@ const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
         }
     });
 
+    useGSAP(() => {
+        if (scrolledIn && !showPermissionsButton) {
+            gsap.to(tiltRef.current, {
+                opacity: tilting ? 0 : 1,
+                duration: 0.5
+            })
+        }
+    }, [tilting, showPermissionsButton, scrolledIn]);
+
     return (
         <div
             className='footer-container'
@@ -72,9 +79,17 @@ const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
             >
                 <div className='top-section'>
                     { !viewport.desktop && (
-                        <div className='tilt' ref={tiltRef}>
+                        <div className='tilt --reminder' ref={tiltRef}>
                             <TiltIcon />
                             <span>tilt your phone</span>
+                        </div>
+                    )}
+                    { (!viewport.desktop && showPermissionsButton) && (
+                        <div className='tilt --permissions' onClick={requestPermissions}>
+                            <TiltIcon />
+                            <span className='button'>
+                                grant tilt permissions
+                            </span>
                         </div>
                     )}
 
