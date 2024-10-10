@@ -78,22 +78,26 @@ const Footer = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivE
                 style={{ height: `${containerHeight}px` }}
             >
                 <div className='top-section'>
-                    <div className='tilt-wrapper'>
-                        { (!viewport.desktop && !showPermissionsButton) && (
-                            <div className='tilt --reminder' ref={tiltRef}>
-                                <TiltIcon />
-                                <span>tilt your phone</span>
-                            </div>
-                        )}
-                        { (!viewport.desktop && showPermissionsButton) && (
-                            <div className='tilt --permissions' onClick={requestPermissions}>
-                                <TiltIcon />
-                                <span className='button'>
-                                    grant tilt permissions
-                                </span>
-                            </div>
-                        )}
-                    </div>
+                    { !viewport.desktop && (
+                        <div className='tilt-wrapper'>
+                            { showPermissionsButton
+                                ? (
+                                    <div className='tilt --permissions' onClick={requestPermissions}>
+                                        <TiltIcon />
+                                        <span className='button'>
+                                            grant tilt permissions
+                                        </span>
+                                    </div>
+                                )
+                                : (
+                                    <div className='tilt --reminder' ref={tiltRef}>
+                                        <TiltIcon />
+                                        <span>tilt your phone</span>
+                                    </div>
+                                )
+                            }
+                        </div>
+                    )}
                     <div className='text'>
                         <Link href={`mailto:${email}?subject=Saying%20hi!`}>
                             <div    

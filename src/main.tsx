@@ -11,7 +11,7 @@ Sentry.init({
 	  Sentry.replayIntegration(),
 	],
 	// Tracing
-	// tracesSampleRate: 1.0, //  Capture 100% of the transactions
+	tracesSampleRate: 1.0, //  Capture 100% of the transactions
 	// Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
 	// While front end only, don't need this:
 	// tracePropagationTargets: ["localhost", /^https:\/\/yourserver\.io\/api/],
