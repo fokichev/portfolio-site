@@ -14,15 +14,6 @@ const useOrientation: OrientationHookInterface = () => {
 	const lastGamma = useRef(0); // To track previous gamma value
 	const lastActivityTime = useRef(Date.now()); // To track the last time tilt was detected
 
-	const checkPermissionGranted = () => {
-		try {
-			document.createEvent('DeviceMotionEvent');
-			return true;
-		} catch (e) {
-			return false
-		}
-	}
-
 	const requestPermissions = () => {
 		if (permission.required && !permission.granted) {
 			(DeviceOrientationEvent as any).requestPermission()
@@ -58,10 +49,10 @@ const useOrientation: OrientationHookInterface = () => {
 	// Check if iPhone && need permissions
 	useEffect(() => {
 		const isIphone = typeof DeviceMotionEvent !== undefined && typeof ((DeviceMotionEvent as any).requestPermission) === "function";
-		// const isIphone = true;
+		
 		if (isIphone) {
 			// Check if permissions already granted by simulating an event
-			setPermission({ required: true, granted: checkPermissionGranted() });
+			setPermission({ required: true, granted: false });
 		} else {
 			setPermission({ required: false, granted: false });
 		}
@@ -74,7 +65,6 @@ const useOrientation: OrientationHookInterface = () => {
 
 		if (permissionsGranted) {
 			// Check for inactivity (if no tilt detected for 2 seconds)
-
 			const checkInactivity = setInterval(() => {
 				if (Date.now() - lastActivityTime.current > 2000) {
 					setTilting(false);
