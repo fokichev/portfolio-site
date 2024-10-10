@@ -21,6 +21,8 @@ import {
     EffectComposer,
     
 } from '@react-three/postprocessing';
+import { ResizeObserver } from '@juggle/resize-observer';
+
 import { useCursorContext, useViewportContext } from '../../../contexts';
 
 const CarrotModel = () => {
@@ -101,6 +103,7 @@ const CarrotModel = () => {
                     pointerEvents: 'none'
                 }}
                 dpr={dpr}
+                resize={{ polyfill: ResizeObserver }}
             >
                 <PerformanceMonitor onChange={onChangePerformance}>
                     <EffectComposer>
