@@ -1,11 +1,12 @@
 import './Quote.scss';
 import { Suspense, useRef } from 'react';
+import { ErrorBoundary } from "react-error-boundary";
 
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 import { useViewportContext } from '../../../../contexts';
-import { AnimatedEmoji, CarrotModel } from '../../../../components';
+import { AnimatedEmoji, CarrotModel, CarrotModelFallback } from '../../../../components';
 import {
     HumanEmoji,
     HumanHandsDownEmoji,
@@ -74,7 +75,9 @@ const Quote = ({ id, refProp }: { id: string, refProp: React.RefObject<HTMLDivEl
             </div>
             <div className='quote-model'>
                 <Suspense>
-                    <CarrotModel />
+                    <ErrorBoundary fallback={<CarrotModelFallback />}>
+                        <CarrotModel />
+                    </ErrorBoundary>
                 </Suspense>
             </div>
         </div>
