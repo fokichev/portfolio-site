@@ -1,9 +1,8 @@
 import './DesktopNavbar.scss'
 
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { useCursorContext } from '../../contexts/CursorContext/CursorContext';
 
@@ -12,38 +11,20 @@ import { NavbarProps, Section } from './Navbar';
 const LINE_HEIGHT = 26;
 
 const DesktopNavbar = (props: NavbarProps) => {
-    const { sections, scope } = props;
+    const { scope, activeSection } = props;
+    const sections = props.sections.filter(section => section.menu);
 
-    const [active, setActive] = useState(sections[0].key)
     const activeRef = useRef<HTMLDivElement>(null);
 
     const { onHoverClickable } = useCursorContext();
 
     const { contextSafe } = useGSAP(() => {
-        sections
-            .filter(section => section.menu)
-            .forEach((section, index) => {
-                if (section.refProp.current) {
-                    ScrollTrigger.create({
-                        trigger: section.refProp.current,
-                        start: 'top center',
-                        end: 'bottom center',
-                        onEnter: () => setSection({ key: section.key, index }),
-                        onEnterBack: () => setSection({ key: section.key, index })
-                    })
-                };
-            })
-    }, { scope });
-
-    
-    const setSection = contextSafe(({ key, index }: { key: string, index: number }) => {
-        setActive(key);
         gsap.to(activeRef.current, {
-            y: index * LINE_HEIGHT,
+            y: activeSection.index * LINE_HEIGHT,
             duration: 0.3,
             // ease: 'power2.inOut' // TODO fix easing
         });
-    });
+    }, { scope, dependencies: [ activeSection.index ]});
 
     const onMenuItemClick = contextSafe((key: string) => gsap.to(window, { scrollTo: `#${key}` }));
 
@@ -64,7 +45,7 @@ const DesktopNavbar = (props: NavbarProps) => {
                         .map(section => 
                             <MenuItem
                                 section={section}
-                                active={active}
+                                active={activeSection.key}
                                 key={section.key}
                                 onHover={onHoverClickable}
                                 onClick={onMenuItemClick}

@@ -19,9 +19,16 @@ type Section = {
     refProp: React.RefObject<HTMLDivElement>
 }
 
+type ActiveSection = {
+    key: string,
+    index: number
+}
+
 interface NavbarProps {
     sections: Section[],
-    scope: React.RefObject<HTMLDivElement>
+    scope: React.RefObject<HTMLDivElement>,
+    activeSection: ActiveSection,
+    setActiveSection: (props: ActiveSection) => void
 }
 
 export {

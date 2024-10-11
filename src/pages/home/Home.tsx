@@ -12,8 +12,6 @@ import { AboutDivider, EmojiDivider, Navbar, ProgressBar, Section } from "../../
 const HomePage = () => {
     const { viewport } = useViewportContext();
 
-    const [progress, setProgress] = useState(0);
-
     const containerRef = useRef<HTMLDivElement>(null);
     const fixedRef = useRef<HTMLDivElement>(null);
     const sections = [
@@ -27,8 +25,27 @@ const HomePage = () => {
         { key: "contact", Component: Footer, menu: true, refProp: useRef(null) },
     ] satisfies Section[];
 
+    const [progress, setProgress] = useState(0);
+    const [activeSection, setActiveSection] = useState({ key: sections[0].key, index: 0 });
+
     useGSAP(() => {
+        // Navbar animations
+        sections
+            .filter(section => section.menu)
+            .forEach((section, index) => {
+                if (section.refProp.current) {
+                        ScrollTrigger.create({
+                            trigger: section.refProp.current,
+                            start: 'top center',
+                            end: 'bottom center',
+                            onEnter: () => setActiveSection({ key: section.key, index }),
+                            onEnterBack: () => setActiveSection({ key: section.key, index })
+                        })
+                    };
+                })
+
         if (viewport.desktop) {
+            // Fade out navbar in footer
             const contactRef = sections.find(section => section.key === 'contact')?.refProp;
             if (contactRef?.current) {
                 gsap.to(fixedRef.current, {
@@ -41,6 +58,8 @@ const HomePage = () => {
                     opacity: 0
                 });
             }
+
+            // Progress bar
             if (containerRef?.current) {
                 ScrollTrigger.create({
                     trigger: containerRef.current,
@@ -62,6 +81,8 @@ const HomePage = () => {
                 <Navbar
                     sections={sections}
                     scope={containerRef}
+                    activeSection={activeSection}
+                    setActiveSection={setActiveSection}
                 />
             </div>
             <div className='sections-container'>

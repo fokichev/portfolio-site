@@ -1,9 +1,8 @@
 import './MobileNavbar.scss';
 
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { NavbarProps, Section } from './Navbar';
 
@@ -11,8 +10,8 @@ const LINE_HEIGHT = 65;
 
 const MobileNavbar = (props: NavbarProps) => {
     const sections = props.sections.filter(section => section.menu);
+    const { activeSection, setActiveSection } = props;
     
-    const [active, setActive] = useState(sections[0].key)
     const tl = useRef<gsap.core.Timeline>();
     const containerRef = useRef<HTMLDivElement>(null);
     const menuRef = useRef<HTMLDivElement>(null);
@@ -37,21 +36,6 @@ const MobileNavbar = (props: NavbarProps) => {
 
     const { contextSafe } = useGSAP(() => {
         if (menuRef.current && burgerTop.current && burgerMiddle.current && burgerBottom.current) {
-            // Set section according to key
-            sections
-                .filter(section => section.menu)
-                .forEach((section, index) => {
-                    if (section.refProp.current) {
-                        ScrollTrigger.create({
-                            trigger: section.refProp.current,
-                            start: 'top center',
-                            end: 'bottom center',
-                            onEnter: () => setSection({ key: section.key, index }),
-                            onEnterBack: () => setSection({ key: section.key, index })
-                        })
-                    };
-                })
-
             // Initialise timeline
             tl.current = gsap.timeline({ paused: true });
 
@@ -71,24 +55,22 @@ const MobileNavbar = (props: NavbarProps) => {
         }
     }, { scope: containerRef });
 
+    useGSAP(() => {
+        gsap.to(activeRef.current, {
+            y: activeSection.index * LINE_HEIGHT,
+            duration: 0.3,
+            ease: 'power2.inOut'
+        });
+    }, [ activeSection.index ]);
+
     const onMenuClick = contextSafe(() => {
         if (tl.current?.paused()) { tl.current.play(); }
         else { tl.current?.reversed(!tl.current.reversed()); }
     });
 
-    const setSection = contextSafe(({ key, index }: { key: string, index: number }) => {
-        setActive(key);
-        gsap.to(activeRef.current, {
-            y: index * LINE_HEIGHT,
-            duration: 0.3,
-            ease: 'power2.inOut'
-        });
-    })
-
     const onMenuItemClick = contextSafe((key: string) => {
-        setActive(key);
         const index = sections.findIndex(section => section.key === key);
-        setSection({ key, index });
+        setActiveSection({ key, index });
         gsap.to(window, { scrollTo: `#${key}` });
         tl.current?.reverse();
     });
@@ -145,7 +127,7 @@ const MobileNavbar = (props: NavbarProps) => {
                             { sections.map(section => (
                                 <MenuItem
                                     section={section}
-                                    active={active}
+                                    active={activeSection.key}
                                     key={section.key}
                                     onClick={onMenuItemClick}
                                 />
